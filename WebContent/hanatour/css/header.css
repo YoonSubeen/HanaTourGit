@@ -16,6 +16,8 @@ body {
 
     line-height: 1;
     letter-spacing: -.4px;
+
+    overflow-x: hidden;
 }
 .border {	
     border: 1px solid red;		 
@@ -31,41 +33,74 @@ body {
 }
 
 header{
-    padding-left: 17px;
+    padding-left: 17px; 
 }
 
 
 /* header1 */
-.header1 {
+.header1_logout, .header1_login {
     width: 1200px;
     height: 48px;
     margin: 0 auto;
     /* background-color: lightgray; */
+    justify-content: flex-end;
 }
 
-.login {
+
+.header1_logout {
+	display: flex;
+}
+
+.header1_login  {
+	display: none;	
+}
+
+
+
+header >  .header1_active {
+    display: flex;
+}
+
+header > .header1_hidden {
+    display: none;
+}
+
+
+
+
+
+.login, .logout {
     width: 140px;
     margin-top: 17px;
     margin-right: 7px;
     font-size: 12px;
 
     position: relative;
+
+    display: flex;
+    justify-content: flex-end;
 }
 
-.login span > a {
+.login div > a,
+.logout div > a {
     color: black;
     text-decoration: none;
 }
-.login span > a:hover {
+.login div > a:hover,
+.logout div > a:hover {
     color: rgb(94, 43, 184);
 }
 
-.login span:nth-child(2) {
-    margin-left: 14px;            
+.login div:nth-child(2),
+.logout div:nth-child(2) {
+    margin-left: 15px;
 }
-.login span:nth-child(3) {
-    margin-right: 2px;
+
+.login div:nth-child(3),
+.logout div:nth-child(3) {
+    margin-left: 15px;
 }
+
 
 
 
@@ -146,7 +181,7 @@ header{
 
     top: -70%;
     left: -27%;
-    z-index: 900;
+    z-index: 100;
 }
 
 .trending_search:hover .trending_hover {
@@ -176,9 +211,6 @@ header{
     margin-left: 27px;
 }
 
-.mypage_item3 {
-    margin-right: 15px;
-}
 
 
 .mypage div > a {
@@ -233,6 +265,185 @@ header{
  }
  
 
+ .mypage_item3 {
+    margin-right: 15px;
+    position: relative;
+}
+
+
+
+
+/* mypage_item3_hover1 */
+.mypage_item3_hover1 {
+    display: none;
+
+    width: 211px;
+    z-index: 200;    
+    position: absolute;
+    top: 215%;
+    left: -560%;
+}
+
+
+.mypage_item3_hover1::after {
+    display: inline-block;
+    content: '';
+    background-position: left top;
+    width: 17px;
+    height: 8px;
+    background-image: url(https://image.hanatour.com/usr/static/img2/pc/com/ico-mymenu-arrow.png);
+    position: absolute;
+    top: -4%;
+    left: 53%;
+}
+
+.mypage_item3_hover1_header {
+    background-color: #f3f3f3;
+    padding: 0 20px 20px;
+    border: 1px solid #111;
+    border-bottom: none;
+    padding-top: 15px;
+    height: 69px;
+
+    font-size: 13px;
+    font-weight: 400;
+    color: #333;
+    word-break: break-all;
+    line-height: 19px;
+    letter-spacing: -.4px;
+}
+
+.mypage_item3_hover1_header > span {
+    color: rgb(94, 43, 184);
+}
+
+
+.mypage_item3_hover1_body {
+    background-color: #fff;
+    border: 1px solid #111;
+    border-top: none;
+    padding-top: 14px;
+    padding-bottom: 20px;
+}
+
+
+.mypage_item3_hover1_body > a > .mypage_item3_hover1_body_btn1 {
+    cursor: pointer;
+    width: 142px;
+    height: 32px;
+    border: 1px solid black;
+    margin-left: 20px;
+    font-size: 12px;
+    line-height: 30px;
+
+    color: #666;
+    background-color: #fff;
+    font-weight: 400;
+    text-align: center;
+    border-radius: 4px;
+    border: solid 1px #c2c2c2;
+}
+
+
+.mypage_item3_hover1_body > a > .mypage_item3_hover1_body_btn2 { 
+    cursor: pointer;
+    width: 142px;
+    height: 32px;
+    border: 1px solid black;
+    margin-left: 20px;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 30px;
+
+    border: solid 1px #5e2bb8;
+    color: #5e2bb8;
+    font-weight: 400;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+
+
+
+
+
+
+
+/* mypage_item3_hover2 */
+
+.mypage_item3_hover2 {
+    display: none;
+
+    width: 211px;
+    z-index: 200;    
+    position: absolute;
+    top: 215%;
+    left: -560%;
+}
+
+
+.mypage_item3_hover2::after {
+    display: inline-block;
+    content: '';
+    background-position: left top;
+    width: 17px;
+    height: 8px;
+    background-image: url(https://image.hanatour.com/usr/static/img2/pc/com/ico-mymenu-arrow.png);
+    position: absolute;
+    top: -4%;
+    left: 53%;
+}
+
+.mypage_item3_hover2_header {
+    background-color: #f3f3f3;
+    padding: 0 20px 20px;
+    border: 1px solid #111;
+    border-bottom: none;
+    padding-top: 15px;
+    height: 49px;
+
+    font-size: 13px;
+    font-weight: 400;
+    color: #333;
+    word-break: break-all;
+    line-height: 19px;
+    letter-spacing: -.4px;
+}
+
+.mypage_item3_hover2_header > span {
+    color: rgb(94, 43, 184);
+}
+
+
+.mypage_item3_hover2_body {
+    background-color: #fff;
+    border: 1px solid #111;
+    border-top: none;
+    padding-top: 17px;
+    padding-bottom: 20px;
+}
+
+.mypage_item3_hover2_body > div {
+    margin-left: 20px;
+}
+
+.mypage_item3_hover2_body > div:not(div:nth-child(1)) {
+    margin-top: 11px;
+}
+
+.mypage_item3_hover2_body > div > a {
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -251,7 +462,7 @@ header{
 
 .menu {
     width: 1300px;
-    height: 55px;
+    height: 56px;
     margin: 0 auto;
 
     /* background-color: aliceblue; */
