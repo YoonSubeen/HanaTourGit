@@ -3,7 +3,7 @@ package dao;
 public class Main {
 	
 public static void main(String[] args) throws Exception {
-	
+	System.out.println("실행");
 	MainTourDao mt = new MainTourDao();
 	CategoryDao cd = new CategoryDao(); 
 	
