@@ -34,8 +34,6 @@ public static void main(String[] args) throws Exception {
 	//카테고리 페이지 출발지 선택
 	// cd.choice_departure("인천");
 	
-	
-	
 }
  
 }
