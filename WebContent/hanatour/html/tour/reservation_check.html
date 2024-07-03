@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="../../css/header.css">
 	<link rel="stylesheet" href="../../css/footer.css">
 	<link rel="stylesheet" href="../../css/reservation_check.css">
+	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header>
@@ -453,6 +454,7 @@
 						<img src="https://image.hanatour.com/usr/manual/md/2020/11/safety/mypage.jpg">
 					</div>
 				</div>
+				<div style="clear:both;"></div>
 			</div>
 			<div class="main_box fl">
 				<div class="main_title">예약내역</div>
@@ -462,52 +464,309 @@
 				 	<button id="hotel">호텔</button>
 				 	<button id="oversea_flight">해외항공</button>
 				 	<button id="domestic_flight">국내항공</button>
-				 	<button id="flight+hotel">항공+호텔</button>
+				 	<button id="flight_hotel">항공+호텔</button>
 				 	<button id="tour">투어/입장권</button>
 				</div>
-		
+				
 				<div id="package_detail" class="detail">
 				  <div>
-				  	<div class="fl">예약내역</div>
-				  	<div class="fl">취소내역</div>
-				  	<div class="fl">지난 내역</div>
+				  	<div class="fl reservation_tab">예약내역</div>
+				  	<div class="fl cancel_tab">취소내역</div>
+				  	<div class="fl last_tab">지난 내역</div>
 				  	<div style="clear:both;"></div>
 				  </div>
 				  
-				  <div class="fr">
-				  	<div class="fl">예약기간 선택하여 조회</div>
-				  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
-				  	<div class="fl">~</div>
-				  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
-				  	<button type="button" class="fl purple_font">조회</button>
-				  	<div style="clear:both;"></div>
+				  <div class="reservation_tab_detail tab_detail">
+					  <div class="fr">
+					  	<div class="fl">예약기간 선택하여 조회</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<div class="fl">~</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<button type="button" class="fl purple_font">조회</button>
+					  	<div style="clear:both;"></div>
+					 </div>
+					  
+					  <div>
+					  	<div class="fl">총 <span class="purple_font"> 0 </span>건</div>
+					  	<div class="fr">
+					  		<div class="purple_font fl">예약일 최신순</div>
+					  		<div class="fl">출발일 </div>
+					  		<div class="fl">최신순</div>
+					  		<div style="clear:both;"></div>
+					  	</div>
+					  	<div style="clear:both;"></div>
+					  </div>
+					  
+					  <div>
+						<table>
+							<tr>
+								<th>예약일/예약코드</th>
+								<th>상품명</th>
+								<th>결제 금액</th>
+								<th>인원</th>
+								<th>출발일/귀국일</th>
+								<th>여행/예약상태</th>
+							</tr>
+							<tr>
+								<td>tr1234567890</td>
+								<td>일본여행</td>
+								<td>0원</td>
+								<td>1명</td>
+								<td>2024.07.02 ~ 2024.07.08</td>
+								<td>예약 완료</td>
+							</tr>
+						</table>
+						</div>
+					  <div style="clear:both;"></div>
 				  </div>
 				  
-				  <div>
-				  	<div class="fl">총 <span class="purple_font"> 0 </span>건</div>
-				  	<div class="fr">
-				  		<div class="purple_font fl">예약일 최신순</div>
-				  		<div class="fl">출발일 </div>
-				  		<div class="fr">최신순</div>
-				  		<div style="clear:both;"></div>
-				  	</div>
-				  	<div style="clear:both;"></div>
+				  <div class="cancel_tab_detail  tab_detail">
+					  <div class="fr">
+					  	<div class="fl">예약기간 선택하여 조회</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<div class="fl">~</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<button type="button" class="fl purple_font">조회</button>
+					  	<div style="clear:both;"></div>
+					 </div>
+					  
+					  <div>
+					  	<div class="fl">총 <span class="purple_font"> 0 </span>건</div>
+					  	<div class="fr">
+					  		<div class="purple_font fl">예약일 최신순</div>
+					  		<div class="fl">출발일 </div>
+					  		<div class="fl">최신순</div>
+					  		<div style="clear:both;"></div>
+					  	</div>
+					  	<div style="clear:both;"></div>
+					  </div>
+					  
+					  <div>
+						<table>
+							<tr>
+								<th>예약일/예약코드</th>
+								<th>상품명</th>
+								<th>결제 금액</th>
+								<th>인원</th>
+								<th>출발일/귀국일</th>
+								<th>취소/환불 신청일</th>
+								<th>취소상태</th>
+							</tr>
+							<tr>
+								<td>tr1234567890</td>
+								<td>일본여행</td>
+								<td>0원</td>
+								<td>1명</td>
+								<td>2024.07.02 ~ 2024.07.08</td>
+								<td>2024.07.01</td>
+								<td>취소 완료</td>
+							</tr>
+						</table>
+						</div>
+					  <div style="clear:both;"></div>
 				  </div>
 				  
-				  <div>
-					<table>
-						<tr>
-							<th>예약일/예약코드</th>
-							<th>상품명</th>
-							<th>결제 금액</th>
-							<th>인원</th>
-							<th>출발일/귀국일</th>
-							<th>여행/예약상태</th>
-						</tr>
-					</table>
-					</div>
-				  <div style="clear:both;"></div>
+				  <div class="last_tab_detail tab_detail">
+					  <div class="fr">
+					  	<div class="fl">예약기간 선택하여 조회</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<div class="fl">~</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<button type="button" class="fl purple_font">조회</button>
+					  	<div style="clear:both;"></div>
+					 </div>
+					  
+					  <div>
+					  	<div class="fl">총 <span class="purple_font"> 0 </span>건</div>
+					  	<div class="fr">
+					  		<div class="purple_font fl">예약일 최신순</div>
+					  		<div class="fl">출발일 </div>
+					  		<div class="fl">최신순</div>
+					  		<div style="clear:both;"></div>
+					  	</div>
+					  	<div style="clear:both;"></div>
+					  </div>
+					  
+					  <div>
+						<table>
+							<tr>
+								<th>예약일/예약코드</th>
+								<th>상품명</th>
+								<th>결제 금액</th>
+								<th>인원</th>
+								<th>출발일/귀국일</th>
+								<th>예약/예약상태</th>
+							</tr>
+							<tr>
+								<td>tr1234567890</td>
+								<td>일본여행</td>
+								<td>0원</td>
+								<td>1명</td>
+								<td>2024.07.02 ~ 2024.07.08</td>
+								<td>예약완료</td>
+							</tr>
+						</table>
+						</div>
+					  <div style="clear:both;"></div>
+				  </div>
+				  
 				</div>
+				
+				<div id="hotel_detail" class="detail">
+				  <div>
+				  	<div class="fl reservation_tab">예약내역</div>
+				  	<div class="fl cancel_tab">취소내역</div>
+				  	<div class="fl last_tab">지난 내역</div>
+				  	<div style="clear:both;"></div>
+				  </div>
+				  
+				  <div class="reservation_tab_detail tab_detail">
+					  <div class="fr">
+					  	<div class="fl">예약기간 선택하여 조회</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<div class="fl">~</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<button type="button" class="fl purple_font">조회</button>
+					  	<div style="clear:both;"></div>
+					 </div>
+					  
+					  <div>
+					  	<div class="fl">총 <span class="purple_font"> 0 </span>건</div>
+					  	<div class="fr">
+					  		<div class="purple_font fl">예약일 최신순</div>
+					  		<div class="fl">출발일 </div>
+					  		<div class="fl">최신순</div>
+					  		<div style="clear:both;"></div>
+					  	</div>
+					  	<div style="clear:both;"></div>
+					  </div>
+					  
+					  <div>
+						<table>
+							<tr>
+								<th>예약일/예약코드</th>
+								<th>상품명</th>
+								<th>결제 금액</th>
+								<th>인원</th>
+								<th>체크인/체크아웃</th>
+								<th>예약상태</th>
+							</tr>
+							<tr>
+								<td>ht1234567890</td>
+								<td>일본호텔</td>
+								<td>0원</td>
+								<td>1명</td>
+								<td>2024.07.02 ~ 2024.07.08</td>
+								<td>예약 완료</td>
+							</tr>
+						</table>
+						</div>
+					  <div style="clear:both;"></div>
+				  </div>
+				  
+				  <div class="cancel_tab_detail  tab_detail">
+					  <div class="fr">
+					  	<div class="fl">예약기간 선택하여 조회</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<div class="fl">~</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<button type="button" class="fl purple_font">조회</button>
+					  	<div style="clear:both;"></div>
+					 </div>
+					  
+					  <div>
+					  	<div class="fl">총 <span class="purple_font"> 0 </span>건</div>
+					  	<div class="fr">
+					  		<div class="purple_font fl">예약일 최신순</div>
+					  		<div class="fl">출발일 </div>
+					  		<div class="fl">최신순</div>
+					  		<div style="clear:both;"></div>
+					  	</div>
+					  	<div style="clear:both;"></div>
+					  </div>
+					  
+					  <div>
+						<table>
+							<tr>
+								<th>예약일/예약코드</th>
+								<th>상품명</th>
+								<th>인원</th>
+								<th>체크인/체크아웃</th>
+								<th>취소일</th>
+								<th>취소상태</th>
+							</tr>
+							<tr>
+								<td>ht1234567890</td>
+								<td>일본호텔</td>
+								<td>1명</td>
+								<td>2024.07.02 ~ 2024.07.08</td>
+								<td>2024.07.01</td>
+								<td>취소 완료</td>
+							</tr>
+						</table>
+						</div>
+					  <div style="clear:both;"></div>
+				  </div>
+				  
+				  <div class="last_tab_detail tab_detail">
+					  <div class="fr">
+					  	<div class="fl">예약기간 선택하여 조회</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<div class="fl">~</div>
+					  	<button type="button" class="grey_font fl">2024.07.05 <span class="calender_img"></span></button>
+					  	<button type="button" class="fl purple_font">조회</button>
+					  	<div style="clear:both;"></div>
+					 </div>
+					  
+					  <div>
+					  	<div class="fl">총 <span class="purple_font"> 0 </span>건</div>
+					  	<div class="fr">
+					  		<div class="purple_font fl">예약일 최신순</div>
+					  		<div class="fl">출발일 </div>
+					  		<div class="fl">최신순</div>
+					  		<div style="clear:both;"></div>
+					  	</div>
+					  	<div style="clear:both;"></div>
+					  </div>
+					  
+					  <div>
+						<table>
+							<tr>
+								<th>예약일/예약코드</th>
+								<th>상품명</th>
+								<th>결제 금액</th>
+								<th>인원</th>
+								<th>체크인/체크아웃</th>
+								<th>예약상태</th>
+							</tr>
+							<tr>
+								<td>ht1234567890</td>
+								<td>일본여행</td>
+								<td>0원</td>
+								<td>1명</td>
+								<td>2024.07.02 ~ 2024.07.08</td>
+								<td>예약완료</td>
+							</tr>
+						</table>
+						</div>
+					  <div style="clear:both;"></div>
+				  </div>
+					
+				</div>
+				<div id="oversea_flight_detail" class="detail">
+					해외항공
+				</div>
+				<div id="domestic_flight_detail" class="detail">
+					국내항공
+				</div>
+				<div id="flight_hotel_detail" class="detail">
+					항공+호텔
+				</div>
+				<div id="tour_detail" class="detail">
+					투어 입장권
+				</div>
+				
+				
 				
 				
 				
@@ -516,22 +775,9 @@
 			</div>
 		</div>
 	</div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <footer>
+ 
+ 	<!-- footer 시작 -->
+     <footer>
 
         <div class="footer1">
             <div>
@@ -737,4 +983,5 @@
 </body>
 <script src="../../script/header.js"></script>
 <script src="../../script/footer.js"></script>
+<script src="../../script/reservation_check.js"></script>
 </html>

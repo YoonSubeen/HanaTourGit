@@ -16,7 +16,7 @@ $(function() {
 
     // 회전 애니메이션 적용
     $(this).css('transition', 'transform 0.7s');
-});
+	});
 	
 	
 	// 투어조건 클릭변화 
