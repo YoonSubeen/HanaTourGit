@@ -41,7 +41,7 @@
 
 
                     <div class="main1_join5_inner1">
-						<h1>아이디 : <%= session.getAttribute("findId") %></h1>
+						<h1>아이디 : <%= request.getAttribute("findId") %></h1>
 					</div>
 					
 					<div class="main1_join5_inner_img">

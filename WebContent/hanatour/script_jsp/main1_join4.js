@@ -13,8 +13,47 @@ $(function() {
     });
 
 
+	// 아이디 유효성 검사
+	function idValidation(id) {
+		let idRegex = /^[a-z0-9]+$/;
+		return idRegex.test(id);
+	}
+
+
+
 	$(".main1_join4_inner4_id_btn").click(function() {
-        $(".main1_join4_form1").submit();
+		
+		let inputJoinId = $("input[name='join_id']").val();
+		
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: contextPath + "/Join4IdDuplicateCheckServlet",
+			data: {
+				key : inputJoinId
+			},
+			dataType: "json",
+			success: function(response) {
+				
+				if( response.key 
+					|| !idValidation(inputJoinId) ) { // 중복아이디가 있거나 유효성검사 실패
+					$(".main1_join4_inner4_id").removeClass("main1_join4_inner4_id_pass");
+					$(".main1_join4_inner4_id").addClass("main1_join4_inner4_id_fail");
+					sumbitActiveCheck();
+				} else {
+					$(".main1_join4_inner4_id").addClass("main1_join4_inner4_id_pass");
+					$(".main1_join4_inner4_id").removeClass("main1_join4_inner4_id_fail");
+					sumbitActiveCheck();
+				}
+				
+			}, error: function() {
+				console.log("아이디 중복체크 에러");
+			}, complete: function() {
+				console.log("아이디 중복체크 성공");
+			}
+			
+		})
+		
     });
 
 
@@ -173,16 +212,18 @@ $(function() {
 
 
 
-/*
     $(".main1_join4_inner5").click(function() {
         if( $(this).hasClass("main1_join4_inner5_active") ) {
+			$("input[name='join_id2']").val( $("input[name='join_id']").val() );
             $(".main1_join4_form2").submit();
         } 
     });
-*/
+
+
 
     function sumbitActiveCheck() {
-        if( $(".main1_join4_inner4_phone").hasClass("main1_join4_inner4_phone_pass")  
+        if( $(".main1_join4_inner4_id").hasClass("main1_join4_inner4_id_pass")
+			&& $(".main1_join4_inner4_phone").hasClass("main1_join4_inner4_phone_pass")  
             && $(".main1_join4_inner4_pw").hasClass("main1_join4_inner4_pw_pass") 
             && $(".main1_join4_inner4_pw_confirm").hasClass("main1_join4_inner4_pw_confirm_pass") ) {
 

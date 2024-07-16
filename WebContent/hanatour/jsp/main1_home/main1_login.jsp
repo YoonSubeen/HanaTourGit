@@ -28,7 +28,7 @@
             </div>
 
             <div class="main1_login_form3">
-                <form action="<%=request.getContextPath() %>/LogInServlet">
+                <form action="<%=request.getContextPath() %>/LogInServlet" method="post">
                     <div class="main1_login_form3_id">
                         <input type="text" name="user_id" placeholder="아이디(이메일계정)"/>
                         <span class=""></span>

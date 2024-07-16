@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.FindPwDao;
+import dao.FindUserInfoDao;
 
 
 @WebServlet("/FindPwServlet")
@@ -17,8 +17,11 @@ public class FindPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		request.setCharacterEncoding("UTF-8");
+		
 		String id = request.getParameter("find_pw_id");
 		String name = request.getParameter("find_pw_name");
 		
@@ -34,20 +37,14 @@ public class FindPwServlet extends HttpServlet {
 		String birth = request.getParameter("find_pw_birth");
 		String email = request.getParameter("find_pw_mail");
 		
-		FindPwDao fpDao = new FindPwDao();
+		FindUserInfoDao fDao = new FindUserInfoDao();
 		
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("findPw", fpDao.findPw(id, name, gender, birth, email));
-		
+		request.setAttribute("findPw", fDao.findPw(id, name, gender, birth, email));
 		
 		request.getRequestDispatcher("hanatour/jsp/main1_home/main1_find_pw_result.jsp").forward(request, response);
 	}
 
 
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		doGet(request, response);
-//	}
 
 }

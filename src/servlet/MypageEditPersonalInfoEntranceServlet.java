@@ -9,20 +9,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.LoginDao;
+import dto.UserInfoDto;
 
-@WebServlet("/LogOutServlet")
-public class LogOutServlet extends HttpServlet {
+
+@WebServlet("/MypageEditPersonalInfoEntranceServlet")
+public class MypageEditPersonalInfoEntranceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		LoginDao lDao = new LoginDao();
+		UserInfoDto uDto;
 		
-		session.setAttribute("loginId", null);
-		session.setAttribute("loginName", null);
+		String loginId = (String)session.getAttribute("loginId");
+		uDto = lDao.getLoginUserDto(loginId);
 		
-		request.getRequestDispatcher("hanatour/jsp/main1_home/main1_1.jsp").forward(request, response);
+		request.setAttribute("loginEmail",  uDto.getEmail() );
+		
+		request.getRequestDispatcher("hanatour/jsp/main1_home/main1_mypage_personal_info.jsp").forward(request, response);
 	}
+
+	
 
 }

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,28 +11,31 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
-import dao.JoinDao;
+import dao.UpdateUserInfoDao;
+import dao.UserInfoDuplicateCheck;
 
-@WebServlet("/Join4IdDuplicateCheckServlet")
-public class Join4IdDuplicateCheckServlet extends HttpServlet {
+
+@WebServlet("/MypageEditPersonalInfoEmailDuplicateCheckServlet")
+public class MypageEditPersonalInfoEmailDuplicateCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("key");
+		
+		
+		String email = request.getParameter("key");
+		
+		
+		UserInfoDuplicateCheck uDao = new UserInfoDuplicateCheck();
+		boolean emailDuplicateCheck = uDao.emailDuplicateCheck(email);
 		
 		JSONObject jObj = new JSONObject();
-		JoinDao jDao = new JoinDao();
-		
-		
-		jObj.put("key", jDao.joinIdDuplicateCheck(id));
+		jObj.put("key", emailDuplicateCheck);
 		
 		response.setContentType("application/json; charset=utf-8");
-		response.getWriter().print( jObj.toString() );
+		response.getWriter().print(jObj.toString());
 	}
 
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	}
+
 
 }

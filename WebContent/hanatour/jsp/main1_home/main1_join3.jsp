@@ -11,7 +11,7 @@
 <body>
     
     <div class="main1_join3">
-        <form action="<%=request.getContextPath() %>/Join3Servlet">
+        <form action="<%=request.getContextPath() %>/Join3Servlet" method="post">
             <div class="main1_join3_inner">
 
                 <div class="main1_join3_inner1">

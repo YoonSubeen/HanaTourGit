@@ -34,7 +34,9 @@
 
                 <!-- main1_join4_inner4_id_pass -->
                 <!-- main1_join4_inner4_id_fail -->
-                <form action="<%=request.getContextPath() %>/Join4IdDuplicateCheckServlet" class="main1_join4_form1">
+                <form 	action="" 
+                		class="main1_join4_form1"
+                >
                     <div class="
                         main1_join4_inner4_id
                     ">
@@ -43,7 +45,8 @@
                         </div>
                         <div class="main1_join4_inner4_id_img"></div>
                         <div></div>
-                        <div>가입할 수 있는 아이디입니다.</div>
+                        <div class="main1_join4_inner4_id_pass_text">가입할 수 있는 아이디입니다.</div>
+                        <div class="main1_join4_inner4_id_fail_text">사용할 수 없는 아이디입니다.</div>
                         <div class="main1_join4_inner4_id_btn">중복확인</div>
                     </div>
                     <input type="submit"/>
@@ -51,22 +54,22 @@
 
 
 
-                <form action="<%=request.getContextPath() %>/Join4Servlet" class="main1_join4_form2">
+                <form action="<%=request.getContextPath() %>/Join4Servlet" class="main1_join4_form2" method="post">
                     <div class="main1_join4_inner4_name_gender">
                         <div class="
                             main1_join4_inner4_name
                         ">
-                            <input type="text" name="join_name" value="<%= (String)session.getAttribute("join_name") %>" placeholder="이름" disabled/>
+                            <input type="text" name="join_name" value="<%= (String)request.getAttribute("joinName") %>" placeholder="이름" disabled/>
                             <div></div>
                         </div>
                         <div class="
                             main1_join4_inner4_gender
                         ">
                             <!-- main1_join4_inner4_gender_active -->
-                            <div class="<%= (String)session.getAttribute("join_gender_male") %>">
+                            <div class="<%= (String)request.getAttribute("joinGenderMale") %>">
                                 <input type="radio" name="join_gender" value="male" disabled/> 남
                             </div>
-                            <div class="<%= (String)session.getAttribute("join_gender_female") %>">
+                            <div class="<%= (String)request.getAttribute("joinGenderFemale") %>">
                                 <input type="radio" name="join_gender" value="female" disabled/> 여
                             </div>
                         </div>
@@ -76,7 +79,7 @@
                         main1_join4_inner4_birth
                     ">
                         <div>
-                            <input type="text" name="join_birth" value="<%= (String)session.getAttribute("join_birth") %>" placeholder="생년월일" disabled/>
+                            <input type="text" name="join_birth" value="<%= (String)request.getAttribute("joinBirth") %>" placeholder="생년월일" disabled/>
                         </div>
                     </div>
                     <!-- main1_join4_inner4_phone_pass -->
@@ -136,7 +139,7 @@
                     ">
                             비밀번호를 다시 한 번 확인해 주세요.
                     </div>
-                    <input type="submit"/>  
+                    <input type="text" name="join_id2"/>  
                 </form>
 
 

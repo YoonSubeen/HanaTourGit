@@ -16,11 +16,9 @@ public class Join4Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		
-		String id = (String) session.getAttribute("join_id");
+		String id = request.getParameter("join_id2");
 		
 		String phone = request.getParameter("join_phone");
 		String pw = request.getParameter("join_pw");
@@ -39,9 +37,7 @@ public class Join4Servlet extends HttpServlet {
 		
 	}
 	
-	
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	}
+
 
 	
 }

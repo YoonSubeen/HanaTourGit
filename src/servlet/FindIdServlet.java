@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.FindIdDao;
+import dao.FindUserInfoDao;
 
 
 
@@ -17,7 +17,9 @@ public class FindIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
  
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
 		
 		String name = request.getParameter("find_id_name");
 		
@@ -33,16 +35,13 @@ public class FindIdServlet extends HttpServlet {
 		String birth = request.getParameter("find_id_birth");
 		String email = request.getParameter("find_id_mail");
 		
-		FindIdDao fiDao = new FindIdDao();
+		FindUserInfoDao fDao = new FindUserInfoDao();
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("findId", fiDao.findId(name, gender, birth, email) );
+		request.setAttribute("findId", fDao.findId(name, gender, birth, email) );
 
 		request.getRequestDispatcher("hanatour/jsp/main1_home/main1_find_id_result.jsp").forward(request, response);
 	}
 
-	
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	}
+
 
 }

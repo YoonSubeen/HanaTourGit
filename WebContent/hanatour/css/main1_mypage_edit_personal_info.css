@@ -338,6 +338,10 @@
     letter-spacing: -1.7px;
 }
 
+.container_right_body3_pw_fail > .container_right_body3_pw_right > input::placeholder { 
+	color: red;
+}
+ 
 
 
 

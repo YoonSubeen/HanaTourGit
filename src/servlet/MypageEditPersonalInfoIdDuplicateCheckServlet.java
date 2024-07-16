@@ -10,28 +10,31 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
-import dao.JoinDao;
+import dao.UserInfoDuplicateCheck;
 
-@WebServlet("/Join4IdDuplicateCheckServlet")
-public class Join4IdDuplicateCheckServlet extends HttpServlet {
+@WebServlet("/MypageEditPersonalInfoIdDuplicateCheckServlet")
+public class MypageEditPersonalInfoIdDuplicateCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		
 		String id = request.getParameter("key");
 		
+		UserInfoDuplicateCheck iDao = new UserInfoDuplicateCheck();
+		boolean idDuplicateCheck = iDao.idDuplicateCheck(id);
+		
+		if(!idDuplicateCheck) {
+			request.setAttribute("tempChangeId", id);
+		}
+		
 		JSONObject jObj = new JSONObject();
-		JoinDao jDao = new JoinDao();
-		
-		
-		jObj.put("key", jDao.joinIdDuplicateCheck(id));
+		jObj.put("key", idDuplicateCheck);
 		
 		response.setContentType("application/json; charset=utf-8");
-		response.getWriter().print( jObj.toString() );
+		response.getWriter().print(jObj.toString());
 	}
-
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	}
 
 }

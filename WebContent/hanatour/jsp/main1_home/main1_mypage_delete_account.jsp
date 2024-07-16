@@ -1,24 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="dto.UserInfoDto" %> 
-
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>하나투어 : 꿈꾸는 대로, 펼쳐지다</title>
-    <!-- bsxlider css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
-
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/header.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main_type.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main1_1.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main1_mypage_delete_account.css">
+
 </head>
 <body>
-   
-   <header>
+    <header>
         <!-- header1_active -->
 		<!-- header1_hidden -->
         <div class="
@@ -495,20 +491,240 @@
                 <div style="clear:both"></div>
             </div>
         </div>
-    </header>
-	
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   <footer>
+    </header>   
+    
+    <div class="container center">
+        <div class="container_inner">
+            <div class="side_bar">
+                <div class="side_bar_inner fl">
+                    <div class="side_title">마이페이지</div>
+                    <div class="side_bottom_box">
+                        <div class="side_box">
+                            <a href="#">예약내역</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">찜</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">1:1문의</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">자주 찾는 질문</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">MY 여행후기</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">개인정보</a>
+                        </div>
+                    </div>
+                    <div class="reserv_list">
+                        <a href="#none">
+                            <img src="https://image.hanatour.com/usr/static/img/pc/mpg/btn_ticket_history.jpg">
+                        </a>
+                    </div>
+                    <div class="side_banner">
+                        <img src="https://image.hanatour.com/usr/manual/md/2020/11/safety/mypage.jpg">
+                    </div>
+                </div>
+            </div>
+
+            
+            
+            
+			<div class="container_right">
+
+
+                <div class="container_right_header">
+                    개인정보
+                </div>
+
+
+                <div class="container_right_body">
+
+                    <div class="container_right_body1">
+                        <!-- container_tab_active -->
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_edit_personal_info.jsp">
+                            <div class="">회원정보 수정</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_change_pw.jsp">
+                            <div class="">비밀번호 변경</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/MypageEditPersonalInfoSNSEntranceServlet">
+                            <div class="">SNS연동</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_delete_account.jsp">
+                            <div class="container_tab_active">회원탈퇴</div>
+                        </a>
+                    </div>
+
+
+                    <div class="container_right_body2">
+                        <span>그동안 보내주신 성원에 감사드립니다.</span><br/>
+                        <ul>
+                            <li>개인정보 취급방침에 의거하여 모든 개인정보가 삭제됩니다</li>
+                            <li>단, 고객게시판, 후기 등의 게시물은 후에도 유지됩니다.</li>
+                            <li>게시물 삭제는 고객센터(1577-1233)로 별도 문의가 필요합니다.</li>
+                        </ul>
+                    </div>
+
+                    <form action="">
+                        <div class="container_right_body3">
+
+                            <div class="container_right_body3_header">
+                                가입정보
+                            </div>
+
+                            <div class="container_right_body3_body">
+
+                                <div class="container_right_body3_body_id">
+                                    <div>아이디</div>
+                                    <div><%=session.getAttribute("loginId") %></div>
+                                </div>
+
+                                <div class="container_right_body3_body_pw">
+                                    <div>비밀번호</div>
+                                    <div>
+                                        <input type="password" name="user_pw" placeholder="비밀번호를 입력해 주세요."/>
+                                    </div>
+                                </div>
+
+                                <div class="container_right_body3_header2">
+                                    탈퇴사유
+                                </div>
+
+
+                                <div class="container_right_body3_body2">
+
+
+                                    <div>
+                                        <!-- delete_account_option_active -->
+                                        <label for="delete_account_option1" class="delete_account_option_active">
+                                            <div class="container_right_body3_body2_option1">
+                                                이벤트 등의 목적으로 한시 사용함
+                                                <span></span>
+                                                <input type="checkbox" name="delete_account_option1" id="delete_account_option1"/>
+                                            </div>
+                                        </label>
+                                        <label for="delete_account_option2" class="">
+                                            <div class="container_right_body3_body2_option2">
+                                                상품의 품질, 가격 등의 불만
+                                                <span></span>
+                                                <input type="checkbox" name="delete_account_option2" id="delete_account_option2"/>
+                                            </div>
+                                        </label>
+                                        <label for="delete_account_option3" class="">
+                                            <div class="container_right_body3_body2_option3">
+                                                문의사항에 대한 불친절한 응대
+                                                <span></span>
+                                                <input type="checkbox" name="delete_account_option3" id="delete_account_option3"/>
+                                            </div>
+                                        </label>
+                                    </div>
+
+
+                                    <div>
+                                        <label for="delete_account_option4" class="">
+                                            <div class="container_right_body3_body2_option4">
+                                                원치않는 상품 및 정보성 이메일
+                                                <span></span>
+                                                <input type="checkbox" name="delete_account_option4" id="delete_account_option4"/>
+                                            </div>
+                                        </label>
+                                        <label for="delete_account_option5" class="">
+                                            <div class="container_right_body3_body2_option5">
+                                                실질적인 혜택이 없음
+                                                <span></span>
+                                                <input type="checkbox" name="delete_account_option5" id="delete_account_option5"/>
+                                            </div>
+                                        </label>
+                                        <label for="delete_account_option6" class="">
+                                            <div class="container_right_body3_body2_option6">
+                                                개인정보 및 보안우려
+                                                <span></span>
+                                                <input type="checkbox" name="delete_account_option6" id="delete_account_option6"/>
+                                            </div>
+                                        </label>
+                                    </div>
+
+
+                                    <div>
+                                        <label for="delete_account_option7" class="">
+                                            <div class="container_right_body3_body2_option7">
+                                                기타
+                                                <span></span>
+                                                <input type="checkbox" name="delete_account_option7" id="delete_account_option7"/>
+                                            </div>
+                                        </label>
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <div class="container_right_body3_header3">
+                                    하나투어에 바라는 점(선택입력)
+                                </div>
+
+
+
+                                <div class="container_right_body3_body3">
+                                    <textarea name="delete_account_opnion"  rows="7" placeholder="바라는 점을 2500자 이내로 입력해 주세요."></textarea>
+                                </div>
+
+                                <div class="container_right_body3_body4">
+                                    유의사항
+                                    <ul>
+                                        <li>하나투어 닷컴 홈페이지를 통해 회원탈퇴 처리가 되면 마일리지 클럽도 자동 탈퇴 처리가 됩니다.</li>
+                                        <li>회원탈퇴 시 가족합산에서 탈퇴되며, 가족 대표자가 탈퇴하시는 경우 가족합산이 자동 해산됩니다.</li>
+                                    </ul>
+                                </div>
+
+
+
+
+                                <div class="container_right_body3_body5">
+                                    <a href="">
+                                        <div>취소</div>
+                                    </a>
+                                    <a href="">
+                                        <div>회원탈퇴</div>
+                                    </a>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                    </form>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+
+            </div>
+
+
+            
+
+
+        </div>
+    </div>
+    
+    
+
+    
+
+
+
+
+    <footer>
 
         <div class="footer1">
             <div>
@@ -622,10 +838,10 @@
         <div class="footer3">
             <div>
                 <div>
-                    ※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.
+                    	※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.
                 </div>
                 <div>
-                    ※ 하나투어는 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.
+                    	※ 하나투어는 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.
                 </div>
                 <div>
                     COPYRIGHTⓒ HANATOUR SERVICE INC. ALL RIGHTS RESERVED
@@ -703,17 +919,11 @@
         <!-- footer4 종료 -->
 
     </footer>
-   
-   
 
 </body>
-<!-- bx slider js -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
-
-<script src="<%=request.getContextPath() %>/hanatour/script/header.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/main_type.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/main1_home.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/footer.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/header.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/footer.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/main1_mypage_delete_account.js"></script>
+</html>
 </html>

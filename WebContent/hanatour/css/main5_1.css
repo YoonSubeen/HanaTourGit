@@ -118,7 +118,7 @@
 .select_departure_airport {
     display: none;
     width: 695px;
-    height: 565px;
+    height: 600px;
     background-color: white;
     margin-top: 10px;
     padding: 30px 30px 0;
@@ -176,6 +176,7 @@
 }
 
 .select_departure_airport2 > span {
+    display: inline-block;
     text-align: left;
     width: auto;
     background-color: #eef0f3;
@@ -186,7 +187,8 @@
     font-weight: 400; 
     border-radius: 4px;
     line-height: 20px;
-    margin: 0 8px 8px 0;
+    margin-right: 8opx;
+    margin-bottom: 8px;
     padding: 6px 25px 6px 10px;
 }
 
@@ -210,6 +212,7 @@
     font-weight: 400;
     letter-spacing: -.4px;
     padding-top: 4px;
+    margin-top: 40px;
 }
 
 
@@ -221,7 +224,7 @@
 .select_departure_airport4 {
     width: 633px;
     height: 373px;
-    margin-top: 20px;
+    margin-top: 15px;
     border: 1px solid #ddd;
     
 }

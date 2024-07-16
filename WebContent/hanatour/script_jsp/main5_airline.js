@@ -55,7 +55,6 @@ $(function() {
     // 출발지 도착치 공항 탭
     $(".airport_list_tab > div").click(function() {
         let index = $(this).index();
-        console.log(index);
         
         $(this).parent().find(".airport_list_tab_active").removeClass("airport_list_tab_active");
         $(this).addClass("airport_list_tab_active");

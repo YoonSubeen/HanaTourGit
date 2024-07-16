@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,7 @@ public class Join2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String agree1 = request.getParameter("main1_join2_agreement1");
 		String agree2 = request.getParameter("main1_join2_agreement2");
@@ -71,13 +70,8 @@ public class Join2Servlet extends HttpServlet {
 		
 		request.getRequestDispatcher("hanatour/jsp/main1_home/main1_join3.jsp").forward(request, response);
 		
-		// RequestDispatcher rd = request.getRequestDispatcher("hanatour/html/main1_home/main1_join3.html");
-		// rd.forward(request, response);
 	}
 
 
-	
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	}
 
 }

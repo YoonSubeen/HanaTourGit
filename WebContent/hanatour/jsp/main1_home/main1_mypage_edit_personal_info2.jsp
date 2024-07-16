@@ -1,24 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="dto.UserInfoDto" %> 
-
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>하나투어 : 꿈꾸는 대로, 펼쳐지다</title>
-    <!-- bsxlider css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
-
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/header.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main_type.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main1_1.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main1_mypage_edit_personal_info2.css">
+
 </head>
 <body>
-   
-   <header>
+    <header>
         <!-- header1_active -->
 		<!-- header1_hidden -->
         <div class="
@@ -495,20 +490,470 @@
                 <div style="clear:both"></div>
             </div>
         </div>
-    </header>
+    </header>    
+    
+    <div class="container center">
+        <div class="container_inner">
+            <div class="side_bar">
+                <div class="side_bar_inner fl">
+                    <div class="side_title">마이페이지</div>
+                    <div class="side_bottom_box">
+                        <div class="side_box">
+                            <a href="#">예약내역</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">찜</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">1:1문의</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">자주 찾는 질문</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">MY 여행후기</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">개인정보</a>
+                        </div>
+                    </div>
+                    <div class="reserv_list">
+                        <a href="#none">
+                            <img src="https://image.hanatour.com/usr/static/img/pc/mpg/btn_ticket_history.jpg">
+                        </a>
+                    </div>
+                    <div class="side_banner">
+                        <img src="https://image.hanatour.com/usr/manual/md/2020/11/safety/mypage.jpg">
+                    </div>
+                </div>
+            </div>
+
+            
+
+			<div class="container_right">
+
+
+                <div class="container_right_header">
+                    개인정보
+                </div>
+
+
+                <div class="container_right_body">
+
+                    <div class="container_right_body1">
+                        <!-- container_tab_active -->
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_edit_personal_info.jsp">
+                            <div class="container_tab_active">회원정보 수정</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_change_pw.jsp">
+                            <div class="">비밀번호 변경</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/MypageEditPersonalInfoSNSEntranceServlet">
+                            <div class="">SNS연동</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_delete_account.jsp">
+                            <div class="">회원탈퇴</div>
+                        </a>
+                    </div>
+
 	
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   <footer>
+	
+						
+					<div class="container_right_header2">
+                        기본 정보 입력
+                    </div>
+
+
+                    <div class="container_right_body2">
+
+                        <div class="basic_info_name">
+                            <div class="basic_info_name_left">이름</div>
+                            <div class="basic_info_name_right">
+                            	<%= 
+	                        		(session.getAttribute("loginId") != null) 
+	                        		? request.getAttribute("hideName")
+	                        		: "???" 
+	                        	%>
+                            </div>
+                        </div>
+                        <!-- basic_info_name -->
+
+                        <div class="basic_info_id">
+                            <div class="basic_info_id_left">아이디</div>
+
+                            <div class="basic_info_id_right">
+
+                                <div class="basic_info_id_right1">
+                                    <div>
+                                    	<%= 
+			                        		(session.getAttribute("loginId") != null) 
+			                        		? session.getAttribute("loginId")
+			                        		: "???" 
+			                        	%>
+                                    </div>
+                                    <div class="basic_info_id_btn1">아이디 변경하기</div>
+                                    <div class="basic_info_id_btn2">아이디 중복 체크</div>
+                                    <div class="basic_info_id_btn3">아이디 변경</div>
+                                </div>
+
+                                <div class="basic_info_id_right2">
+                                	<form action="<%=request.getContextPath() %>/MypageEditPersonalInfoIdUpdateServlet" method="post">
+                                    	<input 
+                                    		type="text" 
+                                    		name="user_change_id" 
+                                    		placeholder="변경할 아이디를 입력해주세요."
+                                    	/>
+                                	</form>
+                                    <ul>
+                                        <li>하나투어닷컴에서는 사용하고 계신 e-mail주소를 아이디로 사용합니다.</li>
+                                        <li>e-mail 변경 시 아이디변경하기로 변경 가능</li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <!-- basic_info_id -->
+
+
+
+                        <div class="basic_info_phone">
+                            <div class="basic_info_phone_left">휴대폰번호</div>
+                            <div class="basic_info_phone_right">
+                                <div>
+                                	<%= 
+                                		(session.getAttribute("loginId") != null) 
+                                		? request.getAttribute("hidePhone") 
+                                		: ""
+                                	%>
+                               	</div>
+                                <div class="basic_info_phone_input">
+                                	<form action="<%= request.getContextPath() %>/MypageEditPersonalInfoPhoneUpdateServlet" method="post">
+                            			<input type="text" name="user_change_phone" placeholder="변경할 휴대폰번호를 입력해주세요."/>
+                                	</form>
+                                </div>
+                                <div class="basic_info_phone_btn1">수정</div>
+                                <div class="basic_info_phone_btn2">휴대폰 번호 변경</div>
+                            </div>
+                        </div>
+                        <!-- basic_info_phone -->
+
+
+
+
+                        <div class="basic_info_birth_gender">
+                            <div>생년월일/성별</div>
+                            <div>
+                            	<%= 
+                            		(session.getAttribute("loginId") != null) 
+                            		? request.getAttribute("hideBirth") 
+                         			: ""
+                         		%>
+                           	</div>
+                        </div>
+                        <!-- basic_info_birth_gender -->
+
+
+
+                        <div class="basic_info_email">
+                            <div class="basic_info_email_left">이메일</div>
+                            <div class="basic_info_email_right">
+                                <div class="basic_info_email_right_input">
+                                    <div>
+                                    	<form action="<%=request.getContextPath() %>/MypageEditPersonalInfoEmailUpdateServlet" method="post">
+                                        	<input 
+                                        		type="text" 
+                                        		name="user_email" 
+                                        		value=
+                                        			"<%= 
+	                                        			(session.getAttribute("loginId") != null) 
+	                                        			? request.getAttribute("hideEmail") 
+	                                        			: ""
+                                        			%>" 
+                                        		disabled
+                                        	/>
+                                    	</form>
+                                    </div>
+                                    <div class="basic_info_email_btn1">이메일 변경하기</div>
+                                    <div class="basic_info_email_btn2">이메일 중복 체크</div>
+                                    <div class="basic_info_email_btn3">이메일 변경</div>
+                                </div>
+                                <div class="basic_info_email_right_ul">
+                                    <ul>
+                                        <li>하나투어닷컴에서는 사용하고 계신 e-mail주소를 아이디로 사용합니다.</li>
+                                        <li>e-mail 변경 시 아이디변경하기로 변경 가능.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- basic_info_email -->
+
+
+                    </div>
+                    <!-- container_right_body2 -->
+
+
+                    <form action="<%=request.getContextPath()%>/MypageEditPersonalInfoPassportInfoDeleteServlet" method="post">
+                        <div class="container_right_header3">
+                            <div class="container_right_header3_left">여권정보 입력</div>
+                            <div class="container_right_header3_right">
+                                <div>* 여권을 재발급 받으신 경우 여권정보 삭제 후 재등록 가능합니다.</div>
+                                <!-- delete_passport_info_active -->
+                                <div class="
+                                	delete_passport_info
+                                	<%=request.getAttribute("deletePassportInfoActive")%>
+                                ">여권정보 삭제</div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <form action="<%=request.getContextPath()%>/MypageEditPersonalInfoPassportInfoUpdateServlet" method="post">
+                        <div class="container_right_body3">
+                            <div>
+                                <div>영문 성</div>
+                                <div>
+                                    <input 
+                                    	type="text" 
+                                    	name="user_last_name" 
+                                    	placeholder="<%=request.getAttribute("lastName")%>"
+                                    	class=""
+                                    />
+                                </div>
+                                <div>영문 명</div>
+                                <div>
+                                    <input 
+                                    	type="text" 
+                                    	name="user_first_name" 
+                                    	placeholder="<%=request.getAttribute("firstName")%>"
+                                    	class=""
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <div>여권번호</div>
+                                <div>
+                                    <input 
+                                    	type="text" 
+                                    	name="user_passport_number" 
+                                    	placeholder="<%=request.getAttribute("passportNumber")%>"
+                                    	class=""
+                                    />
+                                </div>
+                                <div>여권 만료일</div>
+                                <div>
+                                    <input 
+                                    	type="text" 
+                                    	name="user_expiration_date" 
+                                    	placeholder="<%=request.getAttribute("passportExpirationDate")%>"
+                                    	class=""
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <div>국적</div>
+                                <div>
+                                	<!-- container_right_body3_red -->
+                                    <select name="user_nationality" class="">
+                                        <option value="default">
+                                        	<%=request.getAttribute("nationality")%>
+                                        </option>
+                                        <option value="kr">(국적) 대한민국</option>
+                                        <option value="jp">(국적) 일본</option>
+                                        <option value="cn">(국적) 중국</option>
+                                        <option value="us">(국적) 미국</option>
+                                    </select>
+                                </div>
+                                <div>발행국가</div>
+                                <div>
+                                	<!-- container_right_body3_red -->
+                                    <select name="user_authority" class="">
+                                        <option value="default">
+                                        	<%=request.getAttribute("authority")%>
+                                        </option>
+                                        <option value="kr">(발행국가) 대한민국</option>
+                                        <option value="jp">(발행국가) 일본</option>
+                                        <option value="cn">(발행국가) 중국</option>
+                                        <option value="us">(발행국가) 미국</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container_right_body3_agreements">
+                                <div>개인정보 수집동의</div>
+                                <div>
+                                    <div class="">
+                                        (필수) <span>개인정보 수집 및 이용</span>에 대해 동의
+                                    </div>
+                                    <div class="container_right_body3_agree1">
+                                        <label for="" class="">
+                                            <div>동의합니다</div>
+                                            <input type="radio" name="container_right_body3_agree1" value="Y"/>
+                                        </label>
+                                        <label for="" class="container_right_body3_agree1_active">
+                                            <div>동의 하지 않습니다.</div>
+                                            <input type="radio" name="container_right_body3_agree1" value="N" checked/>
+                                        </label>
+                                    </div>
+                                    <div class="">
+                                        (필수) <span>고유식별 정보 수집 및 처리</span>에 대해 동의
+                                    </div>
+                                    <div class="container_right_body3_agree2">
+                                        <label for="" class="">
+                                            <div>동의합니다</div>
+                                            <input type="radio" name="container_right_body3_agree2" value="Y"/>
+                                        </label>
+                                        <label for="" class="container_right_body3_agree2_active">
+                                            <div>동의 하지 않습니다.</div>
+                                            <input type="radio" name="container_right_body3_agree2" value="N" checked/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="passport_img">여권 사진 업로드</div>
+                                <div class="passport_img_input">
+                                	<div class="passport_ocr">
+                                        <!-- file 업로드 -->
+                                        <input 
+                                            type="file" 
+                                            onchange="recognizeFile(window.lastFile=this.files[0])" 
+                                            id="passport_ocr_id"
+                                        />
+                                        <select id="langsel" onchange="window.lastFile && recognizeFile(window.lastFile)">
+                                            <option value='eng'selected>English </option>
+                                        </select>
+                                        <div id="log"></div>
+                                    </div>
+                                	<div>
+                                		여권 사진을 업로드하여 여권번호를 입력할 수 있습니다.
+                                		<br/>사진 업로드 후 여권번호가 입력되기 전까지 잠시만 기다려주세요.
+                                	</div>
+                                </div>
+                            </div>
+                            <!-- container_right_body3_agreements -->
+                        </div>
+                        <!-- container_right_body3 -->
+
+                         <div class="passport_info_save">
+                            <!-- passport_info_save_active -->
+                            <div class="
+                                passport_info_save_inner
+                            ">
+                                여권정보 저장
+                            </div>
+                         </div>
+
+                    </form>
+
+
+
+
+
+
+                    <div class="container_right_header4">
+                        마케팅 활용 동의
+                    </div>
+
+
+
+
+                    <form action="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_edit_personal_info2.jsp">
+
+                        <div class="container_right_body4">
+
+                            <div class="container_right_body4_top">
+                                <div>문자메시지(SMS)</div>
+                                <div>
+                                    <label for="">
+                                        <div>예</div>
+                                        <input type="radio" name="container_right_body4_agree1" value="Y"/>
+                                    </label>
+                                    <label for="" class="container_right_body4_agree_active">
+                                        <div>아니오</div>
+                                        <input type="radio" name="container_right_body4_agree1" value="N" checked/>
+                                    </label>
+                                </div>
+                                <div>이메일</div>
+                                <div>
+                                    <label for="">
+                                        <div>예</div>
+                                        <input type="radio" name="container_right_body4_agree2" value="Y"/>
+                                    </label>
+                                    <label for="" class="container_right_body4_agree_active">
+                                        <div>아니오</div>
+                                        <input type="radio" name="container_right_body4_agree2" value="N" checked/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="container_right_body4_bottom">
+                                <div>우편</div>
+                                <div>
+                                    <label for="">
+                                        <div>예</div>
+                                        <input type="radio" name="container_right_body4_agree3" value="Y"/>
+                                    </label>
+                                    <label for="" class="container_right_body4_agree_active">
+                                        <div>아니오</div>
+                                        <input type="radio" name="container_right_body4_agree3" value="N" checked/>
+                                    </label>
+                                </div>
+                                <div>전화</div>
+                                <div>
+                                    <label for="">
+                                        <div>예</div>
+                                        <input type="radio" name="container_right_body4_agree4" value="Y"/>
+                                    </label>
+                                    <label for="" class="container_right_body4_agree_active">
+                                        <div>아니오</div>
+                                        <input type="radio" name="container_right_body4_agree4" value="N" checked/>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                       
+
+                        <div class="container_right_body4_btn">
+                            <a href="">
+                                <div>취소</div>
+                            </a>
+                            <a href="">
+                                <div>확인</div>
+                            </a>
+                        </div>
+
+
+
+                    </form>	
+						
+						
+						
+						
+						
+						
+
+                    
+
+                </div>
+
+
+
+            </div>
+
+            
+
+
+        </div>
+    </div>
+    
+    
+
+    
+
+
+
+
+    <footer>
 
         <div class="footer1">
             <div>
@@ -622,10 +1067,10 @@
         <div class="footer3">
             <div>
                 <div>
-                    ※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.
+                    	※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.
                 </div>
                 <div>
-                    ※ 하나투어는 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.
+                    	※ 하나투어는 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.
                 </div>
                 <div>
                     COPYRIGHTⓒ HANATOUR SERVICE INC. ALL RIGHTS RESERVED
@@ -703,17 +1148,14 @@
         <!-- footer4 종료 -->
 
     </footer>
-   
-   
 
 </body>
-<!-- bx slider js -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+<script src='https://unpkg.com/tesseract.js@4.0.1/dist/tesseract.min.js'></script>
 
-<script src="<%=request.getContextPath() %>/hanatour/script/header.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/main_type.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/main1_home.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/footer.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/header.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/footer.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/main1_mypage_edit_personal_info2.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/my_page_ocr.js"></script>
+</html>
 </html>

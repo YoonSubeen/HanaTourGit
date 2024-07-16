@@ -1,24 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="dto.UserInfoDto" %> 
-
+<%@ page import="dto.UserInfoDto" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>하나투어 : 꿈꾸는 대로, 펼쳐지다</title>
-    <!-- bsxlider css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
-
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/header.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main_type.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main1_1.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/footer.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main1_mypage_sns_connect.css">
+
 </head>
 <body>
-   
-   <header>
+    <header>
         <!-- header1_active -->
 		<!-- header1_hidden -->
         <div class="
@@ -495,20 +491,114 @@
                 <div style="clear:both"></div>
             </div>
         </div>
-    </header>
-	
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   <footer>
+    </header>    
+    
+    <div class="container center">
+        <div class="container_inner">
+            <div class="side_bar">
+                <div class="side_bar_inner fl">
+                    <div class="side_title">마이페이지</div>
+                    <div class="side_bottom_box">
+                        <div class="side_box">
+                            <a href="#">예약내역</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">찜</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">1:1문의</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">자주 찾는 질문</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">MY 여행후기</a>
+                        </div>
+                        <div class="side_box">
+                            <a href="#">개인정보</a>
+                        </div>
+                    </div>
+                    <div class="reserv_list">
+                        <a href="#none">
+                            <img src="https://image.hanatour.com/usr/static/img/pc/mpg/btn_ticket_history.jpg">
+                        </a>
+                    </div>
+                    <div class="side_banner">
+                        <img src="https://image.hanatour.com/usr/manual/md/2020/11/safety/mypage.jpg">
+                    </div>
+                </div>
+            </div>
+
+            
+            
+            
+			<div class="container_right">
+
+
+                <div class="container_right_header">
+                    개인정보
+                </div>
+
+
+                <div class="container_right_body">
+
+                    <div class="container_right_body1">
+                        <!-- container_tab_active -->
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_edit_personal_info.jsp">
+                            <div class="">회원정보 수정</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_change_pw.jsp">
+                            <div class="">비밀번호 변경</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/MypageEditPersonalInfoSNSEntranceServlet">
+                            <div class="container_tab_active">SNS연동</div>
+                        </a>
+                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_mypage_delete_account.jsp">
+                            <div class="">회원탈퇴</div>
+                        </a>
+                    </div>
+
+
+                    <div class="container_right_body2">
+
+
+                        <div class="container_right_body2_left">
+                            <div class="container_right_body2_left1">
+                            	<%=session.getAttribute("loginName") %>
+                            </div>
+                            <div class="container_right_body2_left2">
+                            	<%=(request.getAttribute("loginEmail") != null)? request.getAttribute("loginEmail"): ""%>
+                            </div>
+                        </div>
+
+
+                        <div class="container_right_body2_right">
+                            <div class="container_right_body2_right_naver">네이버 아이디로 연동하기</div>
+                            <div class="container_right_body2_right_kakao">카카오톡 아이디로 연동하기</div>
+                            <div class="container_right_body2_right_apple">애플 아이디로 연동하기</div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            
+
+
+        </div>
+    </div>
+    
+    
+
+    
+
+
+
+
+    <footer>
 
         <div class="footer1">
             <div>
@@ -622,10 +712,10 @@
         <div class="footer3">
             <div>
                 <div>
-                    ※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.
+                    	※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.
                 </div>
                 <div>
-                    ※ 하나투어는 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.
+                    	※ 하나투어는 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.
                 </div>
                 <div>
                     COPYRIGHTⓒ HANATOUR SERVICE INC. ALL RIGHTS RESERVED
@@ -703,17 +793,11 @@
         <!-- footer4 종료 -->
 
     </footer>
-   
-   
 
 </body>
-<!-- bx slider js -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
-
-<script src="<%=request.getContextPath() %>/hanatour/script/header.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/main_type.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/main1_home.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script/footer.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/header.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/footer.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/main1_mypage_sns_connect.js"></script>
+</html>
 </html>

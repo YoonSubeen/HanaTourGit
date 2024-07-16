@@ -22,7 +22,7 @@
 		<!-- header1_hidden -->
         <div class="
             header1_logout
-            <%= (String)session.getAttribute("header1_logout") %>
+            <%= (session.getAttribute("loginId") != null) ?  "header1_hidden" : "header1_active" %>
         ">
             <div class="logout">
                 <div class="">
@@ -39,7 +39,7 @@
 
         <div class="
             header1_login
-            <%= (String)session.getAttribute("header1_login") %>
+            <%= (session.getAttribute("loginId") != null) ?  "header1_active" : "header1_hidden" %>
         ">
             <div class="login">
                 <div class="">
@@ -116,12 +116,12 @@
                             마이메뉴는<br/><span>회원 전용</span> 메뉴입니다.
                         </div>
                         <div class="mypage_item3_hover1_body">
-                            <a href="">
+                            <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_login.jsp">
                                 <div class="mypage_item3_hover1_body_btn1">
                                     로그인
                                 </div>
                             </a>
-                            <a href="">
+                            <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_join1.jsp">
                                 <div class="mypage_item3_hover1_body_btn2">
                                     회원가입
                                 </div>
@@ -133,7 +133,9 @@
                     <div class="mypage_item3_hover2">
 
                         <div class="mypage_item3_hover2_header">
-                            <span><%= session.getAttribute("login_name") %></span> 님, 반갑습니다.
+                        	<span>
+                        		<%= (session.getAttribute("loginId") != null) ? session.getAttribute("loginName") : "???" %>
+                        	</span> 님, 반갑습니다.
                         </div>
                         <div class="mypage_item3_hover2_body">
                             <div>
@@ -146,7 +148,7 @@
                                 <a href="">1:1문의하기</a>
                             </div>
                             <div>
-                                <a href="">개인정보수정</a>
+                                <a href="<%=request.getContextPath() %>/MypageEditPersonalInfoEntranceServlet">개인정보수정</a>
                             </div>
                         </div>
                     </div>
@@ -187,7 +189,7 @@
                                 </div>
                                 <div class="sub_item fl">
                                     <div>
-                                        <a href="">
+                                        <a href="<%=request.getContextPath()%>/hanatour/jsp/main5_airline/main5_1.jsp">
                                             항공
                                         </a>
                                     </div>
@@ -443,7 +445,7 @@
                             <div></div>
                         </li>
                         <li>
-                            <a href="#">항공</a>
+                            <a href="<%=request.getContextPath()%>/hanatour/jsp/main5_airline/main5_1.jsp">항공</a>
                             <div></div>
                         </li>
                         <li>
@@ -502,28 +504,80 @@
             <!-- 이미지 -->
             <div class="main1_type1_search">
                 <div class="main1_type1_search_top">
-                    	고객님,<br> <strong>어떤 여행을 꿈꾸시나요?</strong>
+                    고객님,<br> <strong>어떤 여행을 꿈꾸시나요?</strong>
                 </div>
                 <div class="main1_type1_search_bottom">
 
                     <div class="main1_type1_search_tab">
                         <div class="main1_type1_search_tab_active">패키지</div>
-                        <div>항공</div>
-                        <div>호텔</div>
+                        <div class="">항공</div>
+                        <div class="">호텔</div>
                     </div>
 
 
 
 
                     <div class="main1_type1_search_setting ">
-                        <!-- main1_type1_search_tab_active 클래스 있는 탭만 나타남 -->
+
 
                         <!-- 패키지 -->
-                        <div class="main1_type1_search_tour main1_type1_search_tab_active">
-
+                        <!-- main1_type1_search_tab_active -->
+                        <div class="
+                            main1_type1_search_tour 
+                            main1_type1_search_tab_active
+                            
+                        ">
                             <form action="#">
-                                	패키지 검색창
-                                <input type="submit" value="패키지 검색">
+                                <!-- main1_type1_search_tour1_input_empty -->
+                                <div class="
+                                    main1_type1_search_tour1
+                                ">
+                                    <input type="text" name="search_tour_arrival" placeholder="어디로 떠나세요?"/>
+                                </div>
+
+                                <div class="main1_type1_search_tour2">
+                                    <select name="search_tour_departure" id="">
+                                        <option value="default">출발지 전체</option>
+                                        <option value="">인천/김포</option>
+                                        <option value="">부산</option>
+                                        <option value="">대구</option>
+                                        <option value="">청주</option>
+                                        <option value="">광주(무안)</option>
+                                        <option value="">제주</option>
+                                        <option value="">양양</option>
+                                    </select>
+                                </div>
+
+                                <div class="main1_type1_search_tour3">
+                                    <input type="text" name="search_tour_date" placeholder="여행시작일 선택" readonly/>
+                                    <div class="main1_type1_search_tour3_calender">
+                                        달력자리
+                                    </div>
+                                </div>
+
+                                <div class="main1_type1_search_tour4">
+                                    <!-- main1_type1_search_tour4_active -->
+                                    <label for="" class="">
+                                        <div>
+                                            <span></span>
+                                            <span>항공권은<br/>있어요</span>
+                                        </div>
+                                        <input type="checkbox" name="search_tour_option1"/>
+                                    </label>
+                                    <!-- main1_type1_search_tour4_active -->
+                                    <label for="" class="">
+                                        <div>
+                                            <span></span>
+                                            <span>우리끼리만<br/>여행할래요</span>
+                                        </div>
+                                        <input type="checkbox" name="search_tour_option2"/>
+                                    </label>
+                                </div>
+
+                                <div class="main1_type1_search_tour5">
+                                    패키지 검색
+                                </div>
+
                             </form>
                         </div>
 
@@ -533,7 +587,10 @@
 
 
                         <!-- 항공 -->
-                        <div class="main1_type1_search_airline">
+                        <div class="
+                            main1_type1_search_airline
+                            
+                        ">
                             <div class="main1_type1_search_airline_tab">
                                 <div class="main1_type1_search_airline_active">왕복</div>
                                 <div class="">편도</div>
@@ -542,47 +599,123 @@
 
                             <div class="main1_type1_search_airline_search_setting">
 
-                                
+                                <!-- main1_type1_search_airline_active -->
                                 <div class="
                                     main1_type1_search_airline_round_trip
                                     main1_type1_search_airline_active
                                 ">
                                     <form action="">
-                                        <div class="main1_type1_round_trip1">
+
+                                        <div class="main1_type1_search_airline_round_trip1">
                                             <div>
-                                                <input type="text" name="departure" placeholder="SEL 인천/김포"/>
+                                                <input type="text" name="search_airline_round_trip_departure"/>
                                             </div>
                                             <div>
-                                                <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type1_airline_double_arrow.png" alt="">
+                                                <span></span>
                                             </div>
                                             <div>
-                                                <input type="text" name="arrival" placeholder="도착지"/>
-                                            </div>
-                                        </div>
-                                        <div class="main1_type1_round_trip2">
-                                            <div>06.12(수)</div>
-                                            <div>06.16(일)</div>
-                                        </div>
-                                        <div class="main1_type1_round_trip3">
-                                            <div>
-                                                <span>성인</span>
-                                                <span>1</span>
-                                                <span>명</span>
-                                                <span>일반석</span>
-                                            </div>
-                                            <div>
-                                                <button 
-                                                    type="button" 
-                                                    value="direct_flight" 
-                                                    class="direct_flight_btn 
-                                                ">
-                                                    직항
-                                                </button>
+                                                <input type="text" name="search_airline_round_trip_arrival" placeholder="도착지"/>
                                             </div>
                                         </div>
-                                        <div class="main1_type1_round_trip4">
-                                            <input type="submit" value="항공권 검색"/>
+
+                                        <div class="main1_type1_search_airline_round_trip_submit_fail">
+                                            도착지를 선택해주세요.
                                         </div>
+
+                                        <div class="main1_type1_search_airline_round_trip2">
+                                            <div>
+                                                <input type="text" name="search_airline_round_trip_departure_date" readonly/>
+                                            </div>
+                                            
+                                            <div>
+                                                <input type="text" name="search_airline_round_trip_arrival_date" readonly/>
+                                            </div>
+                                            <div class="main1_type1_search_airline_round_trip2_calender">
+                                                달력자리
+                                            </div>
+                                        </div>
+
+                                        <div class="main1_type1_search_airline_round_trip3">
+                                            <div>
+                                                <input type="text" name="search_airline_round_trip_member" readonly/>
+                                            </div>
+                                            <!-- round_trip_direct_active -->
+                                            <div class="">
+                                                직항
+                                                <input type="checkbox" name="search_airline_round_trip_direct"/>
+                                            </div>
+
+
+                                            <div class="search_airline_round_trip_member">
+
+                                                <div class="search_airline_round_trip_member1">
+                                                    인원
+                                                </div>
+
+                                                <div class="search_airline_round_trip_member2">
+                                                    <div class="search_airline_round_trip_member_adult">
+                                                        <div>성인</div>
+                                                        <div>
+                                                            <div></div>
+                                                            <div class="search_airline_round_trip_member_adult_number">1</div>
+                                                            <div></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="search_airline_round_trip_member_child">
+                                                        <div>소아</div>
+                                                        <div>
+                                                            <div></div>
+                                                            <div class="search_airline_round_trip_member_child_number">0</div>
+                                                            <div></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="search_airline_round_trip_member_infant">
+                                                        <div>유아</div>
+                                                        <div>
+                                                            <div></div>
+                                                            <div class="search_airline_round_trip_member_infant_number">0</div>
+                                                            <div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="search_airline_round_trip_member3">
+                                                    좌석 등급
+                                                </div>
+
+                                                <div class="search_airline_round_trip_member4">
+                                                    <div>
+                                                        <label for="" class="search_airline_round_trip_seat_class_active">
+                                                            <div></div>
+                                                            <div>일반석</div>
+                                                            <input type="radio" name="search_airline_round_trip_seat_class" value="economy" checked/>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label for="">
+                                                            <div></div>
+                                                            <div>프레스티지석</div>
+                                                            <input type="radio" name="search_airline_round_trip_seat_class" value="prestige"/>
+                                                        </label>
+                                                    </div>
+                                                   
+                                                </div>
+
+                                                <div class="search_airline_round_trip_member5">
+                                                    <div class="search_airline_round_trip_member_select">
+                                                        선택완료
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- search_airline_round_trip_member -->
+
+                                        </div>
+
+                                        <div class="main1_type1_search_airline_round_trip4">
+                                            항공권 검색
+                                        </div>
+
                                     </form>
 
                                 </div>
@@ -590,13 +723,119 @@
 
 
 
-                                <div class="main1_type1_search_airline_one_way">
+                                <div class="
+                                    main1_type1_search_airline_one_way
+                                ">
                                     <form action="">
-                                        <div></div>
-                                        <div></div>
-                                        <div>
-                                            <input type="submit" value="항공권 검색"/>
+
+                                        <div class="main1_type1_search_airline_one_way1">
+                                            <div>
+                                                <input type="text" name="search_airline_one_way_departure"/>
+                                            </div>
+                                            <div>
+                                                <span></span>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="search_airline_one_way_arrival" placeholder="도착지"/>
+                                            </div>
                                         </div>
+
+                                        <div class="main1_type1_search_airline_one_way_submit_fail">
+                                            도착지를 선택해주세요.
+                                        </div>
+
+                                        <div class="main1_type1_search_airline_one_way2">
+                                            <div>
+                                                <input type="text" name="search_airline_one_way_departure_date" readonly/>
+                                            </div>
+                                            <div class="main1_type1_search_airline_one_way2_calender">
+                                                달력자리
+                                            </div>
+                                        </div>
+
+                                        <div class="main1_type1_search_airline_one_way3">
+                                            <div>
+                                                <input type="text" name="search_airline_one_way_member" readonly/>
+                                            </div>
+                                            <!-- one_way_direct_active -->
+                                            <div class="">
+                                                직항
+                                                <input type="checkbox" name="search_airline_one_way_direct"/>
+                                            </div>
+
+
+                                            <div class="search_airline_one_way_member">
+
+                                                <div class="search_airline_one_way_member1">
+                                                    인원
+                                                </div>
+                                        
+                                                <div class="search_airline_one_way_member2">
+                                                    <div class="search_airline_one_way_member_adult">
+                                                        <div>성인</div>
+                                                        <div>
+                                                            <div></div>
+                                                            <div class="search_airline_one_way_member_adult_number">1</div>
+                                                            <div></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="search_airline_one_way_member_child">
+                                                        <div>소아</div>
+                                                        <div>
+                                                            <div></div>
+                                                            <div class="search_airline_one_way_member_child_number">0</div>
+                                                            <div></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="search_airline_one_way_member_infant">
+                                                        <div>유아</div>
+                                                        <div>
+                                                            <div></div>
+                                                            <div class="search_airline_one_way_member_infant_number">0</div>
+                                                            <div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        
+                                                <div class="search_airline_one_way_member3">
+                                                    좌석 등급
+                                                </div>
+                                        
+                                                <div class="search_airline_one_way_member4">
+                                                    <div>
+                                                        <label for="" class="search_airline_one_way_seat_class_active">
+                                                            <div></div>
+                                                            <div>일반석</div>
+                                                            <input type="radio" name="search_airline_one_way_seat_class" value="economy" checked/>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label for="">
+                                                            <div></div>
+                                                            <div>프레스티지석</div>
+                                                            <input type="radio" name="search_airline_one_way_seat_class" value="prestige"/>
+                                                        </label>
+                                                    </div>
+                                                   
+                                                </div>
+                                        
+                                                <div class="search_airline_one_way_member5">
+                                                    <div class="search_airline_one_way_member_select">
+                                                        선택완료
+                                                    </div>
+                                                </div>
+                                        
+                                            </div>
+                                            <!-- search_airline_one_way_member -->
+
+
+
+                                        </div>
+
+                                        <div class="main1_type1_search_airline_one_way4">
+                                            항공권 검색
+                                        </div>
+                                       
                                     </form>
                                 </div>
                                 <!-- main1_type1_search_airline_one_way 종료 -->
@@ -616,11 +855,101 @@
 
 
                         <!-- 호텔 -->
-                        <div class="main1_type1_search_inn">
+                        <div class="
+                            main1_type1_search_inn
+                        ">
+                        
                             <form action="">
-                                호텔 검색창
 
-                                <input type="submit" value="호텔 검색"/>
+                                <div class="main1_type1_search_inn1">
+                                    <input type="text" name="search_inn_arrival" placeholder="어디로 떠나세요?"/>
+                                </div>
+
+                                <div class="main1_type1_search_inn2">
+                                    <div class="search_inn_date">
+                                        <div>
+                                            <input type="text" name="search_inn_date_departure" value="2024.07.16" readonly/>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="search_inn_date_arrival" value="2024.07.17" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="main1_type1_search_inn2_calender">
+                                        달력자리
+                                    </div>
+                                </div>
+
+                                <div class="main1_type1_search_inn3">
+                                    <input type="text" name="search_inn_member" value="객실1 ' 성인 2명" readonly/>
+
+
+                                    <div class="search_inn_room_member">
+
+                                        <div class="search_inn_room_member1">
+                                            객실 선택
+                                        </div>
+
+                                        <div class="search_inn_room_member2">
+                                            <div>객실</div>
+                                            <div>
+                                                <div></div>
+                                                <div class="search_inn_room_member_room_number">1</div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="search_inn_room_member3">
+                                            객실별 인원 설정
+                                        </div>
+
+                                        <div class="search_inn_room_member4">
+                                            <div class="search_inn_room_member_adult">
+                                                <div>성인</div>
+                                                <div>
+                                                    <div></div>
+                                                    <div class="search_inn_room_member_adult_number">2</div>
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                            <div class="search_inn_room_member_children">
+                                                <div>아동</div>
+                                                <div>
+                                                    <div></div>
+                                                    <div class="search_inn_room_member_children_number">0</div>
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="search_inn_room_member5">
+                                            <div>
+                                                <div>
+                                                    <span>객실</span>
+                                                    <span class="search_inn_room_member_room_number">1</span>
+                                                </div>
+                                                &nbsp; &apos; &nbsp;
+                                                <div>
+                                                    <span>성인</span>
+                                                    <span class="search_inn_room_member_adult_number">2</span>
+                                                </div>
+                                                &nbsp;
+                                                <div>
+                                                    <span class="search_inn_room_member_children_text"></span>
+                                                    <span class="search_inn_room_member_children_number"></span>
+                                                </div>
+                                            </div>
+                                            <div>선택완료</div>
+                                        </div>
+
+                                    </div>
+                                    <!-- search_inn_room_member -->
+                                </div>
+
+
+                                <div class="main1_type1_search_inn4">
+                                    숙소 검색
+                                </div>
+
                             </form>
                         </div>
 
@@ -631,7 +960,7 @@
 
 
                     </div>
-
+                    <!-- main1_type1_search_setting 종료 -->
 
 
 

@@ -27,7 +27,8 @@ $(function() {
 
     // 이름
     function nameValidation(name) {
-        let nameRegex = /^(?!^[ㄱ-ㅎㅏ-ㅣ]+$)[가-힣]+$/;
+        // let nameRegex = /^(?!^[ㄱ-ㅎㅏ-ㅣ]+$)[가-힣]+$/;
+        let nameRegex = /^(?!^[ㄱ-ㅎㅏ-ㅣ]+$)[가-힣]{2,}$/;
         return nameRegex.test(name);
     }
 

@@ -27,7 +27,7 @@
 
             <div class="main1_join2_inner3">
 
-                <form action="<%=request.getContextPath() %>/Join2Servlet">
+                <form action="<%=request.getContextPath() %>/Join2Servlet" method="post">
                     <div class="main1_join2_inner3_header">
                         <label for="">
                             <!-- main1_join2_inner3_all_agreement -->

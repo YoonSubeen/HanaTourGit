@@ -8,28 +8,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
+import dao.HideUserInfoDao;
+import dao.UpdateUserInfoDao;
+import dto.UserInfoDto;
 
-import dao.JoinDao;
 
-@WebServlet("/Join4IdDuplicateCheckServlet")
-public class Join4IdDuplicateCheckServlet extends HttpServlet {
+@WebServlet("/MypageEditPersonalInfoPhoneUpdateServlet")
+public class MypageEditPersonalInfoPhoneUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-
+   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("key");
 		
-		JSONObject jObj = new JSONObject();
-		JoinDao jDao = new JoinDao();
+		HttpSession session = request.getSession();
+		
+		String loginId = (String)session.getAttribute("loginId");
+		String changePhone = (String)request.getParameter("user_change_phone");
+		
+		UpdateUserInfoDao uDao = new UpdateUserInfoDao();
+		uDao.phoneNumberUpdate(loginId, changePhone);
 		
 		
-		jObj.put("key", jDao.joinIdDuplicateCheck(id));
-		
-		response.setContentType("application/json; charset=utf-8");
-		response.getWriter().print( jObj.toString() );
+		request.getRequestDispatcher("MypageEditPersonalInfo2EntranceServlet").forward(request, response);
 	}
+
 
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //	}

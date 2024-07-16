@@ -18,32 +18,29 @@ public class Join3Servlet extends HttpServlet {
        
 
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
 		
 		String name = request.getParameter("join_name");
 		String gender = request.getParameter("join_gender");
 		String birth = request.getParameter("join_birth");
 		String email = request.getParameter("join_mail");
 		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("join_name", name);
-		session.setAttribute("join_birth", birth);
-		
-		session.setAttribute("join_gender_male", "");
-		session.setAttribute("join_gender_female", "");
-		
-		
+		request.setAttribute("joinName", name);
+		request.setAttribute("joinBirth", birth);
+	
 		if( gender.equals("male") ) {
 			gender = "M";
-			session.setAttribute("join_gender_male", "main1_join4_inner4_gender_active");
-			session.setAttribute("join_gender_female", "");
+			request.setAttribute("joinGenderMale", "main1_join4_inner4_gender_active");
+			request.setAttribute("joinGenderFemale", "");
 		} else if ( gender.equals("female")) {
 			gender = "F";
-			session.setAttribute("join_gender_male", "");
-			session.setAttribute("join_gender_female", "main1_join4_inner4_gender_active");
+			request.setAttribute("joinGenderMale", "");
+			request.setAttribute("joinGenderFemale", "main1_join4_inner4_gender_active");
 		} else {
-			gender = null;
+			request.setAttribute("joinGenderMale", "");
+			request.setAttribute("joinGenderFemale", "");
 		}
 		
 		JoinDao jDao = new JoinDao();
@@ -53,9 +50,6 @@ public class Join3Servlet extends HttpServlet {
 		request.getRequestDispatcher("hanatour/jsp/main1_home/main1_join4.jsp").forward(request, response);
 	}
 
-	
-	
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	}
+
 
 }

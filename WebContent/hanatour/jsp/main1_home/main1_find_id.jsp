@@ -42,7 +42,7 @@
 
                     <div class=""> 
                         
-                        <form action="<%=request.getContextPath() %>/FindIdServlet">
+                        <form action="<%=request.getContextPath() %>/FindIdServlet" method="post">
 
                             <div class="main1_find_id3_inner3">
                                 <div class="main1_find_id3_inner3_title">이메일로 찾기</div>

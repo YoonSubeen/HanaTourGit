@@ -52,6 +52,7 @@ public class LoginDao {
 			
 			if(rs.next()) {
 				result = rs.getInt(1);
+				
 			}
 			
 			
@@ -75,33 +76,63 @@ public class LoginDao {
 	}
 	
 	
-	// 이름 가져오기
-	public String getLoginUserName(String id, String pw) {
+	
+	
+	// 로그인 유저 Dto return
+	public UserInfoDto getLoginUserDto(String id) {
+		UserInfoDto uiDto = new UserInfoDto();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String name = "";
 		
 		try {
-			
 			conn = getConnection();
-			
 			String sql = 
-					"SELECT  name " + 
+					"SELECT  user_id, " + 
+					"		 user_pw,  " + 
+					"		 name,  " + 
+					"        gender, " + 
+					"        birth,  " + 
+					"		 phone, " + 
+					"		 email, " + 
+					"        last_name, " + 
+					"        first_name, " + 
+					"        passport_number, " + 
+					"        TO_CHAR(expiration_date, 'YYYYMMDD') AS expiration_date, " + 
+					"        nationality, " + 
+					"        authority, " + 
+					"        agree5 " + 
 					"FROM    user_info " + 
-					"WHERE   user_id = ? " + 
-					"        AND " + 
-					"        user_pw = ?";
+					"WHERE   user_id = ? "  
+					;
+			
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
 			
 			rs = pstmt.executeQuery();
-			if( rs.next() ) {
-				name = rs.getString("name");
+			
+			while(rs.next()) {
+				uiDto.setId(id);
+				uiDto.setPw( rs.getString("user_pw") );
+				uiDto.setName( rs.getString("name") );
+				uiDto.setGender( rs.getString("gender") );
+				uiDto.setBirth( rs.getString("birth") );
+				uiDto.setPhone( rs.getString("phone") );
+				uiDto.setEmail( rs.getString("email") );
+				
+				uiDto.setLastName( rs.getString("last_name") );
+				uiDto.setFirstName( rs.getString("first_name") );
+				uiDto.setPassportNumber( rs.getString("passport_number") );
+				uiDto.setPassportExpirationDate( rs.getString("expiration_date") );
+				uiDto.setNationality( rs.getString("nationality") );
+				uiDto.setAuthority( rs.getString("authority") );
+				
+				uiDto.setAgreement5( rs.getString("agree5") );
 			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -120,21 +151,10 @@ public class LoginDao {
 			}
 		}
 		
-		return name;
-	}
-	
-	
-	
-	// 로그인 유저 정보 가져오기
-	public UserInfoDto getUserInfo(String id, String pw) {
-		UserInfoDto uiDto = new UserInfoDto();
-		
-		
-		
-		
-		
 		return uiDto;
 	}
+	
+	
 	
 	
 	

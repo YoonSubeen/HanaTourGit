@@ -42,7 +42,7 @@
 
                     <div class=""> 
                         
-                        <form action="<%=request.getContextPath() %>/FindPwServlet">
+                        <form action="<%=request.getContextPath() %>/FindPwServlet" method="post">
 
                             <div class="main1_find_pw3_inner3">
                                 <div class="main1_find_pw3_inner3_title">이메일로 찾기</div>

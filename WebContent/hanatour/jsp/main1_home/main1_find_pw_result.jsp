@@ -42,7 +42,7 @@
                 
                 
                  <div class="main1_join5_inner1">
-						<h1>비밀번호 : <%= session.getAttribute("findPw") %></h1>
+						<h1>비밀번호 : <%= request.getAttribute("findPw") %></h1>
 					</div>
 					
 					<div class="main1_join5_inner_img">
