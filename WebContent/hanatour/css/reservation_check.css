@@ -1,7 +1,5 @@
 @charset "UTF-8";
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
-
-
 * {
     box-sizing: border-box;
     list-style: none;
@@ -271,6 +269,12 @@ table {
     border-bottom: 1px solid #ddd;
     color: #333;
     font-size: 13px;
+}
+.tab_detail > div:nth-child(3) table td:nth-child(2) {
+	max-width: 330px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 

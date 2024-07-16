@@ -385,6 +385,7 @@ details summary {
 	background-color : rgb(245, 245, 245);
 	margin-left : 20px;
 	border-radius : 20px;
+	margin-bottom: 20px;
 }
 #notice > div:nth-child(1) > img {
 	width : 12px;

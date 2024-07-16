@@ -209,6 +209,28 @@ $(function () {
 			}								 		 			
 			
 		});		
+
+// 가격 단위에 쉼표 찍어주기
+	$(".comma").each(function() {
+    let text = $(this).text();
+    let formattedText = text.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    $(this).text(formattedText);
+	});		
+	
+//	호텔&관광지 클릭시 호텔 정보 보여주기 
+	$(".hotel_total_info").hide(); // 모든 호텔 전체 내용 숨기기
+	$(".hotel_total_info").eq(0).show(); // 첫번째 박스 전체 내용만 보여주기
+	
+	// 클릭시 상응되는 전체 정보 보여주기
+	$(".hotel_check_box").click(function() {
+		// alert("클릭");
+		let smallBox = $(this).index(); // 작은 상자의 index 찾기
+		$(".hotel_total_info").hide(); // 전체 숨기고 
+		$(".hotel_total_info").eq(smallBox).show(); // 클릭한 것의 전체 정보만 보여주기
+		
+		
+	});	
+		
 		
 });		
 		

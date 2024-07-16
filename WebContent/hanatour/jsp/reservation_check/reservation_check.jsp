@@ -1,3 +1,20 @@
+<%@page import="dto.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.ReservationCheckDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	ReservationCheckDao rcDao = new ReservationCheckDao();
+	ArrayList <TravelReservationCheckDto> trcDto = rcDao.travelReservationCheck("subin1222");
+	ArrayList<TravelCancelCheckDto> tccDto = rcDao.travelCancelCheck("subin1222");
+	ArrayList <HotelReservationCheckDto> hrcDto = rcDao.hotelReservationCheck("subin1222");
+	ArrayList<HotelCancelCheckDto> hccDto = rcDao.hotelCancelCheck("subin1222");
+	ArrayList<OverseaFlightReservationCheckDto> ofrcDto = rcDao.overseaFlightReservationCheck("subin1222");
+	ArrayList<OverseaFlightCancelCheckDto> ofccDto = rcDao.overseaFlightCancelCheck("subin1222");
+	ArrayList<DomesticFlightReservationCheckDto> dfrcDto = rcDao.domesticFlightReservationCheck("subin1222");
+	ArrayList<DomesticFlightCancelCheckDto> dfccDto = rcDao.domesticFlightCancelCheck("subin1222");
+	ArrayList<ShowTourReservationDto> showTourReservation = rcDao.showTourReservation("subin1222");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -416,10 +433,7 @@
             </div>
         </div>
     </header>
-    
-    
-    
-    
+
     <div class="container center">
 		<div class="container_inner">
 			<div class="side_bar">
@@ -507,14 +521,20 @@
 								<th>출발일/귀국일</th>
 								<th>여행/예약상태</th>
 							</tr>
+							<%
+								for(TravelReservationCheckDto dto : trcDto) {
+							%>
 							<tr>
-								<td>tr1234567890</td>
-								<td>일본여행</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02 ~ 2024.07.08</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getPackageName() %></td>
+								<td><%=dto.getPrice()%>원</td>
+								<td><%=dto.getMember() %>명</td>
+								<td><%=dto.getEarliestDate() %> ~ <%=dto.getLatestDate() %></td>
 								<td>예약 완료</td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -552,15 +572,21 @@
 								<th>취소/환불 신청일</th>
 								<th>취소상태</th>
 							</tr>
+							<%
+								for(TravelCancelCheckDto dto : tccDto) {
+							%>
 							<tr>
-								<td>tr1234567890</td>
-								<td>일본여행</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02 ~ 2024.07.08</td>
-								<td>2024.07.01</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getPackageName() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getMember() %>명</td>
+								<td><%=dto.getEarliestDate() %> ~ <%=dto.getLatestDate() %></td>
+								<td><%=dto.getCancelDate() %></td>
 								<td>취소 완료</td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -597,22 +623,20 @@
 								<th>출발일/귀국일</th>
 								<th>예약/예약상태</th>
 							</tr>
+							<%
+								for(TravelReservationCheckDto dto : trcDto) {
+							%>
 							<tr>
-								<td>tr1234567890</td>
-								<td>일본여행</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02 ~ 2024.07.08</td>
-								<td>예약완료</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getPackageName() %></td>
+								<td><%=dto.getPrice()%>원</td>
+								<td><%=dto.getMember() %>명</td>
+								<td><%=dto.getEarliestDate() %> ~ <%=dto.getLatestDate() %></td>
+								<td>예약 완료</td>
 							</tr>
-							<tr>
-								<td>tr1234567890</td>
-								<td>일본여행</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02 ~ 2024.07.08</td>
-								<td>예약완료</td>
-							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -659,14 +683,20 @@
 								<th>체크인/체크아웃</th>
 								<th>예약상태</th>
 							</tr>
+							<%
+								for(HotelReservationCheckDto dto : hrcDto) {
+							%>
 							<tr>
-								<td>ht1234567890</td>
-								<td>일본호텔</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02 ~ 2024.07.08</td>
+								<td><%=dto.getReservation_code() %></td>
+								<td><%=dto.getInn_kor() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getCheckin() %> ~ <%=dto.getCheckout() %></td>
 								<td>예약 완료</td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -703,14 +733,20 @@
 								<th>취소일</th>
 								<th>취소상태</th>
 							</tr>
+							<%
+								for(HotelCancelCheckDto dto :  hccDto) {
+							%>
 							<tr>
-								<td>ht1234567890</td>
-								<td>일본호텔</td>
-								<td>1명</td>
-								<td>2024.07.02 ~ 2024.07.08</td>
-								<td>2024.07.01</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getInnKor() %></td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getCheckIn() %> ~ <%=dto.getCheckOut() %></td>
+								<td><%=dto.getCancelDate() %></td>
 								<td>취소 완료</td>
 							</tr>
+							<% 
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -747,14 +783,20 @@
 								<th>체크인/체크아웃</th>
 								<th>예약상태</th>
 							</tr>
+							<%
+								for(HotelReservationCheckDto dto : hrcDto) {
+							%>
 							<tr>
-								<td>ht1234567890</td>
-								<td>일본여행</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02 ~ 2024.07.08</td>
-								<td>예약완료</td>
+								<td><%=dto.getReservation_code() %></td>
+								<td><%=dto.getInn_kor() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getCheckin() %> ~ <%=dto.getCheckout() %></td>
+								<td>예약 완료</td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -800,14 +842,20 @@
 								<th>출발일</th>
 								<th>예약/발권상태</th>
 							</tr>
+							<% 
+								for(OverseaFlightReservationCheckDto dto : ofrcDto) { 
+							%>
 							<tr>
-								<td>fl1234567890</td>
-								<td>일본항공</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getName() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getDeparture() %></td>
 								<td>발권 완료</td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -845,15 +893,21 @@
 								<th>취소일</th>
 								<th>취소상태</th>
 							</tr>
+							<%
+								for(OverseaFlightCancelCheckDto dto: ofccDto) {
+							%>
 							<tr>
-								<td>fl1234567890</td>
-								<td>일본항공</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02</td>
-								<td>2024.07.01</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getName() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getDeparture() %></td>
+								<td><%=dto.getCancelDate() %></td>
 								<td>취소 완료</td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -890,20 +944,25 @@
 								<th>출발일</th>
 								<th>좌석/발권상태</th>
 							</tr>
+							<% 
+								for(OverseaFlightReservationCheckDto dto : ofrcDto) { 
+							%>
 							<tr>
-								<td>fl1234567890</td>
-								<td>일본여행</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02</td>
-								<td>발권완료</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getName() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getDeparture() %></td>
+								<td>예약 완료</td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
 					</div>  
 				</div>
-				
 				
 				<div id="domestic_flight_detail" class="detail">
 				  <div>
@@ -943,13 +1002,19 @@
 								<th>인원</th>
 								<th>출발일</th>
 							</tr>
+							<%
+								for(DomesticFlightReservationCheckDto dto : dfrcDto) {
+							%>
 							<tr>
-								<td>fl1234567890</td>
-								<td>일본항공</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getName() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getDeparture() %></td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -984,14 +1049,22 @@
 								<th>결제금액</th>
 								<th>인원</th>
 								<th>출발일</th>
+								<th>취소일</th>
 							</tr>
+							<%
+								for(DomesticFlightCancelCheckDto dto : dfccDto) {
+							%>
 							<tr>
-								<td>fl1234567890</td>
-								<td>일본항공</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getName() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getDeparture() %></td>
+								<td><%=dto.getCancelDate() %></td>
 							</tr>
+							<%
+								} 
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -1027,13 +1100,19 @@
 								<th>인원</th>
 								<th>출발일</th>
 							</tr>
+							<%
+								for(DomesticFlightReservationCheckDto dto : dfrcDto) {
+							%>
 							<tr>
-								<td>fl1234567890</td>
-								<td>일본여행</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02</td>
+								<td><%=dto.getReservationCode() %></td>
+								<td><%=dto.getName() %></td>
+								<td><%=dto.getPrice() %>원</td>
+								<td><%=dto.getPerson() %>명</td>
+								<td><%=dto.getDeparture() %></td>
 							</tr>
+							<%
+								}
+							%>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -1079,14 +1158,6 @@
 								<th>출발일/귀국일</th>
 								<th>예약/발권상태</th>
 							</tr>
-							<tr>
-								<td>fl1234567890</td>
-								<td>일본항공+호텔</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02~2024.07.08</td>
-								<td>발권완료</td>
-							</tr>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -1124,15 +1195,6 @@
 								<th>취소일</th>
 								<th>취소상태</th>
 							</tr>
-							<tr>
-								<td>fl1234567890</td>
-								<td>일본항공+호텔</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02~2024.07.08</td>
-								<td>2024.07.01</td>
-								<td>취소완료</td>
-							</tr>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
@@ -1169,21 +1231,16 @@
 								<th>출발일/귀국일</th>
 								<th>예약/발권상태</th>
 							</tr>
-							<tr>
-								<td>fl1234567890</td>
-								<td>일본항공+호텔</td>
-								<td>0원</td>
-								<td>1명</td>
-								<td>2024.07.02~2024.07.08</td>
-								<td>발권완료</td>
-							</tr>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
 					</div>
 				</div>
 				
+								  <!-- 여기 -->
 				<div id="tour_detail" class="detail">
+					
+				  <div></div>
 				  
 				  <div class="reservation_tab_detail tab_detail">
 					  <div class="fr">
@@ -1210,28 +1267,25 @@
 						<table>
 							<tr>
 								<th>주문일</th>
-								<th>판매자 정보</th>
 								<th>상품정보</th>
 								<th>주문상태</th>
 							</tr>
 							<tr>
-								<td>2024.07.02~2024.07.08</td>
-								<td>김수연</td>
-								<td>도쿄 디즈니 랜드 티켓</td>
-								<td>사용 완료</td>
+								<%
+									for(ShowTourReservationDto dto : showTourReservation) {
+								%>
+								<td><%=dto.getPaymentDate() %></td>
+								<td><%=dto.getGoodsName() %></td>
+								<td>주문 완료</td>
+								<%
+									}
+								%>
 							</tr>
 						</table>
 						</div>
 					  <div style="clear:both;"></div>
 				  </div>
 				</div>
-				
-				
-				
-				
-				
-				
-				
 			</div>
 		</div>
 	</div>
@@ -1257,7 +1311,7 @@
                 </div>
                 <div class="footer1_center fl">
                     <a href="#">
-                        더보기
+                        	더보기
                     </a>
                 </div>
                 <div class="footer1_right fr">
@@ -1295,9 +1349,6 @@
             </div>
         </div>
         <!-- footer1 종료 -->
-        
-
-
         <div class="footer2">
             <div>
                 <div class="fl">
@@ -1345,9 +1396,6 @@
             </div>
         </div>
         <!-- footer2 종료 -->
-
-
-
         <div class="footer3">
             <div>
                 <div>
@@ -1430,16 +1478,7 @@
             </div>
         </div>
         <!-- footer4 종료 -->
-
     </footer>
-    
-    
-    
-    
-    
-    
-
-
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="../../script/header.js"></script>

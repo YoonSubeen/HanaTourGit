@@ -1,0 +1,2053 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="dto.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.CategoryDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	LocalDate now = LocalDate.now();
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
+	int nowYear = Integer.parseInt(now.format(dtf));	
+
+	dtf = DateTimeFormatter.ofPattern("MM");
+	int nowMonth = Integer.parseInt(now.format(dtf));
+
+	CategoryDao cDao = new CategoryDao();
+	ArrayList<ShowCategoryOneLineInfoDto> categoryOneLine = cDao.showCategoryOneLineInfo("태국");
+	ArrayList<CategoryTagDto> categoryTag  = cDao.categoryTag("태국");
+	ArrayList<CategoryBottomTagDto> categoryBottomTag = cDao.categoryBottomTag("태국");
+	ArrayList<CategoryPackageInfoDto> categoryPackage = cDao.cetegoryPackageInfo("2024-06-01");
+	ArrayList<CategoryPackageFlightInfoDto> categoryPackageFlight = cDao.categoryPackageFligthInfo();
+%>    
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../../css/tour-category.css">
+	<link rel="stylesheet" href="../../css/header.css">
+	<link rel="stylesheet" href="../../css/footer.css">
+	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+        <!-- header1 -->
+        <div class="header1">
+            <div class="login fr">
+                <span class="fl">
+                    <a href="">로그인</a>
+                </span>
+                <span class="fl">
+                    <a href="">회원가입</a>
+                </span>
+                <span class="fr">
+                    <a href="">고객센터</a>
+                </span>
+                <span style="clear: both;"></span>
+            </div>
+        </div>
+        <!-- header2 -->
+        <div class="header2">
+        	
+            <!-- header2 왼쪽 -->
+            <div class="fl">
+                <div class="logo fl">
+                    <img src="../../img/header/ico-hanatour-logo2.png" alt="logo">
+                </div>
+                <div class="search_bar fl">
+                    <form action="#">
+                        <input 
+                            type="text" 
+                            name ="search_keyword" 
+                            placeholder="검색어를 입력해 주세요"
+                        >
+                        <button class="search_btn">
+                            <img src="../../img/header/ico-search.png" alt="돋보기">
+                        </button>
+                    </form>
+                </div>
+                <div class="trending_search fl">
+                    <img src="../../img/header/osaka.png" alt="osaka">
+                    <div class="trending_hover">
+                        <div>
+                            <img src="../../img/header/trending_search.png" alt="인기검색어">
+                        </div>
+                        <div>
+                            <div>일본</div>
+                            <div>몽골</div>
+                            <div>다낭</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+
+            <!-- header2 오른쪽 -->
+            <div class="mypage fr">
+                <div class="mypage_item1 fr">
+                    <a href="#">
+                        <img src="../../img/header/ico-haeder-choice.png" alt="">
+                       
+                    </a>
+                </div>
+                <div class="mypage_item2 fr">
+                    <a href="#">
+                        <img src="../../img/header/ico-reservationhistory.png" alt="">
+                    </a>
+                </div>
+                <div class="mypage_item3 fr">
+                    <a href="">
+                        <img src="../../img/header/ico-mymenu.png" alt="">
+                    </a>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+        
+            <div style="clear: both;"></div>
+        </div>
+        
+        <!-- header3 -->
+        <div class="header3">
+            <div class="menu">
+                <div class="menu_left fl" id="menu_left">
+                    <a href="#">
+                        <img src="../../img/header/ico-hamburgermenu.png" alt="">
+                    </a>
+
+                    <div class="sub_menu_container smc_hide" id="sub_menu_container">
+                        <div class="sub_menu">
+                            <div class="sub_top">
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="#">
+                                            해외여행
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            해외여행 홈
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="">
+                                            항공
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            항공예약
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="#">
+                                            호텔
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            해외호텔
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            국내숙박
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="#">
+                                            국내여행
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            제주여행
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            내륙여행
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            울릉도/섬
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            내나라여행
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            국내골프
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="#">
+                                            연계서비스
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            하나투어상품권
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            포켓와이파이
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <br>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            하나트래비즈
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            하나투어 기프트카드
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            여행자보험
+                                        </a>
+                                    </div>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </div>
+                            <!-- sub_top close -->
+                            
+                            <div class="sub_bottom">
+                                <div class="sub_item fl">
+                                    <div>
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="">
+                                            테마여행
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            허니문
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            해외골프
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            크루즈
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            트래킹
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            제우스
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            MICE
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="#">
+                                            투어/입장권
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            투어/입장권 홈
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="#">
+                                            혜택/이벤트
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            이벤트
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            할인/혜택
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            여행기획전
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <a href="#">
+                                            하나투어 셀렉션
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            하나LIVE
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            하나Original
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            밍글링투어
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            마일리지 클럽
+                                        </a>
+                                    </div>
+                        
+                                </div>
+                                <div class="sub_item fl">
+                                    <div>
+                                        <br>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            하나팩 2.0
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            개런티 프로그램
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            SAFETY&JOY
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            우리끼리
+                                        </a>
+                                    </div>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </div>
+                            <!-- sub_bottom close -->
+                        </div>
+                        <!-- sub_menu close -->
+                        <div class="sub_menu_close" id="sub_menu_close">
+                            <a href="#">
+                                <img src="../../img/header/ico-alllmenu_close.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- sub_menu_container close -->
+                </div>
+                <!-- menu_left close -->
+
+                <div class="menu_center fl">
+                    <ul>
+                        <li>
+                            <a href="">베스트</a>
+                            <div></div>
+                        </li>
+                        <li class="menu_center_sub1">
+                            <a href="#">해외여행</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <a href="#">항공</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <a href="#">호텔</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <a href="#">항공+호텔</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <a href="#">투어/입장권</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <a href="#">국내여행</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <a href="#">테마여행</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <a href="#">제우스</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <a href="#">하나LIVE</a>
+                            <div></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu_right fr">
+                    <ul>
+                        <li>
+                            <a href="#">이달의 혜택</a>
+                        </li>
+                        <li>
+                            <a href="#">맞춤여행</a>
+                        </li>
+                        <li>
+                            <a href="#">여행기획전</a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </header>
+    
+    
+    
+	<div id="div_top" class="center">
+		<div class="fl">	
+			<div id="double_click">도쿄<img src="../../img/tour_img/arrow.png"></div>
+			<form>
+				<div><input id="doubleclick_search" type="text" name="country_chane_search"></div>
+			</form>
+			<div id="where_hide">
+       			<div>
+       				<div class="fl"><strong>최근검색지역</strong></div>
+       				<div class="fr grey_font">전체삭제</div>
+       				<div style="clear:both;"></div>
+       			</div>
+       			<div>
+       				<div class="fl">
+       					<div class="fl">도쿄</div>
+       					<div class="fr grey_x_img"></div>
+       					<div style="clear:both;"></div>
+       				</div>
+       				<div class="fl">
+       					<div class="fl">도쿄</div>
+       					<div class="fr grey_x_img"></div>
+       					<div style="clear:both;"></div>
+       				</div>
+       				<div class="fl">
+       					<div class="fl">도쿄</div>
+       					<div class="fr grey_x_img"></div>
+       					<div style="clear:both;"></div>
+       				</div>
+       				<div style="clear:both;"></div>
+       			</div>
+       			<div>
+       				<div><strong>주요도시</strong></div>
+       			</div>
+       			<div>
+       				
+       			</div>
+       			
+       		</div>
+		</div>
+		<div class="fr">
+			<form>
+				<div id="tour_date" class="fr"><img src="../../img/tour_img/calender.png" alt="캘린더">2024.07.01(월) ~ 2024.07.31(수), 전체</div>
+				<div id="tour_date_hide">
+			  		<img src="../../img/tour_img/calender_img.png" alt="달력사진 나중에  수정" />
+			  		<div>  
+			  			<div>                   
+				  			<div class="grey_font">여행 시작일</div>
+				  			<div><strong>캘린더에서 여행 시작일을 선택해주세요</strong></div>
+				  			<button class="fr">선택완료</button>
+				  			<div style="clear:both;"></div>
+			  			</div>
+	  				</div>
+	  			</div>	
+			</form>
+			<div class="fr">
+				<img src="../../img/tour_img/location-dot.png" alt="점"/>
+				<select>
+			  		<option value="" disabled selected>출발지 전체</option>
+			  		<option value="all">전체</option>
+			  		<option value="Incheon/Gimpo">인천/김포</option>
+			  		<option value="Busan">부산</option>
+			  		<option value="Daegu">대구</option>
+			  		<option value="Cheongju">청주</option>
+			  		<option value="Gwangju">광주(무안)</option>
+			  		<option value="Jeju">제주</option>
+			  		<option value="Yangyang">양양</option>
+			  	</select>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<form action="page2">
+
+	<!-- 콘텐츠 시작 -->
+	<div id="div_content" class = "center">
+		<div id="div_filter" class = "fl">
+			<div id="filter_box">
+		        <div class="fl">
+		            <button type="submit">
+		                <img src="https://image.hanatour.com/usr/static/img2/pc/com/ic_airin_on.png" />
+		            </button>
+		            <div>항공포함</div>
+		        </div>
+		        <div class="fl">
+		            <button type="button">
+		                <img src="https://image.hanatour.com/usr/static/img2/pc/com/ic_airout_on.png" />
+		            </button>
+		            <div>항공<br>불포함</div>
+		        </div>
+		        <div class="fl">
+		            <button type="button">
+		                <img src="https://image.hanatour.com/usr/static/img2/pc/com/ic_group_on.png" />
+		            </button>
+		            <div>단체여행</div>
+		        </div>
+		        <div class="fl">
+		            <button type="submit">
+		                <img src="https://image.hanatour.com/usr/static/img2/pc/com/ic_single_on.png" />
+		            </button>
+		            <div>우리끼리<br>여행</div>
+		        </div>
+		        <div style="clear:both;"></div>
+		    </div>
+			<div>
+				<div>항공 포함 여부와 행사 종류 선택에 따라<br>다양한 패키지를 검색할 수 있습니다.</div>
+			</div>
+			<div id="div-tour">
+				<details open>
+					<summary>
+						<div>
+							<div class="fl">투어조건</div>
+							<div class="black_v"></div>
+							<div style="clear:both;"></div>
+						</div>
+					</summary>
+					<div>
+						<div>
+							<button type="button" class="fl">자유일정 포함</button>
+							<button type="button" class="fl">가이드기사경비없음</button>
+							<button type="button" class="fl">선택관광없음</button>
+							<button type="button" class="fl">쇼핑없음</button>
+							<button type="button" class="fl">가이드동행</button>
+							<div style="clear:both;"></div>
+						</div>
+					</div>
+				</details>
+			</div>
+			<div id="div_promotion">
+				<details open>
+					<summary>
+						<div>
+							<div>프로모션</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">바로 출국 수속 서비스</button>
+						<button type="button" class="fl">369프로모션</button>
+						<button type="button" class="fl">호텔업그레이드</button>
+						<button type="button" class="fl">초특가필살기</button>
+						<button type="button" class="fl">다다익선</button>
+						<button type="button" class="fl">ZEUSworld 특별혜택</button>
+						<button type="button" class="fl">아동동반혜택</button>
+						<button type="button" class="fl">신상품</button>
+						<button type="button" class="fl">홈쇼핑 에디션</button>
+						<button type="button" class="fl">더블 적립 마일리지</button>
+						<button type="button" class="fl">선착순할인</button>
+						<button type="button" class="fl">슈퍼세이브</button>
+						<button type="button" class="fl">얼리버드</button>
+						<button type="button" class="fl"> 한정특가</button>
+						<button type="button" class="fl">타임세일</button>
+						<button type="button" class="fl">특별할인찬스</button>
+						<button type="button" class="fl">NO쇼핑/NO선택관광</button>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+			</details>
+			<div id="div_hotel">
+				<details open>
+					<summary>
+						<div>
+							<div>호텔 성급</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">5성급</button>
+						<button type="button" class="fl">4성급</button>
+						<button type="button" class="fl">3성급</button>
+						<button type="button" class="fl">기타</button>
+						<div style="clear:both;"></div>
+					</div>
+				</details>	
+			</div>
+			<div id="div_flight">
+				<details open>
+					<summary>
+						<div>
+							<div>항공사</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">대한항공</button>
+						<button type="button" class="fl">아시아나항공</button>
+						<button type="button" class="fl">에어부산</button>
+						<button tyep="button" class="fl">에어로케이</button>
+						<button type="button" class="fl">에어프레미아</button>
+						<button type="button" class="fl">에어서울</button>
+						<button type="button" class="fl">이스타항공</button>
+						<button type="button" class="fl">제주항공</button>
+						<button type="button" class="fl">진에어</button>
+						<button type="button" class="fl">티웨이항공</button>
+						<div style="clear:both;"></div>
+					</div>
+				</details>
+			</div>
+			<div id="div_departure_time">
+				<details open>
+					<summary>
+						<div>
+							<div>출발 항공 시간대</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">아침(05~12시)</button>
+						<button type="button" class="fl">점심(12~18시)</button>
+						<button type="button" class="fl">저녁(18~24시)</button>
+						<div style="clear:both;"></div>
+					</div>
+				</details>
+			</div>
+			<div id="div_departure_date">
+				<details open>
+					<summary>
+						<div>
+							<div>출발요일</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">월</button>
+						<button tyep="button" class="fl">화</button>
+						<button type="button" class="fl">수</button>
+						<button type="button" class="fl">목</button>
+						<button type="button" class="fl">금</button>
+						<button type="button" class="fl">토</button>
+						<button type="button" class="fl">일</button>
+						<div style="clear:both;"></div>
+					</div>
+				</details>
+			</div>
+			<div id="div_type">
+				<details open>
+					<summary>
+						<div>
+							<div>어떤 여행을 원하세요?</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">관광</button>
+						<button type="button" class="fl">관광+자유</button>
+						<button type="button" class="fl">골프</button>
+						<button type="button" class="fl">힐링휴양</button>
+						<button type="button" class="fl">아트/문화</button>
+						<button type="button" class="fl">체험/클래스</button>
+						<div style="clear:both;"></div>
+					</div>
+				</details>
+			</div>
+			<div id="div_who">
+				<details open>
+					<summary>
+						<div>
+							<div>누구와 떠나세요?</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">친구모임</button>
+						<button type="button" class="fl">부부연인</button>
+						<button type="button" class="fl">가족여행</button>
+						<button type="button" class="fl">나홀로</button>
+						<button type="button" class="fl">아동동반</button>
+						<button type="button" class="fl">허니문</button>
+						<div style="clear:both;"></div>
+					</div>
+				</details>
+			</div>
+			<div id="div_brand">
+				<details open>
+					<summary>
+						<div>
+							<div>상품브랜드</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">세이브</button>
+						<button type="button" class="fl">스탠다드</button>
+						<button type="button" class="fl">ZEUS</button>
+						<button type="button" class="fl">골프</button>
+						<button type="button" class="fl">우리끼리</button>
+						<button type="button" class="fl">프리미엄</button>
+						<button type="button" class="fl">투어텔</button>
+						<div style="clear:both;"></div>
+					</div>
+				</details>
+			</div>
+			<div id="div_money">
+				<details open>
+					<summary>
+						<div>
+							<div>여행 1인 예산을 어떻게 잡으세요?</div>
+							<div class="black_v"></div>
+						</div>
+					</summary>
+					<div>
+						<button type="button" class="fl">15~98만원</button>
+						<button type="button" class="fl">98~150만원</button>
+						<button type="button" class="fl">150~207만원</button>
+						<button type="button" class="fl">207~920만원</button>
+						<button type="button" class="fl">직접 입력</button>
+						<div style="clear:both;"></div>
+					</div>
+				</details>
+			</div>	
+			<div id="div_search_in_search">
+				<div>
+					<div>결과 내 결과</div>
+				</div>
+				<div>
+					<input type="text" placeholder="상품명을 입력해주세요" />
+					<div class=fr><img src="../../img/tour_img/reading_glasses.png" alt="돋보기"/></div>
+					<div style="clear:both;"></div>
+				</div>
+			</div>	
+		</div>
+		</div>
+		</form>
+		<div id="div_category" class="fl">
+			<div id="div_country_check">
+					<div class="fl"><img src="https://image.hanatour.com/usr/static/img2/nation/JP.gif" alt="국기"/></div>
+					<div class="fl"><strong>일본</strong> : 여행 전 입국 규정을 확인해 주세요</div>
+					<div style="clear:both;"></div>
+			</div>
+			<div id="div_filter_four">
+				<div class="fl"><img src="../../img/tour_img/filter.png"></div>
+				<div class="fl">필터</div>
+				<div class="fl">4</div>
+				<div class="fl">항공포함</div>
+				<div class="fl">항공불포함</div>
+				<div class="fl">단체여행</div>
+				<div class="fl">우리끼리 여행</div>
+				<div class="fl">
+					<div class="fl"><img src="../../img/tour_img/small_circle.png"></div>
+					<div class="fl">필터 초기화</div>
+					<div style="clear:both;"></div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div id="div_filter_wrap">
+				<div class="fl">도쿄 패키지 <span>34</span>개 </div>
+				<div class="fr">낮은 가격순</div>
+				<div class="fr">높은가격순</div>
+				<div class="fr">평점순</div>
+				<div class="fr">예약순</div>
+				<div class="fr">추천순</div>
+				<div style="clear:both;"></div>
+			</div>
+<script>
+	function makeCalenders() {
+		let lastDay = new Date(currentYear, currentMonth, 0).getDate();    // month 는 1~12 라는 것 확인 완료.
+		$("#row_calender1 > .days .day").remove();
+		$("#row_calender1 > .dates .date").remove();
+		$("#row_calender2 > .days .day").remove();
+		$("#row_calender2 > .dates .date").remove();   
+		let arr = ['일', '월', '화', '수', '목', '금', '토'];
+		for(let i=1; i<=16; i++) {
+			let idx = new Date(currentYear + "-" + currentMonth + "-" + i).getDay();
+			let yoil = arr[idx];
+			let sunsat = "";   // 요일에 따라서 "sun" 또는 "sat" 또는 ""를 대입.
+			if(idx==0) sunsat = "sun";
+			else if(idx==6) sunsat = "sat";
+			
+			let y = new Date().getFullYear();
+			let m = new Date().getMonth() + 1; //month는 0~11까지기 때문에 +1을 해줘야 한다
+			let d = new Date().getDate();
+			if(currentYear==y && currentMonth==m && d==i) {
+				sunsat += " today";
+			}
+			$("#row_calender1 > .days > div:last-child").before('<div class="fl day ' + sunsat + '">' + yoil + '</div>'); //★ 이거 뭐지 before이 날짜 계산해서 이전이면 true 반환해주는 코드
+			$("#row_calender1 > .dates > div:last-child").before('<div class="fl date ' + sunsat + '">' + i + '</div>');
+		}
+		for(let i=17; i<=lastDay; i++) {
+			let idx = new Date(currentYear + "-" + currentMonth + "-" + i).getDay();
+			let yoil = arr[idx];
+			let sunsat = "";   // 요일에 따라서 "sun" 또는 "sat" 또는 ""를 대입.
+			if(idx==0) sunsat = "sun";
+			else if(idx==6) sunsat = "sat";
+			$("#row_calender2 > .days > div:last-child").before('<div class="fl day ' + sunsat + '">' + yoil + '</div>');
+			$("#row_calender2 > .dates > div:last-child").before('<div class="fl date ' + sunsat + '">' + i + '</div>');
+		}
+		
+		// 1일부터16일까지로 이동.
+		$("#row_calender1").css('display', 'block');
+		$("#row_calender2").css('display', 'none');
+	}
+	
+	$(function() {
+		$(".small_right_arrow").click(function() {
+			$("#row_calender1").css('display', 'none');
+			$("#row_calender2").css('display', 'block');
+		});
+		$(".small_left_arrow").click(function() {
+			$("#row_calender1").css('display', 'block');
+			$("#row_calender2").css('display', 'none');
+		});
+		
+		makeCalenders();
+	});
+</script>
+<style>
+	#row_calender2 { display: none; }
+</style>
+			<% 
+				for(ShowCategoryOneLineInfoDto oneLineDto : categoryOneLine) {
+			%>
+				<div>
+					<div class="div_small_category">
+						<div class="fl">
+							<div><img src=" <%= oneLineDto.getImgUrl() %> "/></div>
+						</div>
+						<div class="fl">
+							<div>
+								<%
+									if(oneLineDto.getPackageTag().equals("T")) {
+								%>
+									<div class="fl package_tag">패키지</div>
+								<%
+									} else {
+								%>
+									
+								<%
+									}
+								%>
+								<%
+									if(oneLineDto.getLocalDepartureTag().equals("T")) {
+								%>
+									<div class="fl departure_tag">지방 출발</div> 
+								<%
+									} else {
+								%>
+									
+								<%
+									}
+								%>
+								<%
+									if(oneLineDto.getHanapack().equals("T")) {
+								%>
+									<div class="fl hannapack_tag">하나팩2.0</div>
+								<%
+									} else {
+								%>
+									
+								<%
+									}
+								%>
+								<div style="clear:both;"></div>
+							</div>	
+							<div>
+								<div><strong><%=oneLineDto.getCategoryName() %></strong></div>
+								<div><%=oneLineDto.getCategoryEx() %></div>
+								<div>
+									<img class="fl" src="https://image.hanatour.com/usr/static/img2/pc/com/ic_location_line_12.png"/>
+									<%
+									    for (CategoryTagDto tag : categoryTag) {
+									        if (tag.getCategoryIdx() == oneLineDto.getCategoryIdx()) {
+									%>	
+									        <div class="fl">
+									            <%= tag.getCityName() %>
+									        </div>
+									<%
+									        }
+									    }
+									%>
+
+									<div style="clear:both;"></div>
+								</div>
+								<div>
+									<img class="fl" src="https://image.hanatour.com/usr/static/img2/pc/com/ic_calendar_line_12.png" />
+									<div class="fl"><%=oneLineDto.getTravelPeriod() %></div><br/>
+									<div style="clear:both;"></div>
+								</div>
+								<div>
+									<div><img class="fl" src="https://image.hanatour.com/usr/static/img2/pc/com/ic_star_solid_12.png"/></div>
+									<div class="fl"><strong><%=oneLineDto.getReviewStar() %></strong></div>
+									<div class="fl">( <%=oneLineDto.getCommentAmount() %> )</div>
+									<% 
+										for(CategoryBottomTagDto dto :categoryBottomTag) {
+											if(dto.getCategoryIdx() == oneLineDto.getCategoryIdx()) {
+									%>
+									<div class="fl bottom_tag"><%=dto.getTag() %></div>
+									<%
+											}
+										}
+									%>
+									<div style="clear:both;"></div>
+								</div>
+							</div>	
+						</div>	
+						<div class="fl">
+							<div><span class="price_comma"><strong><%=oneLineDto.getPrice() %></strong></span>원~</div>
+							<div class="product_show">
+								<div class=" fl">판매상품보기</div>
+								<img class="fr" src="../../img/tour_img/purple_down.png"/>
+								<div style="clear:both;"></div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+					</div>
+					<div class="product_hide">
+						<div>
+							<div class="calender_nav">
+								<span class="big_black_left_arrow"></span>
+								<span class="show_date"><%=nowYear%>년 <%=nowMonth%>월</span>
+								<span class="big_black_right_arrow"></span>
+							</div>
+							<div class="row_calender" id="row_calender1">
+								<div class="days">
+									<div style="clear:both;"></div>
+								</div>
+								<div class="dates">
+									<span class="fr small_right_arrow"></span>
+									<div style="clear:both;"></div>
+								</div>
+							</div>
+							<div class="row_calender" id="row_calender2">
+								<div class="days">
+									<div style="clear:both;"></div>
+								</div>
+								<div class="dates">
+									<span class="fl small_left_arrow"></span>
+									<div style="clear:both;"></div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div>
+								<div class="fl"><strong>총 <span class="purple_font">2</span> 개</strong></div>
+								<article class=" fr cont-select">
+								  <button class="btn-select">출발확정순</button>
+								  <ul class="list-member">
+								    <li><button type="button">출발확정순</button></li>
+								    <li><button type="button">출발시간 빠른순</button></li>
+								    <li><button type="button">출발시간 늦은순</button></li>
+								    <li><button type="button">낮은 가격순</button></li>
+								    <li><button type="button">높은 가격순</button></li>
+								  </ul>
+								</article>
+								<div style="clear:both;"></div>
+								<div class="small_product_box">
+								<!-- 여기 -->
+									<%
+										for(CategoryPackageInfoDto dto : categoryPackage) {
+											if(dto.getCategoryIdx() == oneLineDto.getCategoryIdx()) {
+									%>
+									<div>
+										<div>
+											<div class="fl comparePackageName"><%=dto.getPacakgeName() %></div>
+											<div class="fr"><span><strong class="price_comma comparePrice"><%=dto.getAdult() %></strong></span> 원</div>
+											<div style="clear:both;"></div>
+										</div>
+										<div>
+											<img class="fl compareFLightLogo" src="<%=dto.getLogo() %>"/>
+											<div><span class="fl compareFlightName"><%=dto.getName() %></span>, 잔여 6석</div>
+											<div style="clear:both;"></div>
+										</div>
+										<div>
+										<%
+											for(CategoryPackageFlightInfoDto cpfiDto : categoryPackageFlight) {
+												if(cpfiDto.getPackageIdx() == dto.getPackageIdx()) {
+										%>
+												<span class="small_calender_logo"></span>
+												<span class="compareDepartureTime"><%=cpfiDto.getDepartureTime() %></span>   
+												<span class="one_arrow_img"></span>
+												<span class="compareArrivalTime"><%=cpfiDto.getArrivalTime() %></span>
+										<%
+												}
+											} 
+										%>	
+											<span><%=dto.getTravelPeriod() %></span>
+										
+										</div>
+										<div>
+											<span class="write_img"></span>
+											 
+											<%
+												if (dto != null && dto.getInn() == null) {
+											%>
+											        	호텔 <%= dto.getMaxStar() %> 성급
+											<%
+											   	 } else {
+											%>
+											        호텔없음	
+											<%
+												    }
+											%>
+											, 
+											<%
+												if(dto.getShopping().equals("T")) {
+											%>
+												<%=dto.getShoppingTimes() %>
+											<%
+												} else {
+											%>
+												쇼핑없음
+											<%
+												}
+											%>
+											, 
+											<%
+												if(dto.getGuide().equals("T")) {
+											%>
+												가이드 있음
+											<%
+												} else {
+											%>
+												가이드 없음
+											<%
+												}
+											%>
+										</div>
+										<div class="fr">
+											<button class="grey_font compare_button" type="button">상품비교하기</button>
+											<button class="white_font" type="button">상세일정보기</button>
+										</div>
+										<div style="clear:both;"></div>
+									</div>
+									<%
+											}
+										}		
+									%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<%
+				}
+			%>
+			
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	
+	<!-- 상품비교함 시작 -->
+
+	<div id="compare_wrap" class="hide">
+		<div id="compare_box" class="fixed-box">
+			<div>
+				<button type="button">
+					<div class="white_font">상품비교함<span class="blue_font">(3)</span><div class="v"></div></div>
+				</button>
+			</div>
+		</div>
+		
+		<div id="compare_content">
+			<div><strong>다양한 상품을 한 번에 비교하고 선택해보세요!</strong></div>
+			<div class="grey_font">비교함에는 최대 3개까지 담을 수 있으며, 최대 3개의 상품을 비교할 수 있습니다.</div>
+			<div class="fr">
+				<button type="button"><span></span>선택초기화</button>
+				<button>상품비교하기</button>
+			</div>
+			<div id="compare_item_area">
+				<div class="fl compare_item">
+					<button type="button" class="fr"></button>
+					<div>[타임세일]도쿄 4일 #2일자유 #자유식사 #오다이바 #아사쿠사 #시내숙박</div>
+					<div>
+						<div class="fl grey_font">07/01 (월)</div>
+						<div class="fl right-arrow"></div>
+						<div class="fl grey_font">07/04 (목)</div>
+						<img class="fl" src="https://image.hanatour.com/usr/static/img/airline/ZE.png" alt="항공마크" />
+						<div>이스타 항공</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div class="grey_font"><span class="purple_font">예약가능</span>/잔여 20석</div>
+					<div><span><strong>639,000</strong></span>원</div>
+				</div>
+				
+				<div class="fl compare_item">
+					<button type="button" class="fr"></button>
+					<div>도쿄/오다이바 3일 #1일 자유 #도쿄 시내 숙박</div>
+					<div>
+						<div class="fl grey_font">07/01 (월)</div>
+						<div class="fl right-arrow"></div>
+						<div class="fl grey_font">07/03 (수)</div>
+						<img class="fl" src="https://image.hanatour.com/usr/static/img/airline/YP.png" alt="항공마크" />
+						<div>에어프레미아</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div class="grey_font"><span class="purple_font">예약가능</span>/잔여 20석</div>
+					<div><span><strong>639,900</strong></span>원</div>
+					
+				</div>
+				
+				<div class="fl no_compare_item">
+					<div>상품에서 '상품비교함 담기'<br/>버튼을 클릭해보세요.</div>
+				</div>
+
+				<div style="clear:both;"></div>
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	<!-- 상품 비교함 종료 -->
+	
+	<!-- 3개짜리 상품 비교함 내부 시작 -->
+	<div id="div_fullscreen_grey" style="display: none;">
+		<div id="compare_in" style="display: none;">
+			<div>
+				<div class="fl"><strong>상품비교하기</strong></div>
+				<div class="fr">
+					<button type="button" class="fr"></button>
+					<button type="button" class="fr"><span class="print"></span>인쇄하기</button>
+					<div style="clear:both;"></div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div id="compare_in_content">
+				<table class="compare3">
+					<tr>
+						<th id="grey_blank">빈칸</th>
+						<th class="compare_top">
+							<img src="https://image.hanatour.com/usr/cms/resize/400_0/2021/09/01/10000/1db600f9-a998-4bf1-902d-8aed33fa0065.jpg" alt="관광지 사진"/>
+							<div>[타임세일]도쿄 4일 #2일자유 #자유식사 #오다이바 #아사쿠사 #시내숙박</div>
+							<div>성인 1인</div>
+							<div><span><strong>639,900</strong></span>원</div>
+							<div>
+								<button type="button">찜</button>
+								<button type="button">상세일정보기</button>
+							</div>
+						</th>
+						<th class="compare_top">
+							<img src="https://image.hanatour.com/usr/cms/resize/400_0/2021/09/01/10000/1db600f9-a998-4bf1-902d-8aed33fa0065.jpg" alt="관광지 사진"/>
+							<div>[타임세일]도쿄 4일 #2일자유 #자유식사 #오다이바 #아사쿠사 #시내숙박</div>
+							<div>성인 1인</div>
+							<div><span><strong>639,900</strong></span>원</div>
+							<div>
+								<button type="button">찜</button>
+								<button type="button">상세일정보기</button>
+							</div>
+						</th>
+						<th class="compare_top">
+							<img src="https://image.hanatour.com/usr/cms/resize/400_0/2021/09/01/10000/1db600f9-a998-4bf1-902d-8aed33fa0065.jpg" alt="관광지 사진"/>
+							<div>[타임세일]도쿄 4일 #2일자유 #자유식사 #오다이바 #아사쿠사 #시내숙박</div>
+							<div>성인 1인</div>
+							<div><span><strong>639,900</strong></span>원</div>
+							<div>
+								<button type="button">찜</button>
+								<button type="button">상세일정보기</button>
+							</div>
+							<div style="clear:both"></div>
+						</th>
+					</tr>
+					<tr id="compare_schedule">
+						<th>일정요약</th>
+						<td>
+							<div class="compare_day">
+								<div class="purple_font"><strong>1일차</strong></div>
+								<div class="grey_font">오다이바와 아사쿠사, 그리고 나카미세도리를 즐겨보세요 </div>
+								<div>
+									<div class="fl schedule_label">주요일정</div>
+									<div class="fl schedule_content">오다이바, 오다이바 해상공원 & 자유의 여신상, 다이바시티, 도쿄(Tokyo / 東京), 아사쿠사, 나카미세도리</div>
+								</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>2일차</strong></div>
+								<div class="grey_font">도쿄타워와 시부야 스카이 전망대를 방문해보세요 </div>
+								<div>
+									<div class="fl schedule_label">주요일정</div>
+									<div class="fl schedule_content">도쿄타워, 시부야 스카이 전망대</div>
+								</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>3일차</strong></div>
+								<div class="grey_font">여행중</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>4일차</strong></div>
+								<div class="grey_font">도착</div>
+							</div>
+							<div class="compare_schedule_notice">※ 자유 일정이 있는 상품인 경우, 상품 담당자의 추천 일정도 포함하여 요약합니다.</div>
+							<button type="button">접기</button>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr id="review_content">
+						<th>후기 요약</th>
+						<td>도쿄 여행에서 즐거운 관광지와 편안한 일정으로 여행을 즐겼습니다. 가이드의 설명과 배려로 편안한 여행을 만들어주셨고, 호텔과 식사도 만족스러웠습니다. 다음에도 다른 지역으로 패키지 여행을 떠나보고 싶은 마음이 드는 좋은 경험이었습니다.</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr id="reservation_content">
+						<th>예약현황</th>
+						<td><span class="purple_font">예약가능</span> / 잔여20석</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">일정</th>
+					</tr>
+					<tr id="departure_content">
+						<th>출발일</th>
+						<td>2024.07.01(월)</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>여행기간</th>
+						<td class="schedule_td">3박4일</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>방문도시</th>
+						<td class="schedule_td">	나리타-도쿄(1)-도쿄(1)-도쿄(1)-나리타</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>이용항공</th>
+						<td class="schedule_td">저비용항공사</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>출발</th>
+						<td class="schedule_td">2024.07.01(월) 08:00 - ZE0601</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>도착</th>
+						<td class="schedule_td">2024.07.04(목) 14:35 - ZE0602</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">선택관광/쇼핑</th>
+					</tr>
+					<tr>
+						<th>선택관광</th>
+						<td class="schedule_td"> - </td>
+						<td class="schedule_td"> - </td>
+						<td class="schedule_td"> - </td>
+					</tr>
+					<tr id="shopping_times">
+						<th>쇼핑횟수</th>
+						<td class="schedule_td">
+							<div><span class="blue_circle_img"></span>1회</div>
+						</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr id="guide_tf">
+						<th>가이드</th>
+						<td class="schedule_td">
+							<div><span class="blue_circle_img"></span>현지 도착시 가이드와 미팅이 이루어집니다</div>
+						</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr id="leader_tf">
+						<th>인솔자</th>
+						<td class="schedule_td">
+							<div><span class="purple_x_img"></span>인솔자가 동행하지 않습니다.</div>
+						</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">부가정보</th>
+					</tr>
+					<tr>
+						<th>
+							<div class="blue_o_img"></div>
+							<div>포함내역</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[교통]</strong></div>
+								<div><span><b>왕복항공권, 전용 차량비 :</b></span> 자유일정 시 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[저세금]</strong></div>
+								<div><span><b>국내공항세, 현지공항세, 관광진흥개발기금, 전쟁보험료</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[숙박]</strong></div>
+								<div><span><b>숙박비</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[식사]</strong></div>
+								<div><span><b>식사비 :</b></span> 전일정 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[관광]</strong></div>
+								<div><span><b>관광지 입장료 :</b></span> 자유일정 시 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[여행자보험]</strong></div>
+								<div><span><b>1억원 여행자보험</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[인솔자]</strong></div>
+								<div><span><b>인솔자 경비(현지 기타경비외) :</b></span> 자유일정 시 불포함</div>
+							</div>
+						</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr id="no_contain">
+						<th>
+							<div class="purple_no_img"></div>
+							<div>불포함내역</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[가이드/기사]</strong></div>
+								<div><span><b>가이드/기사 경비 : </b></span>인당 JPY 4,000 (인당 총 ￥4,000의 경비를 현지에서 지불 (성인/아동 동일))</div>
+								<div>
+									개인 여행경비(물값,자유시간시 개인비용 등)
+									<br/>
+									각종 매너팁 (테이블팁, 객실팁, 포터비, 마사지팁)
+									<br/>
+									※ 매너팁은 소비자의 자율적 선택으로 지불여부에 따른 불이익은 없습니다.
+								</div>
+							</div>
+						</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>
+							<div class="green_check_img"></div>
+							<div>선택경비</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[교통]</strong></div>
+								<div><span><b>항공리턴변경(불가)</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[숙박]</strong></div>
+								<div><span><b>객실 1인 사용료 : 150,000원</b></span></div>
+							</div>
+						</td>
+						<td class="schedule_td"></td>
+						<td class="schedule_td"></td>
+					</tr>
+
+				</table>
+			</div>
+			
+		</div>
+	</div>
+	<!-- 상품 비교함 내부 종료 -->
+	
+	
+<!-- <!-- 	상품 비교함 2개짜리 내부 시작
+	<div id="div_fullscreen_grey" style="display: none;">
+		<div id="compare_in" style="display: none;">
+			<div>
+				<div class="fl"><strong>상품비교하기</strong></div>
+				<div class="fr">
+					<button type="button" class="fr"></button>
+					<button type="button" class="fr"><span class="print"></span>인쇄하기</button>
+					<div style="clear:both;"></div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div id="compare_in_content">
+				<table class="compare2">
+					<tr>
+						<th id="grey_blank">빈칸</th>
+						<th class="compare_top">
+							<img src="https://image.hanatour.com/usr/cms/resize/400_0/2021/09/01/10000/1db600f9-a998-4bf1-902d-8aed33fa0065.jpg" alt="관광지 사진"/>
+							<div>[타임세일]도쿄 4일 #2일자유 #자유식사 #오다이바 #아사쿠사 #시내숙박</div>
+							<div>성인 1인</div>
+							<div><span><strong>639,900</strong></span>원</div>
+							<div>
+								<button type="button">찜</button>
+								<button type="button">상세일정보기</button>
+							</div>
+						</th>
+						<th class="compare_top">
+							<img src="https://image.hanatour.com/usr/cms/resize/400_0/2021/09/01/10000/1db600f9-a998-4bf1-902d-8aed33fa0065.jpg" alt="관광지 사진"/>
+							<div>[타임세일]도쿄 4일 #2일자유 #자유식사 #오다이바 #아사쿠사 #시내숙박</div>
+							<div>성인 1인</div>
+							<div><span><strong>639,900</strong></span>원</div>
+							<div>
+								<button type="button">찜</button>
+								<button type="button">상세일정보기</button>
+							</div>
+						</th>
+					</tr>
+					<tr id="compare_schedule">
+						<th>일정요약</th>
+						<td>
+							<div class="compare_day">
+								<div class="purple_font"><strong>1일차</strong></div>
+								<div class="grey_font">오다이바와 아사쿠사, 그리고 나카미세도리를 즐겨보세요 </div>
+								<div>
+									<div class="fl schedule_label">주요일정</div>
+									<div class="fl schedule_content">오다이바, 오다이바 해상공원 & 자유의 여신상, 다이바시티, 도쿄(Tokyo / 東京), 아사쿠사, 나카미세도리</div>
+								</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>2일차</strong></div>
+								<div class="grey_font">도쿄타워와 시부야 스카이 전망대를 방문해보세요 </div>
+								<div>
+									<div class="fl schedule_label">주요일정</div>
+									<div class="fl schedule_content">도쿄타워, 시부야 스카이 전망대</div>
+								</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>3일차</strong></div>
+								<div class="grey_font">여행중</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>4일차</strong></div>
+								<div class="grey_font">도착</div>
+							</div>
+							<div class="compare_schedule_notice">※ 자유 일정이 있는 상품인 경우, 상품 담당자의 추천 일정도 포함하여 요약합니다.</div>
+							<button type="button">접기</button>
+						</td>
+						<td>
+							<div class="compare_day">
+								<div class="purple_font"><strong>1일차</strong></div>
+								<div class="grey_font">오다이바와 아사쿠사, 그리고 나카미세도리를 즐겨보세요 </div>
+								<div>
+									<div class="fl schedule_label">주요일정</div>
+									<div class="fl schedule_content">오다이바, 오다이바 해상공원 & 자유의 여신상, 다이바시티, 도쿄(Tokyo / 東京), 아사쿠사, 나카미세도리</div>
+								</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>2일차</strong></div>
+								<div class="grey_font">도쿄타워와 시부야 스카이 전망대를 방문해보세요 </div>
+								<div>
+									<div class="fl schedule_label">주요일정</div>
+									<div class="fl schedule_content">도쿄타워, 시부야 스카이 전망대</div>
+								</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>3일차</strong></div>
+								<div class="grey_font">여행중</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>4일차</strong></div>
+								<div class="grey_font">도착</div>
+							</div>
+							<div class="compare_schedule_notice">※ 자유 일정이 있는 상품인 경우, 상품 담당자의 추천 일정도 포함하여 요약합니다.</div>
+							<button type="button">접기</button>
+						</td>
+					</tr>
+					<tr id="review_content">
+						<th>후기 요약</th>
+						<td>도쿄 여행에서 즐거운 관광지와 편안한 일정으로 여행을 즐겼습니다. 가이드의 설명과 배려로 편안한 여행을 만들어주셨고, 호텔과 식사도 만족스러웠습니다. 다음에도 다른 지역으로 패키지 여행을 떠나보고 싶은 마음이 드는 좋은 경험이었습니다.</td>
+						<td></td>
+					</tr>
+					<tr id="reservation_content">
+						<th>예약현황</th>
+						<td><span class="purple_font">예약가능</span> / 잔여20석</td>
+						<td></td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">일정</th>
+					</tr>
+					<tr id="departure_content">
+						<th>출발일</th>
+						<td>2024.07.01(월)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>여행기간</th>
+						<td class="schedule_td">3박4일</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>방문도시</th>
+						<td class="schedule_td">	나리타-도쿄(1)-도쿄(1)-도쿄(1)-나리타</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>이용항공</th>
+						<td class="schedule_td">저비용항공사</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>출발</th>
+						<td class="schedule_td">2024.07.01(월) 08:00 - ZE0601</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>도착</th>
+						<td class="schedule_td">2024.07.04(목) 14:35 - ZE0602</td>
+						<td class="schedule_td">2024.07.04(목) 14:35 - ZE0602</td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">선택관광/쇼핑</th>
+					</tr>
+					<tr>
+						<th>선택관광</th>
+						<td class="schedule_td"> - </td>
+						<td class="schedule_td"> - </td>
+					</tr>
+					<tr id="shopping_times">
+						<th>쇼핑횟수</th>
+						<td class="schedule_td">
+							<div><span class="blue_circle_img"></span>1회</div>
+						</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr id="guide_tf">
+						<th>가이드</th>
+						<td class="schedule_td">
+							<div><span class="blue_circle_img"></span>현지 도착시 가이드와 미팅이 이루어집니다</div>
+						</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr id="leader_tf">
+						<th>인솔자</th>
+						<td class="schedule_td">
+							<div><span class="purple_x_img"></span>인솔자가 동행하지 않습니다.</div>
+						</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">부가정보</th>
+					</tr>
+					<tr>
+						<th>
+							<div>
+								<div class="blue_o_img"></div>
+								<div>포함내역</div>
+							</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[교통]</strong></div>
+								<div><span><b>왕복항공권, 전용 차량비 :</b></span> 자유일정 시 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[저세금]</strong></div>
+								<div><span><b>국내공항세, 현지공항세, 관광진흥개발기금, 전쟁보험료</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[숙박]</strong></div>
+								<div><span><b>숙박비</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[식사]</strong></div>
+								<div><span><b>식사비 :</b></span> 전일정 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[관광]</strong></div>
+								<div><span><b>관광지 입장료 :</b></span> 자유일정 시 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[여행자보험]</strong></div>
+								<div><span><b>1억원 여행자보험</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[인솔자]</strong></div>
+								<div><span><b>인솔자 경비(현지 기타경비외) :</b></span> 자유일정 시 불포함</div>
+							</div>
+						</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr id="no_contain">
+						<th>
+							<div class="purple_no_img"></div>
+							<div>불포함내역</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[가이드/기사]</strong></div>
+								<div><span><b>가이드/기사 경비 : </b></span>인당 JPY 4,000 (인당 총 ￥4,000의 경비를 현지에서 지불 (성인/아동 동일))</div>
+								<div>
+									개인 여행경비(물값,자유시간시 개인비용 등)
+									<br/>
+									각종 매너팁 (테이블팁, 객실팁, 포터비, 마사지팁)
+									<br/>
+									※ 매너팁은 소비자의 자율적 선택으로 지불여부에 따른 불이익은 없습니다.
+								</div>
+							</div>
+						</td>
+						<td class="schedule_td"></td>
+					</tr>
+					<tr>
+						<th>
+							<div class="green_check_img"></div>
+							<div>선택경비</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[교통]</strong></div>
+								<div><span><b>항공리턴변경(불가)</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[숙박]</strong></div>
+								<div><span><b>객실 1인 사용료 : 150,000원</b></span></div>
+							</div>
+						</td>
+						<td class="schedule_td"></td>
+					</tr>
+	
+				</table>
+			</div>
+			
+		</div>
+	</div>
+	상품 비교함 내부 종료 --> -->
+	
+	<!-- 1개짜리 상품 비교함 내부 시작 
+	<div id="div_fullscreen_grey" style="display: none;">
+		<div id="compare_in" style="display: none;">
+			<div>
+				<div class="fl"><strong>상품비교하기</strong></div>
+				<div class="fr">
+					<button type="button" class="fr"></button>
+					<button type="button" class="fr"><span class="print"></span>인쇄하기</button>
+					<div style="clear:both;"></div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div id="compare_in_content">
+				<table class="compare1">
+					<tr>
+						<th id="grey_blank">빈칸</th>
+						<th class="compare_top">
+							<img src="https://image.hanatour.com/usr/cms/resize/400_0/2021/09/01/10000/1db600f9-a998-4bf1-902d-8aed33fa0065.jpg" alt="관광지 사진"/>
+							<div>[타임세일]도쿄 4일 #2일자유 #자유식사 #오다이바 #아사쿠사 #시내숙박</div>
+							<div>성인 1인</div>
+							<div><span><strong>639,900</strong></span>원</div>
+							<div>
+								<button type="button">찜</button>
+								<button type="button">상세일정보기</button>
+							</div>
+						</th>
+					</tr>
+					<tr id="compare_schedule">
+						<th>일정요약</th>
+						<td>
+							<div class="compare_day">
+								<div class="purple_font"><strong>1일차</strong></div>
+								<div class="grey_font">오다이바와 아사쿠사, 그리고 나카미세도리를 즐겨보세요 </div>
+								<div>
+									<div class="fl schedule_label">주요일정</div>
+									<div class="fl schedule_content">오다이바, 오다이바 해상공원 & 자유의 여신상, 다이바시티, 도쿄(Tokyo / 東京), 아사쿠사, 나카미세도리</div>
+								</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>2일차</strong></div>
+								<div class="grey_font">도쿄타워와 시부야 스카이 전망대를 방문해보세요 </div>
+								<div>
+									<div class="fl schedule_label">주요일정</div>
+									<div class="fl schedule_content">도쿄타워, 시부야 스카이 전망대</div>
+								</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>3일차</strong></div>
+								<div class="grey_font">여행중</div>
+							</div>
+							<div class="compare_day">
+								<div class="purple_font"><strong>4일차</strong></div>
+								<div class="grey_font">도착</div>
+							</div>
+							<div class="compare_schedule_notice">※ 자유 일정이 있는 상품인 경우, 상품 담당자의 추천 일정도 포함하여 요약합니다.</div>
+							<button type="button">접기</button>
+						</td>
+					</tr>
+					<tr id="review_content">
+						<th>후기 요약</th>
+						<td>도쿄 여행에서 즐거운 관광지와 편안한 일정으로 여행을 즐겼습니다. 가이드의 설명과 배려로 편안한 여행을 만들어주셨고, 호텔과 식사도 만족스러웠습니다. 다음에도 다른 지역으로 패키지 여행을 떠나보고 싶은 마음이 드는 좋은 경험이었습니다.</td>
+					</tr>
+					<tr id="reservation_content">
+						<th>예약현황</th>
+						<td><span class="purple_font">예약가능</span> / 잔여20석</td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">일정</th>
+					</tr>
+					<tr id="departure_content">
+						<th>출발일</th>
+						<td>2024.07.01(월)</td>
+					</tr>
+					<tr>
+						<th>여행기간</th>
+						<td class="schedule_td">3박4일</td>
+					</tr>
+					<tr>
+						<th>방문도시</th>
+						<td class="schedule_td">	나리타-도쿄(1)-도쿄(1)-도쿄(1)-나리타</td>
+					</tr>
+					<tr>
+						<th>이용항공</th>
+						<td class="schedule_td">저비용항공사</td>
+					</tr>
+					<tr>
+						<th>출발</th>
+						<td class="schedule_td">2024.07.01(월) 08:00 - ZE0601</td>
+					</tr>
+					<tr>
+						<th>도착</th>
+						<td class="schedule_td">2024.07.04(목) 14:35 - ZE0602</td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">선택관광/쇼핑</th>
+					</tr>
+					<tr>
+						<th>선택관광</th>
+						<td class="schedule_td"> - </td>
+					<tr id="shopping_times">
+						<th>쇼핑횟수</th>
+						<td class="schedule_td">
+							<div><span class="blue_circle_img"></span>1회</div>
+						</td>
+					</tr>
+					<tr id="guide_tf">
+						<th>가이드</th>
+						<td class="schedule_td">
+							<div><span class="blue_circle_img"></span>현지 도착시 가이드와 미팅이 이루어집니다</div>
+						</td>
+					</tr>
+					<tr id="leader_tf">
+						<th>인솔자</th>
+						<td class="schedule_td">
+							<div><span class="purple_x_img"></span>인솔자가 동행하지 않습니다.</div>
+						</td>
+					</tr>
+					<tr class="colspan">
+						<th colspan="4" align="left">부가정보</th>
+					</tr>
+					<tr>
+						<th>
+							<div class="blue_o_img"></div>
+							<div>포함내역</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[교통]</strong></div>
+								<div><span><b>왕복항공권, 전용 차량비 :</b></span> 자유일정 시 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[저세금]</strong></div>
+								<div><span><b>국내공항세, 현지공항세, 관광진흥개발기금, 전쟁보험료</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[숙박]</strong></div>
+								<div><span><b>숙박비</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[식사]</strong></div>
+								<div><span><b>식사비 :</b></span> 전일정 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[관광]</strong></div>
+								<div><span><b>관광지 입장료 :</b></span> 자유일정 시 불포함</div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[여행자보험]</strong></div>
+								<div><span><b>1억원 여행자보험</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[인솔자]</strong></div>
+								<div><span><b>인솔자 경비(현지 기타경비외) :</b></span> 자유일정 시 불포함</div>
+							</div>
+						</td>
+					</tr>
+					<tr id="no_contain">
+						<th>
+							<div class="purple_no_img"></div>
+							<div>불포함내역</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[가이드/기사]</strong></div>
+								<div><span><b>가이드/기사 경비 : </b></span>인당 JPY 4,000 (인당 총 ￥4,000의 경비를 현지에서 지불 (성인/아동 동일))</div>
+								<div>
+									개인 여행경비(물값,자유시간시 개인비용 등)
+									<br/>
+									각종 매너팁 (테이블팁, 객실팁, 포터비, 마사지팁)
+									<br/>
+									※ 매너팁은 소비자의 자율적 선택으로 지불여부에 따른 불이익은 없습니다.
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<div class="green_check_img"></div>
+							<div>선택경비</div>
+						</th>
+						<td class="schedule_td">
+							<div class="additional_info">
+								<div><strong>[교통]</strong></div>
+								<div><span><b>항공리턴변경(불가)</b></span></div>
+							</div>
+							<div class="additional_info">
+								<div><strong>[숙박]</strong></div>
+								<div><span><b>객실 1인 사용료 : 150,000원</b></span></div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 상품 비교함 내부 종료 -->
+	
+	<footer>
+
+        <div class="footer1">
+            <div>
+                <div class="footer1_left fl">
+                    <div>공지</div>
+                    <div class="footer1_announcement">
+                        <a href="#" class="footer1_active">
+                            &lt;하나LIVE&gt; 24년 5월 30일 방송 이벤트 당첨자 안내(사전알림/퀴즈/구매인증)
+                        </a>
+                        <a href="#">
+                            [여행만보] 24년 6월 미션 변동 사항 안내
+                        </a>
+                        <a href="#">
+                            [공지] 24년 6월, 신용카드 ARS/온라인 무이자 할부 혜택 관련 안내 (항공권 제외)
+                        </a>
+                    </div>
+                </div>
+                <div class="footer1_center fl">
+                    <a href="#">
+                        더보기
+                    </a>
+                </div>
+                <div class="footer1_right fr">
+                    <div>
+                        <a href="#">
+                            <img src="../../img/footer/facebook.png" alt="페이스북">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="../../img/footer/instagram.png" alt="인스타그램">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="../../img/footer/naverblog.png" alt="네이버 블로그">
+                        </a>
+                    </div>
+                    <div >
+                        <a href="#">
+                            <img src="../../img/footer/kakaoplus.png" alt="카카오 플러스">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="../../img/footer/youtube.png" alt="유튜브">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="../../img/footer/kakaostory.png" alt="카카오 스토리">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer1 종료 -->
+        
+
+
+        <div class="footer2">
+            <div>
+                <div class="fl">
+                    <div class="footer2_left_top">
+                        <div class="fl">
+                            <a href="#">회사소개</a>
+                        </div>
+                        <div class="fl">
+                            <a href="#">이용약관</a>
+                        </div>
+                        <div class="fl">
+                            <a href="#">개인정보처리방침</a>
+                        </div>
+                        <div class="fl">
+                            <a href="">여행약관</a>
+                        </div>
+                        <div class="fl">
+                            <a href="#">해외여행자보험</a>
+                        </div>
+                        <div class="fl">
+                            <a href="#">마케팅제휴</a>
+                        </div>
+                        <div class="fl">
+                            <a href="#">공식인증예약센터 검색</a>
+                        </div>
+                    </div>
+                    <div class="footer2_left_bottom">
+                        <img src="../../img/footer/footer2_left.png" alt="">
+                    </div>
+                   <div style="clear: both;"></div>
+                </div>
+                <div class="footer2_right fr">
+                    <div>하나은행 구매안전 서비스</div>
+                    <div>
+                        고객님은 안전거래를 위해 현금으로 결제시<br/>
+                        (주)하나투어에서 가입한 하나은행으로<br/>
+                        구매안전서비스를 이용하실 수 있습니다.
+                    </div>
+                    <div>
+                        <a href="#">
+                            서비스 가입사실 확인
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer2 종료 -->
+
+
+
+        <div class="footer3">
+            <div>
+                <div>
+                    ※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.
+                </div>
+                <div>
+                    ※ 하나투어는 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.
+                </div>
+                <div>
+                    COPYRIGHTⓒ HANATOUR SERVICE INC. ALL RIGHTS RESERVED
+                </div>
+                
+            </div>
+        </div>
+        <!-- footer3 종료 -->
+
+        
+        <div class="footer4">
+            <div>
+                <div class="footer4_left fl">
+                    <div class="fl">
+                        <div class="fl">
+                            <img src="../../img/footer/award-logo-01.png" alt="">
+                        </div>
+                        <div class="fl">
+                            대한민국<br/>100대 브랜드
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                    <div class="fl">
+                        <div class="fl">
+                            <img src="../../img/footer/award-logo-02-2024.png" alt="">
+                        </div>
+                        <div class="fl">
+                            한국능률협회선정<br/>20년연속(2005~2024)<br/>브랜드파워 1위
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                    <div class="fl">
+                        <div class="fl">
+                            <img src="../../img/footer/award-logo-03-2024.png" alt="">
+                        </div>
+                        <div class="fl">
+                            브랜드스탁선정<br/>20년연속(2005~2024)<br/>브랜드스타 1위
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div> 
+                    <div style="clear: both;"></div>
+                </div>
+                <!-- footer4_left 종료  -->
+
+                <div class="footer4_center fl">
+                   <button>
+                        <img src="../../img/footer/ico-arrow-left.png" alt="">
+                    </button>
+                    <button>
+                       <img src="../../img/footer/ico-arrow-right.png" alt="">
+                   </button>
+                </div>
+                <!-- footer4_center 종료 -->
+                <div class="footer4_right fl">
+                    <div>
+                        <img src="../../img/footer/korea_brand_awards.jpg" alt="">
+                    </div>
+                    <div>
+                        <img src="../../img/footer/mark_01.png" alt="">
+                    </div>
+                    <div>
+                        <img src="../../img/footer/mark1_eprivacy.png" alt="">
+                    </div>
+                    <div>
+                        <img src="../../img/footer/mark_03_new.png" alt="">
+                    </div>
+                    <div>
+                        <img src="../../img/footer/ico_isms.png" alt="">
+                    </div>
+                </div>
+                <!-- footer4_right 종료 -->
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+        <!-- footer4 종료 -->
+
+    </footer>
+	
+
+</body>
+<script src="../../script/tour_category.js"></script>
+<script src="../../script/header.js"></script>
+<script src="../../script/footer.js"></script>
+
+</html>

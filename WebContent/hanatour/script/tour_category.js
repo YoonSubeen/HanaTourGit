@@ -171,7 +171,7 @@ $(function() {
 		$('#compare_in').show();  // This will show the element with id compare_in
 		$('#div_fullscreen_grey').show();  // This will ...
     }); 
-	
+});
 
 	
 	
@@ -187,28 +187,15 @@ $(function() {
 	$("body").click(function() {
 		alert("이건...?");
 	});*/
-	
-	//상품비교함 숨기고 보이기
+
+	//상품함 숨기고 보이기 작업하는 동안 잠깐 걸어놔서 풀어야 한다
 	$(".product_hide").hide();
 	$(".product_show").click(function() {
 		$(this).parent().parent().parent().find(".product_hide").toggle();
 	});
 	
-//일자 달력 
-	$(document).ready(function() {
-    calendarInit();
-});
-/*
-    달력 렌더링 할 때 필요한 정보 목록 
 
-    현재 월(초기값 : 현재 시간)
-    금월 마지막일 날짜와 요일
-    전월 마지막일 날짜와 요일
-*/
-
-function calendarInit() {
-
-    // 날짜 정보 가져오기
+// 날짜 정보 가져오기
     let date = new Date(); // 현재 날짜(로컬 기준) 가져오기
     let utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000); // uct 표준시 도출
     let kstGap = 9 * 60 * 60 * 1000; // 한국 kst 기준시간 더하기
@@ -219,82 +206,41 @@ function calendarInit() {
   
     
     let currentYear = thisMonth.getFullYear(); // 달력에서 표기하는 연
-    let currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
+    let currentMonth = thisMonth.getMonth()+1; // 달력에서 표기하는 월
     let currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
 
-    // kst 기준 현재시간
-    // console.log(thisMonth);
-
-    // 캘린더 렌더링
-    renderCalender(thisMonth);
-
-    function renderCalender(thisMonth) {
-
-        // 렌더링을 위한 데이터 정리
-        currentYear = thisMonth.getFullYear();
-        currentMonth = thisMonth.getMonth();
-        currentDate = thisMonth.getDate();
-
-        // 이전 달의 마지막 날 날짜와 요일 구하기
-        let startDay = new Date(currentYear, currentMonth, 0);
-        let prevDate = startDay.getDate();
-        let prevDay = startDay.getDay();
-
-        // 이번 달의 마지막날 날짜와 요일 구하기
-        let endDay = new Date(currentYear, currentMonth + 1, 0);
-        let nextDate = endDay.getDate();
-        let nextDay = endDay.getDay();
-
-        // 현재 월 표기
-        $('.show_date').text(currentYear + "년" + (currentMonth + 1) + "월");
-
-        // 렌더링 html 요소 생성
-        calendar = document.querySelector('.dates')
-        calendar.innerHTML = '';
-        
-        // 지난달
-        for (let i = prevDate - prevDay + 1; i <= prevDate; i++) {
-            calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
-        }
-        // 이번달
-        for (let i = 1; i <= nextDate; i++) {
-            calendar.innerHTML = calendar.innerHTML + '<div class="day current">' + i + '</div>'
-        }
-        // 다음달
-        for (let i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
-            calendar.innerHTML = calendar.innerHTML + '<div class="day next disable">' + i + '</div>'
-        }
-
-        // 오늘 날짜 표기
-        if (today.getMonth() == currentMonth) {
-            todayDate = today.getDate();
-            let currentMonthDate = document.querySelectorAll('.dates .current');
-            currentMonthDate[todayDate -1].classList.add('today');
-        }
-    }
-
+ 
+$(function() {
     // 이전달로 이동
     $('.big_black_left_arrow').on('click', function() {
-        thisMonth = new Date(currentYear, currentMonth - 1, 1);
-        renderCalender(thisMonth);
+		currentMonth--;	
+		if(currentMonth==0) { 
+			currentYear--;
+			currentMonth = 12;
+		}
+		$(this).parent().find(".show_date").text(currentYear + "년 " + currentMonth + "월");
+//        thisMonth = new Date(currentYear, currentMonth - 1, 1);
+//        currentMonth = thisMonth.getMonth(); 
+//		alert(thisMonth);
+//        renderCalender(thisMonth);
+		makeCalenders();
     });
 
     // 다음달로 이동
     $('.big_black_right_arrow').on('click', function() {
-        thisMonth = new Date(currentYear, currentMonth + 1, 1);
-        renderCalender(thisMonth); 
+		currentMonth++;
+		if(currentMonth==13)  {
+			currentYear++;
+			currentMonth = 1;
+		}
+		$(this).parent().find(".show_date").text(currentYear + "년 " + currentMonth + "월");
+//        thisMonth = new Date(currentYear, currentMonth + 1, 1);
+//        currentMonth = thisMonth.getMonth();   // 0~11
+//		alert(thisMonth);
+//        renderCalender(thisMonth); 
+		makeCalenders();
     });
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+/* } */
 	
 	//상품비교함 배열
 	$("#compare_in > div:nth-child(1) >div:nth-child(2) > button:nth-child(1)").click(function() {
@@ -314,8 +260,41 @@ function calendarInit() {
 	  }
 	});
 	
+// 가격 단위에 쉼표 찍어주기
+	$(".price_comma").each(function() {
+    let text = $(this).text();
+    let formattedText = text.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    $(this).text(formattedText);
+	});
 	
+// 상품비교함 추가하기
+ 	let compareButtonToggle = false;
+	$(".compare_button").click(function() {
+	    if (compareButtonToggle) {
+	        $(this).css('border', '');
+	        $(this).css('color', '');
+	    } else {
+	        $(this).css('border', 'solid 1px #5e2bb8');
+	        $(this).css('color', '#5e2bb8');
+	        
+	       	let comparePackageName = $(this).parent().parent().find(".comparePackageName").text();
+	       	let comparePrice = $(this).parent().parent().find(".comparePrice").text();
+			let compareFlightLogo = $(".compareFLightLogo").attr("src");			
+	       	let compareFlightName = $(this).parent().parent().find(".compareFlightName").text();
+	       	let compareDepartureTime = $(this).parent().parent().find(".compareDepartureTime").text();
+	       	let compareArrivalTime = $(this).parent().parent().find(".compareArrivalTime").text();
+	        alert(comparePackageName);
+	        alert(comparePrice);
+	        alert(compareFlightLogo);
+	        alert(compareFlightName);
+	        alert(compareDepartureTime);
+	        alert(compareArrivalTime);
+	    }
+	    compareButtonToggle = !compareButtonToggle;
+	});
+
 	
+
 	
 	
 	

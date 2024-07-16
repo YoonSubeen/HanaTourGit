@@ -172,7 +172,7 @@ body {
 	margin-right: 5px;
     margin-bottom: -2px;
     position: absolute;
-    top: 237px;
+    top: 190px;
     left: 952px;
 }
 #tour_date_hide {
@@ -1029,7 +1029,6 @@ summary {
 }
 .div_small_category > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
 	width : 466px;
-	height : 28px;
 	margin-top : 8px;
 	font-size : 18px;
 	font-weight : 500;
@@ -1071,9 +1070,7 @@ summary {
 .div_small_category > div:nth-child(2) > div:nth-child(2) > div:nth-child(5) > div:nth-child(3) {
 	margin-left : 3px;
 }
-.div_small_category > div:nth-child(2) > div:nth-child(2) > div:nth-child(5) > div:nth-child(4),
-.div_small_category > div:nth-child(2) > div:nth-child(2) > div:nth-child(5) > div:nth-child(5),
-.div_small_category > div:nth-child(2) > div:nth-child(2) > div:nth-child(5) > div:nth-child(6) {
+.bottom_tag {
 	margin-left : 5px;
 	background-color : rgb(247, 247, 247);
 	border : 1px solid rgb(247, 247, 247);
@@ -1089,7 +1086,7 @@ summary {
 	border-left : 1px solid rgb(102, 102, 102); 
 }
 .div_small_category > div:nth-child(3) > div:nth-child(1) {
-	font-size: 17px;
+	font-size: 17px; 
     font-weight: 400;
     padding-left : 25px;
     padding-top : 11px;
@@ -1179,8 +1176,22 @@ summary {
 	width: 7px;
     height: 12px;
     margin-top: 9px;
+    margin-right: 20px;
+    
 }
 
+.small_left_arrow {
+	display: inline-block;
+    content: '';
+    background-repeat: no-repeat;
+    background-image: url(https://image.hanatour.com/usr/static/img2/pc/com/spr_com.png);
+	background-position: -225px -52px;
+	transform: rotate(180deg);
+	width: 7px;
+    height: 12px;
+    margin-top: 9px;
+    margin-left: -10px;
+}
 
 
 
@@ -1197,32 +1208,50 @@ summary {
     text-align: center;
     line-height: 1;
 }
-.row_calender .days {
-    display: flex;
-    margin-bottom: 20px;
+.row_calender .days, .row_calender .dates {
     padding-bottom: 20px;
+    padding-left: 10px;
+    width: 100%;
+    margin: 0px 0 0 15px;
 }
-.row_calender .day {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% / 7);
-    text-align: left;
+#row_calender2 {
+	position: relative;
+    min-height: 124px;
+    margin-top: 25px;
+    border: solid 1px #eaeaea;
+    border-top: none;
+    background-color: #ffffff;
+    text-align: center;
+}
+.row_calender .day, .row_calender .date {
+   	/* display: flex; */
+    width: calc(100% / 17);
     color: #999;
     font-size: 15px;
     text-align: center;
-    border-radius:5px
+    border-radius: 5px;
+    line-height: 36px;
 }
-.current.today {
+/*.current.today {
 	background: rgb(242 242 242);
+}*/
+.dates .today {
+	background-color: #5e2bb8;
+	width: 36px !important;
+    height: 36px !important;
+    border-radius: 18px !important;
+    margin-right: 13px;
+    color: white;
+    font-weight: 900;
 }
 .row_calender .dates {
-    display: flex;
+    /* display: flex; */
+    
 }
-.row_calender .day:nth-child(7n -1) {
+.row_calender .day.sat, .row_calender .date.sat {   /* :nth-child(7n -1) */
     color: #3c6ffa;
 }
-.row_calender .day:nth-child(7n) {
+.row_calender .day.sun, .row_calender .date.sun {   /* :nth-child(7n) */
     color: #ed2a61;
 }
 n.row_calender .day.disable {
@@ -1362,15 +1391,15 @@ n.row_calender .day.disable {
 	margin-top : 5px;
 }
 .small_product_box > div > div:nth-child(2) > img {
-	 width: 20px;
-	 margin-right : 10px;
-	 margin-left: 10px;
+    height: 16px;
+	margin-right : 10px;
+	margin-left: 10px;
 }
 .small_product_box > div > div:nth-child(3) {
 	margin-top : 5px;
 }
 .small_product_box > div > div:nth-child(3) > span {
-	margin-right : 10px;
+	margin-right: 3px;
 	margin-left: 10px;
 }
 .small_product_box > div > div:nth-child(4) {
@@ -1380,7 +1409,7 @@ n.row_calender .day.disable {
 .small_product_box > div > div:nth-child(5) {
 	margin-right: -10px;
 }
-.small_product_box > div > div:nth-child(5) > button:nth-child(1) {
+.compare_button {
 	background-color :  white;
 	padding: 0;
     height : 36px;

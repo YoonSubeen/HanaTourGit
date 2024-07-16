@@ -4,14 +4,19 @@ public class Main {
 	
 public static void main(String[] args) throws Exception {
 	System.out.println("실행");
+	
 	MainTourDao mt = new MainTourDao();
 	CategoryDao cd = new CategoryDao(); 
+	PackageDao pd = new PackageDao();
+	ReservationCheckDao rc = new ReservationCheckDao();
 	
+	
+// 메인 페이지	
 	//유형1 확인
-	// mt.showtype1(2); 
+	//mt.showtype1(2); 
 	
 	//유형4확인
-	// mt.showtype4(204);
+	//mt.showtype4(202);
 	
 	//유형5확인
 	// mt.showtype5(3);
@@ -33,6 +38,31 @@ public static void main(String[] args) throws Exception {
 	
 	//카테고리 페이지 출발지 선택
 	// cd.choice_departure("인천");
+	
+// 카테고리 페이지
+	// 카테고리 날짜 선택해서 카테고리 나열 
+	// cd.choiceDateShowCategroy("24/06/01", "24/06/30");   
+	
+	
+// 패키지 페이지 
+	// 패키지 top부분 한줄 정보 
+	//pd.packageTopOneLineInfo(1);
+	
+
+// 예약내역 확인
+	//rc.travelReservationCheck("subin1222");
+	
+	//rc.hotelReservationCheck("subin1222");
+	
+	// rc.OverseaFlightReservationCheck("subin1222");
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
  

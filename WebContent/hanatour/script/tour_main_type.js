@@ -1,5 +1,11 @@
 $(function() {
-
+		new Swiper('.swiper', {
+			    slidesPerView : 'auto',
+			    spaceBetween : 2, 
+			    autoplay: {
+		        	delay: 2000, // 시작시간 설정
+		      	},
+			});
 
 
     // 유형1 재생 <-> 클릭
@@ -37,11 +43,6 @@ $(function() {
         $(this).addClass("type3_tab_active");
     });
 
-
-
-
-
-
     // 유헝9 탭변경
     $(".type9_tab > div").click(function() {
         let index = $(this).index();
@@ -70,6 +71,15 @@ $(function() {
 	$("#tour_date").click(function () {
 		$("#tour_date_hide").toggle();
 	});	
+	
+// 슬라이드 	
+	new Swiper('.swiper', {
+	    slidesPerView : 'auto',
+	    spaceBetween : 2, 
+	    autoplay: {
+        	delay: 2000, // 시작시간 설정
+      	},
+	});
 
 
 
