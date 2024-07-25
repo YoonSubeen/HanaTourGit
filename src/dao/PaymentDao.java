@@ -48,7 +48,7 @@ public class PaymentDao {
 		ResultSet rs = pstmt.executeQuery();
 		while(rs.next()) {
 			int reservationIdx = rs.getInt("reservation_idx");
-			Integer travelPrice = (rs.getObject("travel_price") != null) ? rs.getInt("travel_price") : null;
+			Integer travelPrice = (rs.getObject("travel_price") != null) ? rs.getInt("travel_price") : null; // null은 문자열이 아님
 			Integer flightPrice = (rs.getObject("flight_price") != null) ? rs.getInt("flight_price") : null;
 			Integer innPrice = (rs.getObject("inn_price") != null) ? rs.getInt("inn_price") : null;
 			Integer goodsPrice = (rs.getObject("goods_price") != null) ? rs.getInt("goods_price") : null;

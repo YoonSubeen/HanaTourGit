@@ -101,7 +101,6 @@ public class CategoryDao {
 	// 카테고리 날짜 선택 
 	public void choiceDateShowCategroy(String departure_date, String arrival_date) throws Exception {
 	    Connection conn = getConnection();
-	    
 	    // PreparedStatement
 	    String sql = "SELECT DISTINCT c.hanapack, " + 
 	            "c.category_name, " + 
@@ -122,9 +121,7 @@ public class CategoryDao {
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1, departure_date);
 	    pstmt.setString(2, arrival_date);
-	    
 	    ResultSet rs = pstmt.executeQuery();
-	    
 	    while (rs.next()) {
 	        String hanapack = rs.getString("hanapack");
 	        String category_name = rs.getString("category_name");

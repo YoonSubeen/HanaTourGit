@@ -60,6 +60,118 @@ body {
 .red_font {
 	color: rgb(165, 42, 42);
 }
+a { 
+	text-decoration: none;
+	color : black; 
+}
+
+/*후기 작성창 */
+#div_fullscreen_grey {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 8;
+}
+#write_review_box {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: 1200px;
+	height: 800px;	
+	z-index: 10;
+}	
+#write_review_box > div:nth-child(1) {
+	width : 1120px;
+	height: 84px;
+	margin : 0 40px;
+	padding : 40px 0 20px;
+	border-bottom : 2px solid black;
+}
+#write_review_box > div:nth-child(1) >div:nth-child(1) {
+	font-size: 22px;
+}
+#write_review_box > div:nth-child(1) >div:nth-child(2) {
+	width : 200px;
+}
+#write_review_box > div:nth-child(1) >div:nth-child(2) > button:nth-child(2) {
+	height: 36px;
+    min-width: 110px;
+    font-size: 13px;
+    line-height: 34px;
+    color: #666;
+    text-align: center;
+    border-radius: 4px;
+    border: solid 1px #c2c2c2;
+    cursor : pointer;
+}
+#write_review_box > div:nth-child(1) >div:nth-child(2) > button:nth-child(1) {
+	background-repeat: no-repeat;
+    background-image: url(https://image.hanatour.com/usr/static/img2/pc/com/spr_com.png);
+    width: 26px;
+    height: 26px;
+    background-position: 0 0;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border: 0;
+    margin-left: 20px;
+}
+.print {
+	width: 14px;
+    height: 14px;
+    margin: -3px 4px 0 0;
+    background-position: -193px 0;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-image: url(https://image.hanatour.com/usr/static/img2/pc/com/spr_icn.png);
+    display: inline-block;
+    content: '';
+}
+#write_review_box > form {
+	margin: 20px 40px;
+}
+#user_review > div {
+	margin-bottom : 20px;
+}
+#user_review > div:nth-child(1) > select{
+	margin-left : 10px;
+	height: 35px;
+	border-radius: 10px;
+}
+#user_review > div:nth-child(1) > div{
+	margin-left: 20px;
+    margin-top: 10px;
+}
+#user_review > div:nth-child(2) {
+	border: 1px solid black;
+    border-radius: 10px;
+    padding: 32px;
+    width: 1123px;
+}
+#user_review > div:nth-child(2) > label {
+	margin-right : 10px;
+}
+#user_review > div:nth-child(3) > textarea {
+	resize: none;
+	border-radius: 10px;
+}
+
+#user_review > button {
+	background-color: #5e2bb8;
+    color: white;
+    border-radius: 5px;
+    height: 30px;
+    width: 93px;
+    border: 0;
+}
+
+
+
 
 /*이미지 모음*/
 .print_img {
@@ -926,10 +1038,10 @@ body {
 
 /*일정, 호텔 관광 등 종합 정보*/
 #long_content_header {
-	position : sticky;
-	top : 0px;
-	margin-top: 50px;
-	z-index: 1;
+	position: sticky;
+    top: 0px;
+    margin-top: 50px;
+    z-index: 8;
 }
 #long_content_header > div {
 	width : 144px;
@@ -944,6 +1056,7 @@ body {
 }
 
 /*여행일정*/
+
 #travel_trip_detail > div:nth-child(1) {
     border-bottom: 1px solid #dedede;
     font-size: 15px;
@@ -1019,7 +1132,7 @@ body {
 	text-align: center;
 }
 .schedule_flight > div:nth-child(1) > div:nth-child(1) > img {
-	width : 14px;
+	height: 14px;
 }
 .schedule_flight > div:nth-child(1) > div:nth-child(2) {
 	font-size: 14px;
@@ -1064,12 +1177,12 @@ body {
 }
 
 /*회색 왼쪽 줄*/
-#grey_left {
-	border-left : 1px solid #eaeaea;
-	margin-left: 20px;
-	margin-top: 30px;
-	padding-left: 20px;
-	position : relative;
+.grey_left {
+	border-left: 1px solid #eaeaea;
+    margin-left: 20px;
+    padding-top: 1px;
+    padding-left: 20px;
+    position: relative;
 
 }
 /*여행일정 출입국 절차 상자*/
@@ -1126,6 +1239,14 @@ body {
 }
 .flight_info_box > div:nth-child(2) {
 	font-size: 14px;
+	margin-bottom : 5px;
+}
+.flight_info_box > div:nth-child(2) > img  {
+	width: 248px;
+    height: 185px;
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 .flight_info_box > div:nth-child(3) > img {
 	width: 248px;
@@ -1194,6 +1315,10 @@ body {
 	font-size: 20px;
     line-height: 34px;
 }
+.region > div:nth-child(2) {
+	font-size: 14px;
+    line-height: 12px;
+}
 .region_white_dot {
 	content: '';
     display: inline-block;
@@ -1246,6 +1371,42 @@ body {
     background-color: #c2c2c2;
 }
 
+/*관광지 한개 상자 */
+.one_attraction_box {
+	position: relative;
+    padding: 25px;
+    margin-top: 30px;
+    border: 1px solid #dadce1;
+    box-shadow: 2.8px 2.8px 0 0 rgba(102, 102, 102, 0.08);
+    font-size: 15px;
+}
+.one_attraction_box > div:nth-child(1) {
+	margin-bottom: 10px;
+    font-size: 17px;
+}
+.one_attraction_box > div:nth-child(2) {
+	margin-top: 5px;
+}
+.one_attraction_box > div:nth-child(4) > img {
+	width: 248px;
+    height: 185px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.one_attraction_box > div:nth-child(5) {
+	margin-bottom : 10px;
+}
+.one_attraction_box > div:nth-child(6) {
+	margin-bottom : 15px;
+	line-height: 1.3;
+}
+.one_attraction_box > div:nth-child(8) {
+	margin-top : 15px;
+	margin-bottom : 40px;
+}
+
+
 /*관광지 여러개 상자*/
 .many_attraction_box {
 	position: relative;
@@ -1273,7 +1434,7 @@ body {
  
 }
 .dotted_border {
-	border-top: 2px dotted #dadce1;
+	border-bottom: 2px dotted #dadce1;
 }
 .many_in_attraction {
 	padding: 20px 25px;
@@ -1299,6 +1460,7 @@ body {
 }
 .many_in_attraction > div:nth-child(5) {
 	line-height: 1.6;
+	font-size: 15px;
 }
 .many_attraction_box_dot {
 	content: '';
@@ -1327,7 +1489,7 @@ body {
 .food_box > div:nth-child(2) {
 	margin-bottom : 5px;
 }
-.food_box > div:nth-child(3) > img {
+.food_box > div:nth-child(4) > img {
 	width : 240px;
 	height : 185px;
 	margin-top : 20px;
@@ -1336,7 +1498,6 @@ body {
 }
 .food_box > div:nth-child(4) {
 	line-height: 1.6;
-	margin-bottom: 50px;
 }
 .food_box_dot {
 	content: '';
@@ -1403,7 +1564,7 @@ body {
 .inn_icon_info {
 	border-top : 1px solid #dadce1;
 	margin-top : 40px;
-	padding : 40px 0;
+	padding: 15px 0 0;
 }
 .inn_icon_info > div:nth-child(1) {
 	font-size: 17px;
@@ -1423,6 +1584,12 @@ body {
     text-align : center;
     line-height : 40px;
     margin-right : 10px;
+}
+.inn_candidate > div:nth-child(2) > div:nth-child(1) {
+	width: 335px;
+}
+.inn_candidate > div:nth-child(2) > div:nth-child(1) > strong {
+	margin-right : 10px;
 }
 .inn_candidate > div:nth-child(2) > div:nth-child(2) {
 	margin-top : 5px;
@@ -1453,7 +1620,7 @@ body {
 }
 .meal > div:nth-child(2) {
 	padding-left : 40px;
-    padding-top: 20px;
+    padding-top: 6px;
 }
 .meal_dot {
 	top: 10px;
@@ -1938,7 +2105,8 @@ body {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) -33%, #fff);
     width: 100%;
     height: 32px;
-    z-index: 100;
+    z-index: 3;
+}
 }
 
 /*여행후기 내용 부분*/
@@ -1983,14 +2151,23 @@ body {
 #travel_review_detail > div:nth-child(2) > div:nth-child(3) > form > select:nth-child(2):hover {
 	border: 1px solid #5e2bb8;
 }
-#travel_review_detail > div:nth-child(2) > div:nth-child(3) > form > div:nth-child(3) > div:nth-child(1) {
+#travel_review_detail > div:nth-child(2) > div:nth-child(3) > div:nth-child(3) > div:nth-child(1) {
     font-size: 15px;
     margin-top: 16px;
     margin-right: 10px;
 }
-#travel_review_detail > div:nth-child(2) > div:nth-child(3) > form > div:nth-child(3) > div:nth-child(2) > input {
+#write_review {
+	background-color: #5e2bb8;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    height: 37px;
+    margin-top: -5px;
+    width: 93px;
+}
+#travel_review_detail > div:nth-child(2) > div:nth-child(3) > div:nth-child(3) > div:nth-child(2) > input {
 	height: 39px;
-      font-size: 13px;
+     font-size: 13px;
     padding: 0 15px 0 25px;
     background-color: #fff;
     font-weight: 400;

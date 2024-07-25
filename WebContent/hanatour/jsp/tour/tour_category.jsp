@@ -17,9 +17,17 @@
 	ArrayList<ShowCategoryOneLineInfoDto> categoryOneLine = cDao.showCategoryOneLineInfo("태국");
 	ArrayList<CategoryTagDto> categoryTag  = cDao.categoryTag("태국");
 	ArrayList<CategoryBottomTagDto> categoryBottomTag = cDao.categoryBottomTag("태국");
-	ArrayList<CategoryPackageInfoDto> categoryPackage = cDao.cetegoryPackageInfo("2024-06-01");
+	ArrayList<CategoryPackageInfoDto> categoryPackage = cDao.cetegoryPackageInfo("2024-08-01"); // 여기 숫자 고정
 	ArrayList<CategoryPackageFlightInfoDto> categoryPackageFlight = cDao.categoryPackageFligthInfo();
-%>    
+
+	
+	String paramStartDate = "20240718";   
+	String paramEndDate = "20240720";   // request.getParameter("end_date");
+	if(request.getParameter("start_date")!=null)
+		paramStartDate = request.getParameter("start_date");
+	if(request.getParameter("end_date")!=null)
+		paramEndDate = request.getParameter("end_date");	
+%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +36,10 @@
 	<link rel="stylesheet" href="../../css/tour-category.css">
 	<link rel="stylesheet" href="../../css/header.css">
 	<link rel="stylesheet" href="../../css/footer.css">
+	<link rel="stylesheet" href="../../css/lightpick.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+	<script src="../../script/lightpick.js"></script>
 </head>
 <body>
 	<header>
@@ -481,10 +492,13 @@
        		</div>
 		</div>
 		<div class="fr">
-			<form>
+			<form class="fr">
 				<div id="tour_date" class="fr"><img src="../../img/tour_img/calender.png" alt="캘린더">2024.07.01(월) ~ 2024.07.31(수), 전체</div>
 				<div id="tour_date_hide">
-			  		<img src="../../img/tour_img/calender_img.png" alt="달력사진 나중에  수정" />
+			  		<div>
+				  		<input type="text" id="input_start_date" name="start_date"/>
+				  		<input type="text" id="input_end_date" name="end_date"/>
+			  		</div>
 			  		<div>  
 			  			<div>                   
 				  			<div class="grey_font">여행 시작일</div>
@@ -494,6 +508,7 @@
 			  			</div>
 	  				</div>
 	  			</div>	
+	  			<div style="clear:both;"></div>
 			</form>
 			<div class="fr">
 				<img src="../../img/tour_img/location-dot.png" alt="점"/>
@@ -794,61 +809,6 @@
 				<div class="fr">추천순</div>
 				<div style="clear:both;"></div>
 			</div>
-<script>
-	function makeCalenders() {
-		let lastDay = new Date(currentYear, currentMonth, 0).getDate();    // month 는 1~12 라는 것 확인 완료.
-		$("#row_calender1 > .days .day").remove();
-		$("#row_calender1 > .dates .date").remove();
-		$("#row_calender2 > .days .day").remove();
-		$("#row_calender2 > .dates .date").remove();   
-		let arr = ['일', '월', '화', '수', '목', '금', '토'];
-		for(let i=1; i<=16; i++) {
-			let idx = new Date(currentYear + "-" + currentMonth + "-" + i).getDay();
-			let yoil = arr[idx];
-			let sunsat = "";   // 요일에 따라서 "sun" 또는 "sat" 또는 ""를 대입.
-			if(idx==0) sunsat = "sun";
-			else if(idx==6) sunsat = "sat";
-			
-			let y = new Date().getFullYear();
-			let m = new Date().getMonth() + 1; //month는 0~11까지기 때문에 +1을 해줘야 한다
-			let d = new Date().getDate();
-			if(currentYear==y && currentMonth==m && d==i) {
-				sunsat += " today";
-			}
-			$("#row_calender1 > .days > div:last-child").before('<div class="fl day ' + sunsat + '">' + yoil + '</div>'); //★ 이거 뭐지 before이 날짜 계산해서 이전이면 true 반환해주는 코드
-			$("#row_calender1 > .dates > div:last-child").before('<div class="fl date ' + sunsat + '">' + i + '</div>');
-		}
-		for(let i=17; i<=lastDay; i++) {
-			let idx = new Date(currentYear + "-" + currentMonth + "-" + i).getDay();
-			let yoil = arr[idx];
-			let sunsat = "";   // 요일에 따라서 "sun" 또는 "sat" 또는 ""를 대입.
-			if(idx==0) sunsat = "sun";
-			else if(idx==6) sunsat = "sat";
-			$("#row_calender2 > .days > div:last-child").before('<div class="fl day ' + sunsat + '">' + yoil + '</div>');
-			$("#row_calender2 > .dates > div:last-child").before('<div class="fl date ' + sunsat + '">' + i + '</div>');
-		}
-		
-		// 1일부터16일까지로 이동.
-		$("#row_calender1").css('display', 'block');
-		$("#row_calender2").css('display', 'none');
-	}
-	
-	$(function() {
-		$(".small_right_arrow").click(function() {
-			$("#row_calender1").css('display', 'none');
-			$("#row_calender2").css('display', 'block');
-		});
-		$(".small_left_arrow").click(function() {
-			$("#row_calender1").css('display', 'block');
-			$("#row_calender2").css('display', 'none');
-		});
-		
-		makeCalenders();
-	});
-</script>
-<style>
-	#row_calender2 { display: none; }
-</style>
 			<% 
 				for(ShowCategoryOneLineInfoDto oneLineDto : categoryOneLine) {
 			%>
@@ -986,7 +946,6 @@
 								</article>
 								<div style="clear:both;"></div>
 								<div class="small_product_box">
-								<!-- 여기 -->
 									<%
 										for(CategoryPackageInfoDto dto : categoryPackage) {
 											if(dto.getCategoryIdx() == oneLineDto.getCategoryIdx()) {
@@ -1016,7 +975,6 @@
 											} 
 										%>	
 											<span><%=dto.getTravelPeriod() %></span>
-										
 										</div>
 										<div>
 											<span class="write_img"></span>
@@ -1059,7 +1017,7 @@
 										</div>
 										<div class="fr">
 											<button class="grey_font compare_button" type="button">상품비교하기</button>
-											<button class="white_font" type="button">상세일정보기</button>
+											<button class="white_font" type="button" onclick="location.href='tour_package.jsp?package_idx=<%= dto.getPackageIdx() %>'">상세일정보기</button>
 										</div>
 										<div style="clear:both;"></div>
 									</div>
