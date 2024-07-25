@@ -973,7 +973,7 @@
 
             <div class="main1_type1_img">
 
-                <div class="bxslider">
+                <div class="bxslider2">
                     <div><img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type1_img1.jpg"/></div>
                     <div><img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type1_img2.jpg"/></div>
                     <div><img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type1_img3.jpg"/></div>

@@ -45,7 +45,7 @@ async function recognizeFile(file) {
         logger: progressUpdate,
         workerPath: 'https://unpkg.com/tesseract.js@v4.0.1/dist/worker.min.js',
         langPath: 'https://tessdata.projectnaptha.com/4.0.0',
-        corePath: 'https://unpkg.com/tesseract.js-core@v4.0.1/tesseract-core.wasm.js',
+        corePath: 'https://unpkg.com/tesseract.js-core@v4.0.1/tesseract-core.wasm.js'
     });
     progressUpdate({ status: 'done', data });
 }
