@@ -92,11 +92,11 @@ $(function() {
             e.preventDefault();
         } else {
             
-        $(".main1_join3_inner3_gender_validation").css("display", "none");
+        	$(".main1_join3_inner3_gender_validation").css("display", "none");
             $(this).parent().find(".main1_join3_inner3_gender_active").removeClass("main1_join3_inner3_gender_active");
             $(this).addClass("main1_join3_inner3_gender_active");
             $(this).find("input").prop("checked", true);
-            }
+        }
     })
 
 

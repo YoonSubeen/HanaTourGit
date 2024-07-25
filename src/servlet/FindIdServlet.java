@@ -44,6 +44,7 @@ public class FindIdServlet extends HttpServlet {
 		session.setAttribute("findId", fiDao.findId(name, gender, birth, email));
 >>>>>>> refs/heads/SB_2024.07.16
 
+		
 		request.getRequestDispatcher("hanatour/jsp/main1_home/main1_find_id_result.jsp").forward(request, response);
 	}
 

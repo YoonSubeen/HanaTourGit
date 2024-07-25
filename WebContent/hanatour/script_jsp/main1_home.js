@@ -1,8 +1,14 @@
 
+
+
+
+
+    
+
 $(function() {
 
     // 메인1_유형1 이미지 슬라이더 bx slider
-    $('.bxslider').bxSlider({
+    $('.bxslider2').bxSlider({
         auto: true,
         autoControls: true,
         stopAutoOnClick: true,
@@ -10,24 +16,9 @@ $(function() {
         slideWidth: 600
     });
     
+
 
     // 메인1_유형1 검색창 탭
-    $(".main1_type1_search_tab > div").click(function() {
-
-$(function() {
-
-    // 메인1_유형1 이미지 슬라이더 bx slider
-    $('.bxslider').bxSlider({
-        auto: true,
-        autoControls: true,
-        stopAutoOnClick: true,
-        pager: true,
-        slideWidth: 600
-    });
-    
-
-
-
     $(".main1_type1_search_tab > div").click(function() {
         $(this).parent().find(".main1_type1_search_tab_active").removeClass("main1_type1_search_tab_active");
         $(this).addClass("main1_type1_search_tab_active");
@@ -680,17 +671,15 @@ $(function() {
 
 
 
-});
-        let index = $(this).index();
+    let index = $(this).index();
 
-        $(this).parent().find(".main1_type1_search_tab_active").removeClass("main1_type1_search_tab_active");
-        $(this).addClass("main1_type1_search_tab_active");
-    
+    $(this).parent().find(".main1_type1_search_tab_active").removeClass("main1_type1_search_tab_active");
+    $(this).addClass("main1_type1_search_tab_active");
 
-        $(".main1_type1_search_setting").find(".main1_type1_search_tab_active").removeClass("main1_type1_search_tab_active");
-        $(".main1_type1_search_setting").children().eq(index).addClass("main1_type1_search_tab_active");
 
-    });
+    $(".main1_type1_search_setting").find(".main1_type1_search_tab_active").removeClass("main1_type1_search_tab_active");
+    $(".main1_type1_search_setting").children().eq(index).addClass("main1_type1_search_tab_active");
+
 
 
 

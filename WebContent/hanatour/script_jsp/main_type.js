@@ -1,31 +1,26 @@
 $(function() {
 
-
-
-    // 유형1 재생 <-> 클릭
-    $(".type1_img_slider_btn > div:nth-child(3) > a").click(function(e) {
-        if(  $(this).children("img").attr("src")  == "../../img/main5_airline/type1_button_play.png" ) {
-            $(this).children("img").attr("src", "../../img/main5_airline/type1_button_stop.png");
-        } else {
-            $(this).children("img").attr("src", "../../img/main5_airline/type1_button_play.png");
-        }
-
-        e.preventDefault();
+    $('.bxslider').bxSlider({
+        auto: true,
+        autoControls: true,
+        stopAutoOnClick: true,
+        pager: true,
+        slideWidth: 1920
     });
 
 
 
     // 유형2 재생 <-> 클릭
-    $(".type2_control_bottom > div:nth-child(4) > a").click(function(e) {
+    // $(".type2_control_bottom > div:nth-child(4) > a").click(function(e) {
 
-        if ( $(this).find("img").attr("src") ==  "../../img/main5_airline/type2_stop.png") {
-            $(this).find("img").attr("src", "../../img/main5_airline/type2_play.png");
-        } else {
-            $(this).find("img").attr("src", "../../img/main5_airline/type2_stop.png");
-        }
+    //     if ( $(this).find("img").attr("src") ==  "../../img/main5_airline/type2_stop.png") {
+    //         $(this).find("img").attr("src", "../../img/main5_airline/type2_play.png");
+    //     } else {
+    //         $(this).find("img").attr("src", "../../img/main5_airline/type2_stop.png");
+    //     }
 
-        e.preventDefault();
-    });
+    //     e.preventDefault();
+    // });
 
 
 
