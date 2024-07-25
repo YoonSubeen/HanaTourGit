@@ -173,7 +173,7 @@ body {
     margin-bottom: -2px;
     position: absolute;
     top: 190px;
-    left: 952px;
+    left: 1052px;
 }
 #tour_date_hide {
 	width: 720px;
@@ -182,12 +182,14 @@ body {
     box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2);
     z-index: 5;
     position: absolute;
-    top: 280px;
-    left: 725px;
+    top: 234px;
+    left: 820px;
 }
 #tour_date_hide > img {
 	width : 100%;
 } 
+#tour_date_hide #input_start_date { display: none; }
+#tour_date_hide #input_end_date { display: none; }
 #tour_date_hide > div:nth-child(2) > div {
 	font-size: 15px;
     font-weight: 600;
@@ -978,6 +980,7 @@ summary {
 #div_category > #div_filter_wrap > div:nth-child(6) {
 	color : rgb(94, 43, 184); 
 }
+#row_calender2 { display: none; }
 .div_small_category {
 	width : 900px;
 	height : 260px;

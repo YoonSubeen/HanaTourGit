@@ -74,8 +74,7 @@ $(function () {
 		}
 	});
 	
-	//총 가격 정하기 
-	
+//총 가격 정하기 
 	$(".select_person button").click (function() {
 		//alert("아");
 		let adult = Number($("#adult_price").val());
@@ -90,9 +89,6 @@ $(function () {
 		
 		$("#total").text(total.toLocaleString());
 	});
-	
-	
-	
 	
 // 여행일정부분 내용 변경 
 	$("#travel_trip").css("background-color","#5e2bb8")
@@ -143,7 +139,6 @@ $(function () {
 	
 //호텔&관광지 
 //호텔정보와 관광지 정보 나타내기 
-	
 	//기본적으로 호텔 정보 선택되게 하기
 	$("#hotel_detail").css("border","1px solid black")
 						.css("border-bottom","0")
@@ -230,7 +225,47 @@ $(function () {
 		
 		
 	});	
+	
+// 후기 더보기 누르는 기능 
+	// 현재 상태를 저장하는 변수 false = 변경x, true = 변경
+	let isChanged = false;
+	
+	$("#see_more").click(function() {
+	// 원래 형태의 css	
+	let original = {
+		"overflow" : "hidden",
+		"height" : "242px"
+	}
+	
+	// 바뀐 css
+	let change = {
+		"overflow" : "visible",
+		"height" : "auto"
+	}
+	
+	// 현재 상태에 따라 css 변경 
+	if(isChanged) {
+		$("#travel_review_detail > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)").css(original);
+		$(this).text("더보기");
+	} else {
+		 $("#travel_review_detail > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)").css(change);
+		$(this).text("접기");
+	}
+	
+	// 토글 (위에서 css를 변경했기 때문에 반대의 값으로 값을 저장해줘야한다)
+	isChanged = !isChanged
 		
+	});
+	
+//	후기작성 	
+	$("#div_fullscreen_grey").hide();
+	$("#write_review").click(function() {
+		$("#div_fullscreen_grey").show();
+	});
+	$("#review_x").click(function() {
+		$("#div_fullscreen_grey").hide();
+	});
+	
 		
 });		
 		
