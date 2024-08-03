@@ -172,8 +172,8 @@ body {
 	margin-right: 5px;
     margin-bottom: -2px;
     position: absolute;
-    top: 190px;
-    left: 1052px;
+    top: 236px;
+    left: 957px;
 }
 #tour_date_hide {
 	width: 720px;
@@ -452,6 +452,7 @@ summary {
     display: flex;
     cursor: pointer;
 }
+
 /*투어조건*/
 #div-tour {
   	position: relative;
@@ -966,16 +967,13 @@ summary {
 #div_category > #div_filter_wrap > div:nth-child(1) > span {
 	color : rgb(94, 43, 184);
 }
-#div_category > #div_filter_wrap > div:nth-child(2),
-#div_category > #div_filter_wrap > div:nth-child(3),
-#div_category > #div_filter_wrap > div:nth-child(4),
-#div_category > #div_filter_wrap > div:nth-child(5),
-#div_category > #div_filter_wrap > div:nth-child(6) {
-	font-size : 14px;
-	font-weight : 400;
-	height : 14px;
-	letter-spacing : -0.4px;
-	margin-left : 18px;
+#div_category > #div_filter_wrap > form > button {
+	font-size: 14px;
+    font-weight: 400;
+    height: 14px;
+    letter-spacing: -0.4px;
+    border: 0;
+    background-color: white;
 }
 #div_category > #div_filter_wrap > div:nth-child(6) {
 	color : rgb(94, 43, 184); 

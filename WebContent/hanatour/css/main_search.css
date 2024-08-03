@@ -61,10 +61,10 @@ body {
 	border-bottom : 1px solid #e5e5e5;
 }
 .inn_margin-right {
-	margin-right: 49px;
+	margin-right: 40px;
 }
 .ticket_margin-right {
-	margin-right : 49px;
+	margin-right : 40px;
 }
 
 
@@ -200,10 +200,11 @@ body {
 }
 /*숙소 내용*/
 .inn_content_box {
-	width : 200px;
-	height : 394px;
-	background-color : white;
-	padding : 0;
+	width: 200px;
+    height: 394px;
+    background-color: white;
+    padding: 0;
+    border: 0;
 }
 .inn_content_box > img {
 	width : 200px;
@@ -278,10 +279,11 @@ body {
 }
 /*투어 입장권 내용*/
 .ticket_content_box {
-	width : 200px;
-	height : 436px;
-	background-color : white;
-	padding : 0;
+	width: 200px;
+    height: 436px;
+    background-color: white;
+    padding: 0;
+    border: 0;
 }
 .ticket_content_box > img {
 	width : 200px;
@@ -344,9 +346,9 @@ body {
 
 /*추천여행지*/
 #attraction {
-    position: relative; /* 또는 static */
+    sposition: relative;
     width: 1200px;
-    height: 1058px;
+    height: auto;
     padding-top: 50px;
 }
 #attraction > div:nth-child(1) {
@@ -355,7 +357,7 @@ body {
 	padding-bottom: 10px;
 }
 .attraction_content_box {
-	height : 942px;
+	height : auto;
 }
 /*동그란 이미지*/
 #recommend_top {
@@ -386,30 +388,30 @@ body {
     -webkit-line-clamp: 2; /* 보여줄 줄 수 */
 }
 /*네모난 설명(중간)*/
-#recommend_middle {
+.recommend_middle {
 	width : 1200px;
 	height : 360px;
 }
-#recommend_middle > img {
+.attraction_ex > img {
 	width : 580px;
 	height : 360px;
 	margin-top: 50px;
 }
-#recommend_middle > div:nth-child(2) {
+.attraction_ex > div:nth-child(2) {
 	background-color : rgb(222,244,245);
 	width : 620px;
 	height : 360px;
 	margin-top: 50px;
 }
-#recommend_middle > div:nth-child(2) > div:nth-child(1) {
+.attraction_ex > div:nth-child(2) > div:nth-child(1) {
 	margin : 40px 40px 0;
 	color: #111;
     font-size: 30px;
 }
-#recommend_middle > div:nth-child(2) > div:nth-child(2) {
+.attraction_ex > div:nth-child(2) > div:nth-child(2) {
 	color: #666;
-    font-size: 15px;
-    margin : 20px 40px 0;
+    font-size: 13px;
+    margin: 20px 40px 0;
     line-height: 1.8;
     letter-spacing: -0.9px;
 }

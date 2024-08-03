@@ -9,7 +9,7 @@ public class PackageDao {
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String id = "project";
-		String pw = "pass1222";
+		String pw = "pass1234";
 		
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url,id,pw);
@@ -402,6 +402,7 @@ public class PackageDao {
 				"LEFT JOIN city ci ON ci.city_idx = i.city_idx " + 
 				"LEFT JOIN country co ON co.country_idx = ci.country_idx " + 
 				"WHERE package_idx = ? " + 
+				"AND i.inn_kor NOT LIKE '%숙박%' " +
 				"AND ci.city_name IS NOT NULL ";
 		Connection conn = getConnection();
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -432,7 +433,7 @@ public class PackageDao {
 				"        i.floors, " + 
 				"        i.room_num, " + 
 				"        i.checkin_checkout, " + 
-				"        ii.img_url " + 
+				"        ii.inn_img_url " + 
 				"FROM package_inn pi  " + 
 				"LEFT JOIN inn i ON pi.inn_idx = i.inn_idx " + 
 				"LEFT JOIN city ci ON ci.city_idx = i.city_idx " + 
@@ -440,6 +441,7 @@ public class PackageDao {
 				"LEFT JOIN inn_img ii ON ii.inn_idx = i.inn_idx " + 
 				"WHERE package_idx = ? " + 
 				"AND ci.city_name IS NOT NULL " + 
+				"AND i.inn_kor NOT LIKE '%숙박%' " +
 				"AND ii.num = 1 ";
 		Connection conn = getConnection();
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -456,7 +458,7 @@ public class PackageDao {
 			String floors = rs.getString("floors");
 			String roomNum = rs.getString("room_num");
 			String checkInCheckOut = rs.getString("checkin_checkout");
-			String imgUrl = rs.getString("img_url");
+			String imgUrl = rs.getString("inn_img_url");
 			TabHotelInfoDto dto = new TabHotelInfoDto(location, innKor, innEng, address, phone, homepageUrl, famousSpot, floors, roomNum, checkInCheckOut, imgUrl);
 			listRet.add(dto);
 		}
@@ -1178,32 +1180,39 @@ public class PackageDao {
 	}
 	
 //	후기 전체 내용 
-	public ArrayList<PackageReviewContentDto> packageReviewContent(int packageIdx) throws Exception {
+	public ArrayList<PackageReviewContentDto> packageReviewContent(int packageIdx, int pageNum) throws Exception {
 		ArrayList<PackageReviewContentDto> listRet = new ArrayList<PackageReviewContentDto>();
-		String sql = "SELECT  " + 
-				"    c.category_idx, " + 
-				"    p.package_idx, " + 
-				"    tr.review_idx, " + 
-				"    tr.review_star, " + 
-				"    tr.user_id, " + 
-				"    tr.press_like, " + 
-				"    tr.age, " + 
+		int endNum = pageNum * 10;
+		int startNum = endNum-9;
+		String sql = "SELECT t2.* " + 
+				"FROM (SELECT rownum rnum, t1.* " + 
+				"FROM (SELECT   " + 
+				"    c.category_idx,  " + 
+				"    p.package_idx,  " + 
+				"    tr.review_idx,  " + 
+				"    tr.review_star,   " + 
+				"    tr.user_id,   " + 
+				"    tr.press_like,  " + 
+				"    tr.age,  " + 
 				"    TO_CHAR(tr.write_date,'YYYY.MM.DD') as write_date, " + 
 				"    p.package_name, " + 
-				"    tr.text, " + 
-				"    tr.help " + 
-				"FROM package p  " + 
-				"INNER JOIN category c ON c.category_idx = p.category_idx " + 
-				"INNER JOIN travel_review tr ON p.package_idx = tr.package_idx " + 
-				"WHERE p.category_idx = ( " + 
-				"    SELECT category_idx  " + 
+				"    tr.text,   " + 
+				"    tr.help  " + 
+				"FROM package p   " + 
+				"INNER JOIN category c ON c.category_idx = p.category_idx  " + 
+				"INNER JOIN travel_review tr ON p.package_idx = tr.package_idx  " + 
+				"WHERE p.category_idx = (  " + 
+				"    SELECT category_idx   " + 
 				"    FROM package  " + 
 				"    WHERE package_idx = ?  " + 
-				") " + 
-				"ORDER BY tr.help DESC";
+				")  " + 
+				"ORDER BY tr.help DESC) t1) t2 " + 
+				"WHERE rnum >= ? AND rnum <= ? ";
 		Connection conn = getConnection();
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, packageIdx);
+		pstmt.setInt(2, startNum);
+		pstmt.setInt(3, endNum);
 		ResultSet rs = pstmt.executeQuery();
 		while(rs.next()) {
 			int categoryIdx = rs.getInt("category_idx");
@@ -1223,6 +1232,24 @@ public class PackageDao {
 	    pstmt.close();
 	    conn.close();
 	    return listRet;
+	}
+	
+//	리뷰 패키지 전체의 리뷰 가져오기 
+	public int getLastPageNumber(int packageIdx) throws Exception {
+		String sql = "SELECT COUNT(*) FROM travel_review " + 
+				"WHERE package_idx = ? "; 
+		Connection conn = getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, packageIdx);
+		ResultSet rs = pstmt.executeQuery();
+		int countRet = -1;
+		if(rs.next()) {
+			countRet = rs.getInt(1);
+		}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		return countRet/10 + (countRet%10 > 0 ? 1 : 0); 
 	}
 	
 //	리뷰 이미지 
@@ -1333,9 +1360,7 @@ public class PackageDao {
 		pstmt.close();
 		conn.close();
 	 }
-	 public void insertReviewContent() throws Exception {
-		 
-	 }
+
 	 
 //	후기 내용 태그 insert
 	 public void insertReviewTag(int[] tag, int maxReviewIdx) throws Exception {
@@ -1365,9 +1390,32 @@ public class PackageDao {
 			 pstmt.close();
 			 conn.close();
 		 }
-		 
-		 
 	 }
+	 
+//	후기 페이징 
+	 
+	 /*public void pageReview(int pageNum) throws Exception {
+		 int endNum = pageNum * 10;
+		 int startNum = endNum - 9;
+		 
+		 String sql = "--  리뷰 페이지 네이션 " + 
+		 		"SELECT t2.* " + 
+		 		"FROM (SELECT rownum rnum, t1.* " + 
+		 		"FROM(SELECT * " + 
+		 		"FROM travel_review " + 
+		 		"ORDER BY review_idx DESC) t1) t2 " + 
+		 		"WHERE rnum >= ? AND rnum <= ? ";
+		 Connection conn = getConnection();
+		 PreparedStatement pstmt = conn.prepareStatement(sql);
+		 pstmt.setInt(1, startNum);
+		 pstmt.setInt(2, endNum);
+		 ResultSet rs = pstmt.executeQuery();
+		 while(rs.next()) {
+			 int reviewIdx = rs.getInt("review_idx");
+			 
+		 }
+		 
+	 }*/
 	 
 	
 }

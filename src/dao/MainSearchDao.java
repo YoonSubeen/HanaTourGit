@@ -10,7 +10,7 @@ public class MainSearchDao {
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String id = "project";
-		String pw = "pass1222";
+		String pw = "pass1234";
 		
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url,id,pw);
@@ -169,6 +169,130 @@ public class MainSearchDao {
 			String detailedEx = rs.getString("detailed_Ex");
 			String imgUrl = rs.getString("img_url");
 			RecommendAttractionTopDto dto = new RecommendAttractionTopDto(attractionIdx, attractionKor, detailedEx, imgUrl);
+			listRet.add(dto);
+		}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		return listRet;
+	}
+	
+// 추천 호텔 
+	public ArrayList<RecommendHotelDto> recommendHotel(String countryCity) throws Exception {
+		ArrayList<RecommendHotelDto> listRet = new ArrayList<RecommendHotelDto>();
+		String sql = "SELECT DISTINCT inn_img_url, " + 
+				"        inn_idx,  " + 
+				"        inn_kor,  " + 
+				"        inn_type, " + 
+				"        star, " + 
+				"        city_name, " + 
+				"        country_name, " + 
+				"        review_avg, " + 
+				"        review_num, " + 
+				"        min_price, " + 
+				"        rn " + 
+				"FROM ( " + 
+				"    SELECT " + 
+				"        im.inn_img_url, " + 
+				"        i.inn_idx,  " + 
+				"        i.inn_kor,  " + 
+				"        i.inn_type, " + 
+				"        i.star, " + 
+				"        c.city_name, " + 
+				"        co.country_name, " + 
+				"        AVG(s.clean + s.employee + s.convenient_facility + s.inn_facility) / 4 AS review_avg, " + 
+				"        COUNT(DISTINCT rv.review_idx) AS review_num, " + 
+				"        MIN(r.price) AS min_price, " + 
+				"        ROW_NUMBER() OVER (ORDER BY i.inn_idx) AS rn " + 
+				"    FROM inn i " + 
+				"    LEFT JOIN room r ON r.inn_idx = i.inn_idx AND r.checkin >= TO_DATE('20240801', 'yyyymmdd') AND r.checkin < TO_DATE('20240901', 'yyyymmdd') " + 
+				"    LEFT JOIN inn_img im ON i.inn_idx = im.inn_idx " + 
+				"    LEFT JOIN city c ON c.city_idx = i.city_idx " + 
+				"    LEFT JOIN country co ON co.country_idx = c.country_idx " + 
+				"    LEFT JOIN inn_review rv ON i.inn_idx = rv.inn_idx " + 
+				"    LEFT JOIN inn_review_standard s ON s.review_idx = rv.review_idx " + 
+				"    WHERE (city_name = ?  " + 
+				"    OR country_name = ? ) " + 
+				"    AND im.num = 1 " + 
+				"    AND i.inn_kor NOT LIKE '%없음%' " + 
+				"    AND i.inn_kor NOT LIKE '%기내%' " + 
+				"    GROUP BY i.inn_idx, i.inn_kor, i.inn_type, i.star, c.city_name, co.country_name, im.inn_img_url " + 
+				") " + 
+				"WHERE rn <= 5 ";
+		Connection conn = getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,countryCity);
+		pstmt.setString(2,countryCity);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			String innImgUrl = rs.getString("inn_img_url");
+			int innIdx = rs.getInt("inn_idx");
+			String innKor = rs.getString("inn_kor");
+			String innType = rs.getString("inn_type");
+			double star = rs.getDouble("star");
+			String cityName = rs.getString("city_name");
+			String countryName = rs.getString("country_name");
+			double reviewAvg = rs.getDouble("review_avg");
+			int reviewNum = rs.getInt("review_num");
+			int minPrice = rs.getInt("min_price");
+			int rn = rs.getInt("rn");
+			RecommendHotelDto dto = new RecommendHotelDto(innImgUrl, innIdx, innKor, innType, star, cityName, countryName, reviewAvg, reviewNum, minPrice, rn);
+			listRet.add(dto);
+		}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		return listRet;
+	}
+	
+// 추천 투어/입장권
+	public ArrayList<RecommendTicketDto> recommendTicket(String countryCity) throws Exception {
+		ArrayList<RecommendTicketDto> listRet = new ArrayList<RecommendTicketDto>();
+		String sql = "SELECT  goods_idx, " + 
+				"        min_img_url, " + 
+				"        goods_name, " + 
+				"        goods_ticket_type, " + 
+				"        city_name, " + 
+				"        min_type_price, " + 
+				"        avg_rating, " + 
+				"        review_count " + 
+				"FROM ( " + 
+				"    SELECT DISTINCT " + 
+				"        g.goods_idx, " + 
+				"        MIN(gthmb.img_url) KEEP (DENSE_RANK FIRST ORDER BY gthmb.goods_thumbnail_idx) AS min_img_url, " + 
+				"        g.goods_name, " + 
+				"        g.goods_ticket_type, " + 
+				"        c.city_name, " + 
+				"        MIN(gdt.type_price) AS min_type_price, " + 
+				"        TRUNC(avg(rv.rating),1) AS avg_rating, " + 
+				"        COUNT(DISTINCT rv.review_idx) AS review_count " + 
+				"    FROM goods g " + 
+				"    LEFT JOIN goods_thumbnail gthmb ON gthmb.goods_idx = g.goods_idx " + 
+				"    LEFT JOIN goods_type gt ON g.goods_idx = gt.goods_idx  " + 
+				"    LEFT JOIN goods_detail_type gdt ON gt.goods_type_idx= gdt.goods_type_idx " + 
+				"    LEFT JOIN goods_review rv ON gt.goods_type_idx = rv.goods_type_idx " + 
+				"    LEFT JOIN city c ON g.city_idx = c.city_idx " + 
+				"    LEFT JOIN country co ON co.country_idx = c.country_idx " + 
+				"    WHERE (c.city_name = ? " + 
+				"    OR co.country_name = ?) " + 
+				"    GROUP BY g.goods_name, g.goods_ticket_type, c.city_name, g.goods_idx " + 
+				") " + 
+				"WHERE ROWNUM <= 5 ";
+		Connection conn = getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,countryCity);
+		pstmt.setString(2,countryCity);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			int goodsIdx = rs.getInt("goods_idx");
+			String minImgUrl = rs.getString("min_img_url");
+			String goodsName = rs.getString("goods_name");
+			String goodsTicketType = rs.getString("goods_ticket_type");
+			String  cityName = rs.getString("city_name");
+			int minTypePrice = rs.getInt("min_type_price");
+			double avgRating = rs.getDouble("avg_rating");
+			int reviewCount = rs.getInt("review_count");
+			RecommendTicketDto dto = new RecommendTicketDto(goodsIdx, minImgUrl, goodsName, goodsTicketType, cityName, minTypePrice, avgRating, reviewCount);
 			listRet.add(dto);
 		}
 		rs.close();

@@ -6,9 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import dto.MainOrderDto;
-import dto.MainType8Dto;
-import dto.PromotionDto;
+import dto.GetType3TitleDto;
+import dto.*;
 
 public class MainTourDao {
 //Connection 객체
@@ -16,7 +15,7 @@ public class MainTourDao {
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String id = "project";
-		String pw = "pass1222";
+		String pw = "pass1234";
 
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url, id, pw);
@@ -68,19 +67,81 @@ public class MainTourDao {
 		
 		return listRet;
 	}
+	
+//	유형3 (타이틀)
+	public ArrayList<GetType3TitleDto> getType3Title(int orderIdx) throws Exception {
+		ArrayList<GetType3TitleDto> listRet = new ArrayList<GetType3TitleDto>();
+		String sql = "SELECT  main_type3_idx, " + 
+				"        order_idx, " + 
+				"        title, " + 
+				"        img_url, " + 
+				"        tab_name " +
+				"FROM main_type3 " + 
+				"WHERE order_idx = ? " + 
+				"ORDER BY main_type3_idx ";
+		Connection conn = getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, orderIdx);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) { 
+			int mainType3Idx = rs.getInt("main_type3_idx");
+			String title = rs.getString("title");
+			String imgUrl = rs.getString("img_url");
+			String tabName = rs.getString("tab_name");
+			GetType3TitleDto dto = new GetType3TitleDto(mainType3Idx, title, imgUrl, tabName);
+			listRet.add(dto);
+		}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		return listRet;
+	}
+	
+//	유형3 (상품)
+	public ArrayList<GetType3ProductDto> getType3Product() throws Exception {
+		ArrayList<GetType3ProductDto> listRet = new ArrayList<GetType3ProductDto>();
+		String sql = "SELECT  m3.main_type3_idx, " + 
+				"        m8.main_type8_idx, " + 
+				"        m8.order_idx, " + 
+				"        m8.img_url, " + 
+				"        m8.tag_top, " + 
+				"        m8.product_name, " + 
+				"        m8.tag_bottom, " + 
+				"        m8.price, " + 
+				"        m8.category_idx " + 
+				"FROM  main_type8 m8 " + 
+				"RIGHT JOIN main_type3 m3 ON m3.main_type3_idx = m8.main_type3_idx " + 
+				"ORDER BY title ";
+		Connection conn = getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			int mainType3Idx = rs.getInt("main_type3_idx");
+			int mainType8Idx = rs.getInt("main_type8_idx");
+			String imgUrl = rs.getString("img_url");
+			String tagTop = rs.getString("tag_top");
+			String productName = rs.getString("product_name");
+			String tagBottom = rs.getString("tag_bottom");
+			String price = rs.getString("price");
+			int categoryIdx = rs.getInt("category_idx");
+			GetType3ProductDto dto = new GetType3ProductDto(mainType3Idx, mainType8Idx, imgUrl, tagTop, productName, tagBottom, price, categoryIdx);
+			listRet.add(dto);		
+		}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		return listRet;
+	}
+	
 
 //유형4 
 	public String getType4(int orderIdx) throws Exception {
 		String strRet = null;
-		Connection conn = getConnection();
-
 		String sql = "SELECT title  " + "FROM main_type4 " + "WHERE order_idx = ? ";
-
+		Connection conn = getConnection();
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, orderIdx);
-
 		ResultSet rs = pstmt.executeQuery();
-
 		if (rs.next()) {
 			String title = rs.getString("title");
 			strRet = title;
@@ -88,18 +149,17 @@ public class MainTourDao {
 		rs.close();
 		pstmt.close();
 		conn.close();
-
 		return strRet;
 	}
 
 //유형5	
-	public void showtype5(int order_idx) throws Exception {
+	public void gettype5(int orderIdx) throws Exception {
 		Connection conn = getConnection();
 
 		String sql = "SELECT title  " + "FROM main_type5 " + "WHERE order_idx = ? ";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, order_idx);
+		pstmt.setInt(1, orderIdx);
 
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
@@ -113,7 +173,8 @@ public class MainTourDao {
 	}
 
 //유형6
-	public void showtype6(int order_idx) throws Exception {
+	public String getType6(int order_idx) throws Exception {
+		String strRet = null;
 		Connection conn = getConnection();
 
 		String sql = "SELECT img_url " + "FROM main_type6 " + "WHERE order_idx = ?";
@@ -123,13 +184,13 @@ public class MainTourDao {
 
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
-			String img_url = rs.getString("img_url");
-
-			System.out.println(img_url);
+			String imgUrl = rs.getString("img_url");
+			strRet = imgUrl;
 		}
 		rs.close();
 		pstmt.close();
 		conn.close();
+		return strRet;
 
 	}
 

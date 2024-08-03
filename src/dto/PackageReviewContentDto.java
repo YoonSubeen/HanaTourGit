@@ -11,6 +11,17 @@ public class PackageReviewContentDto {
 	private String packageName; 
 	private String text; 
 	private int help;
+	private int reviewId;
+	
+    // 리뷰 ID의 getter 메서드
+    public int getReviewId() {
+        return reviewId;
+    }
+
+    // 리뷰 ID의 setter 메서드
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
+    }
 	
 	public PackageReviewContentDto(int categoryIdx, int reviewStar, int reviewIdx, String userId, String pressLike,
 			String age, String writeDate, String packageName, String text, int help) {

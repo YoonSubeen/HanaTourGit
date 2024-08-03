@@ -140,7 +140,7 @@
                         </div>
                         <div class="mypage_item3_hover2_body">
                             <div>
-                                <a href="">예약내역</a>
+                                <a href="<%=request.getContextPath()%>/hanatour/jsp/reservation_check/reservation_check.jsp">예약내역</a>
                             </div>
                             <div>
                                 <a href="">찜</a>
@@ -178,7 +178,7 @@
                             <div class="sub_top">
                                 <div class="sub_item fl">
                                     <div>
-                                        <a href="#">
+                                        <a href="<%=request.getContextPath()%>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp" alt="">
                                             해외여행
                                         </a>
                                     </div>

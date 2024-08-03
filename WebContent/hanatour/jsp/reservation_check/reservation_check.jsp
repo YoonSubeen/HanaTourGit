@@ -3,17 +3,20 @@
 <%@page import="dao.ReservationCheckDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%
+	String id = (String)session.getAttribute("loginId");
+	
 	ReservationCheckDao rcDao = new ReservationCheckDao();
-	ArrayList <TravelReservationCheckDto> trcDto = rcDao.travelReservationCheck("subin1222");
-	ArrayList<TravelCancelCheckDto> tccDto = rcDao.travelCancelCheck("subin1222");
-	ArrayList <HotelReservationCheckDto> hrcDto = rcDao.hotelReservationCheck("subin1222");
-	ArrayList<HotelCancelCheckDto> hccDto = rcDao.hotelCancelCheck("subin1222");
-	ArrayList<OverseaFlightReservationCheckDto> ofrcDto = rcDao.overseaFlightReservationCheck("subin1222");
-	ArrayList<OverseaFlightCancelCheckDto> ofccDto = rcDao.overseaFlightCancelCheck("subin1222");
-	ArrayList<DomesticFlightReservationCheckDto> dfrcDto = rcDao.domesticFlightReservationCheck("subin1222");
-	ArrayList<DomesticFlightCancelCheckDto> dfccDto = rcDao.domesticFlightCancelCheck("subin1222");
-	ArrayList<ShowTourReservationDto> showTourReservation = rcDao.showTourReservation("subin1222");
+	ArrayList <TravelReservationCheckDto> trcDto = rcDao.travelReservationCheck(id);
+	ArrayList<TravelCancelCheckDto> tccDto = rcDao.travelCancelCheck(id);
+	ArrayList <HotelReservationCheckDto> hrcDto = rcDao.hotelReservationCheck(id);
+	ArrayList<HotelCancelCheckDto> hccDto = rcDao.hotelCancelCheck(id);
+	ArrayList<OverseaFlightReservationCheckDto> ofrcDto = rcDao.overseaFlightReservationCheck(id);
+	ArrayList<OverseaFlightCancelCheckDto> ofccDto = rcDao.overseaFlightCancelCheck(id);
+	ArrayList<DomesticFlightReservationCheckDto> dfrcDto = rcDao.domesticFlightReservationCheck(id);
+	ArrayList<DomesticFlightCancelCheckDto> dfccDto = rcDao.domesticFlightCancelCheck(id);
+	ArrayList<ShowTourReservationDto> showTourReservation = rcDao.showTourReservation(id);
 %>
 <!DOCTYPE html>
 <html>
@@ -522,7 +525,7 @@
 								<th>여행/예약상태</th>
 							</tr>
 							<%
-								for(TravelReservationCheckDto dto : trcDto) {
+								for(TravelReservationCheckDto dto : trcDto) { 
 							%>
 							<tr>
 								<td><%=dto.getReservationCode() %></td>

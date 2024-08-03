@@ -781,7 +781,7 @@ a {
 }
 
 /*안심결제, 소비자 중심 경영  사진 베너*/
-#banner1 {
+.banner1 {
 	width : 1200px;
 	height : 62px;
 	margin-top : 60px;
@@ -789,7 +789,7 @@ a {
 	display: flex;
 	overflow: hidden;
 }
-#banner1 > img {
+.banner1 > img {
 	width: 293px;
 	margin-right: 10px;
 }
@@ -886,6 +886,7 @@ a {
 #package_price > img {
 	margin-top: 20px;
     margin-bottom: 15px;
+    width: 870px;
 }
 
 /*테마소개*/

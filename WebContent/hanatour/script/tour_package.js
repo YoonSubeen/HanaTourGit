@@ -74,7 +74,7 @@ $(function () {
 		}
 	});
 	
-//총 가격 정하기 
+//	총 가격 정하기 
 	$(".select_person button").click (function() {
 		//alert("아");
 		let adult = Number($("#adult_price").val());
@@ -88,7 +88,9 @@ $(function () {
 		
 		
 		$("#total").text(total.toLocaleString());
+		$("#totalPrice").val(total);
 	});
+		
 	
 // 여행일정부분 내용 변경 
 	$("#travel_trip").css("background-color","#5e2bb8")
@@ -265,6 +267,39 @@ $(function () {
 	$("#review_x").click(function() {
 		$("#div_fullscreen_grey").hide();
 	});
+	
+//	후기 작성 checkbox 최대 5개로 제한하기
+	$("input[type='checkbox']").on("click", function() {
+		let count = $("input:checked[type='checkbox']").length;
+		
+		if(count > 5) {
+			$(this).prop("checked",false);
+			alert("5개까지만 선택할 수 있습니다.");
+		}
+	});	
+	
+// 후기 submit시 선택하지 않으면 누르지 않게 하기 
+	$("#user_review > button").click(function(event) {
+	    // select 요소의 값을 가져오고 빈 문자열인지 확인
+	    if ($('select[name="like"]').val() === null) {
+	        alert("좋아요를 선택해주세요");
+	        event.preventDefault();
+	    }
+	    else if ($('select[name="age"]').val() === null) {
+	        alert("나이대를 선택해주세요");
+	        event.preventDefault();
+	    }
+	    else if ($('select[name="star"]').val() === null) {
+	        alert("별점을 선택해주세요");
+	        event.preventDefault();
+	    }
+	    else if ($('input[name="tag"]:checked').length === 0) {
+	        alert("태그를 선택해주세요");
+	        event.preventDefault();
+	    }
+	});
+
+	
 	
 		
 });		

@@ -11,7 +11,7 @@ public class CategoryDao {
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String id = "project";
-		String pw = "pass1222";
+		String pw = "pass1234";
 		
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url,id,pw);
@@ -19,7 +19,7 @@ public class CategoryDao {
 		return conn;
 	}
 	
-	// 출발지 선택 
+	// 출발지 선택  (아직 사용 안함)
 	public void choice_departure(String departure) throws Exception {
 		Connection conn = getConnection();
 		
@@ -75,7 +75,7 @@ public class CategoryDao {
 		conn.close();
 	}
 	
-	// 카테고리 나라만 선택된 상태의 나열  > ★ 바뀌는 상태에 대한 문이 한개씩 있어야 하나? if문으로 바꿔야 할까
+	// 카테고리 나라만 선택된 상태의 나열  > ★ 바뀌는 상태에 대한 문이 한개씩 있어야 하나? if문으로 바꿔야 할까 (아직 사용 안함)
 	public void show_category() throws Exception {
 		Connection conn = getConnection();
 		
@@ -98,7 +98,7 @@ public class CategoryDao {
 				"ORDER BY c.category_idx";
 	}
 	
-	// 카테고리 날짜 선택 
+	// 카테고리 날짜 선택  (아직 사용 안함)
 	public void choiceDateShowCategroy(String departure_date, String arrival_date) throws Exception {
 	    Connection conn = getConnection();
 	    // PreparedStatement
@@ -151,8 +151,8 @@ public class CategoryDao {
 	
 	
 	
-// 카테고리 한줄 뿌리 (이름, 설명, 가격, 별점, 댓글 수, 기간 )
-	public ArrayList<ShowCategoryOneLineInfoDto> showCategoryOneLineInfo(String countryCity) throws Exception {
+// 카테고리 한줄 뿌리기 (이름, 설명, 가격, 별점, 댓글 수, 기간 )
+	public ArrayList<ShowCategoryOneLineInfoDto> showCategoryOneLineInfo(String countryCity, String sortOrder ,String tour) throws Exception {
 	    ArrayList<ShowCategoryOneLineInfoDto> listRet = new ArrayList<ShowCategoryOneLineInfoDto>();    
 	    String sql = "SELECT  c.category_name, " + 
 	    		"        c.category_idx, " + 
@@ -172,7 +172,20 @@ public class CategoryDao {
 	            "LEFT JOIN city ci ON cr.city_idx = ci.city_idx " + 
 	            "LEFT JOIN country co ON co.country_idx = ci.country_idx " + 
 	            "WHERE (ci.city_name = ? OR co.country_name = ?)  " + 
-	            "GROUP BY c.category_name, c.category_idx, c.category_ex, c.travel_period, c.price, c.img_url, c.hanapack, c.package_tag, c.local_departure_tag";
+	            "GROUP BY c.category_name, c.category_idx, c.category_ex, c.travel_period, c.price, c.img_url, c.hanapack, c.package_tag, c.local_departure_tag ";
+	    if("review".equals(sortOrder)) {
+	    	sql += " ORDER BY review DESC";
+	    } else if ("lowPrice".equals(sortOrder)) {
+	    	sql += " ORDER BY price";
+	    } else if ("highPrice".equals(sortOrder)) {
+	    	sql += "ORDER BY price DESC";
+	    }
+	    
+	    
+	    
+	    System.out.println(sql);
+	    
+	    
 	    
 	    Connection conn = getConnection();
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -205,19 +218,16 @@ public class CategoryDao {
 	}
 	
 // 태그 정보 넣기 
-	public ArrayList<CategoryTagDto> categoryTag(String countryCity) throws Exception {
+	public ArrayList<CategoryTagDto> categoryTag() throws Exception {
 		ArrayList<CategoryTagDto> listRet = new ArrayList<CategoryTagDto>();
-		String sql = "SELECT  c.category_idx, " + 
-				"        ci.city_name   " + 
-				"FROM category c " + 
-				"LEFT JOIN category_region cr ON c.category_idx = cr.category_idx " + 
+		String sql = "SELECT  c.category_idx,  " + 
+				"        ci.city_name    " + 
+				"FROM category c  " + 
+				"LEFT JOIN category_region cr ON c.category_idx = cr.category_idx  " + 
 				"LEFT JOIN city ci ON ci.city_idx = cr.city_idx " + 
-				"LEFT JOIN country co ON co.country_idx = ci.country_idx " + 
-				"WHERE ci.city_name = ? OR co.country_name = ? ";
+				"LEFT JOIN country co ON co.country_idx = ci.country_idx";
 		Connection conn = getConnection();
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
-	    pstmt.setString(1, countryCity);
-	    pstmt.setString(2, countryCity);
 	    ResultSet rs = pstmt.executeQuery();
 	    while(rs.next()) {
 	    	String cityName = rs.getString("city_name");
@@ -233,21 +243,18 @@ public class CategoryDao {
 	}
 	
 //	하단 태그 뿌리기. 여래개의 정보 
-	public ArrayList<CategoryBottomTagDto> categoryBottomTag(String countryCity) throws Exception {
+	public ArrayList<CategoryBottomTagDto> categoryBottomTag() throws Exception {
 		ArrayList<CategoryBottomTagDto> listRet = new ArrayList<CategoryBottomTagDto>();
-		String sql = " SELECT DISTINCT c.category_idx, " + 
-				"        ct.tag " + 
-				" FROM category c " + 
-				" LEFT JOIN category_tag ct ON c.category_idx = ct.category_idx " + 
-				"LEFT JOIN category_region cr ON c.category_idx = cr.category_idx " + 
+		String sql = "SELECT DISTINCT c.category_idx,  " + 
+				"        ct.tag  " + 
+				" FROM category c  " + 
+				"LEFT JOIN category_tag ct ON c.category_idx = ct.category_idx " + 
+				"LEFT JOIN category_region cr ON c.category_idx = cr.category_idx  " + 
 				"LEFT JOIN city ci ON ci.city_idx = cr.city_idx " + 
-				"LEFT JOIN country co ON co.country_idx = ci.country_idx " + 
-				"WHERE ci.city_name = ? OR co.country_name = ? " ;
+				"LEFT JOIN country co ON co.country_idx = ci.country_idx";
 		
 		Connection conn = getConnection();
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
-	    pstmt.setString(1, countryCity);
-	    pstmt.setString(2, countryCity);
 	    ResultSet rs = pstmt.executeQuery();
 	    while(rs.next()) {
 	    	int categoryIdx = rs.getInt("category_idx");
@@ -260,9 +267,10 @@ public class CategoryDao {
 	    conn.close();
 	    return listRet;
 	}
+	
 
 // 카테고리 패키지 정보
-	public ArrayList<CategoryPackageInfoDto> cetegoryPackageInfo(String departureDate) throws Exception {
+	public ArrayList<CategoryPackageInfoDto> cetegoryPackageInfo(String departureDate, String tour) throws Exception {
 		ArrayList<CategoryPackageInfoDto> listRet = new ArrayList<CategoryPackageInfoDto>();
 		String sql = "SELECT c.category_idx, " + 
 				"       p.package_idx, " + 
@@ -284,8 +292,14 @@ public class CategoryDao {
 				"LEFT JOIN package_inn pi ON p.package_idx = pi.package_idx " + 
 				"LEFT JOIN inn i ON i.inn_idx = pi.inn_idx " + 
 				"LEFT JOIN airline_ticket at ON at.ticket_idx = pf.ticket_idx " + 
-				"LEFT JOIN airline a ON a.iata = at.airline_iata " + 
-				"GROUP BY c.category_idx, p.package_idx, p.package_name, p.travel_period, p.shopping, p.shopping_times, p.guide, pp.adult, a.logo, a.name,pi.inn " + 
+				"LEFT JOIN airline a ON a.iata = at.airline_iata "; 
+				
+		
+		if("free_schedule".equals(tour)) {
+			sql += "WHERE free_tour = 'T' ";
+	    }
+		
+		sql += "GROUP BY c.category_idx, p.package_idx, p.package_name, p.travel_period, p.shopping, p.shopping_times, p.guide, pp.adult, a.logo, a.name,pi.inn " + 
 				"HAVING TO_CHAR(MIN(pf.departure_date), 'YYYY-MM-DD') = ? ";
 				
 		Connection conn = getConnection();
@@ -342,5 +356,33 @@ public class CategoryDao {
 	    conn.close();
 	    return listRet;
 	}
+	
+// 나라와 국기 
+	public ArrayList<CategoryFlagDto> categoryFlag(String countryCity) throws Exception {
+		ArrayList<CategoryFlagDto> listRet = new ArrayList<CategoryFlagDto>();
+		String sql = "SELECT DISTINCT co.country_name, " + 
+				"        co.flag_img " + 
+				"FROM country co " + 
+				"INNER JOIN city ci ON co.country_idx = ci.country_idx " + 
+				"WHERE ci.city_name = ? " + 
+				"OR co.country_name = ?" ;
+		Connection conn = getConnection();
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, countryCity);
+	    pstmt.setString(2, countryCity);
+	    ResultSet rs = pstmt.executeQuery();
+	    while(rs.next()) {
+	    	String countryName = rs.getString("country_name");
+	    	String flagImg = rs.getString("flag_img");
+	    	CategoryFlagDto dto = new CategoryFlagDto(countryName, flagImg);
+	    	listRet.add(dto);
+	    }
+	    rs.close();
+	    pstmt.close();
+	    conn.close();
+	    return listRet;
+	}
+	
+	
 
 }

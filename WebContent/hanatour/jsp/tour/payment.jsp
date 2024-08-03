@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	
 	PaymentDao pDao = new PaymentDao();
 	ArrayList<PaymentPriceDto> paymentPrice = pDao.paymentPrice("subin1222");
 	PaymentPriceDto dto = paymentPrice.get(0);
@@ -13,54 +14,70 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="../../css/payment.css">
-	<link rel="stylesheet" href="../../css/header.css">
-	<link rel="stylesheet" href="../../css/footer.css">
-	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/payment.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/header.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/footer.css">
 </head>
 <body>
-	    <header>
-        <!-- header1 -->
-        <div class="header1">
-            <div class="login fr">
-                <span class="fl">
-                    <a href="">로그인</a>
-                </span>
-                <span class="fl">
-                    <a href="">회원가입</a>
-                </span>
-                <span class="fr">
+	   	   <header>
+        <!-- header1_active -->
+		<!-- header1_hidden -->
+        <div class="
+            header1_logout
+            <%= (session.getAttribute("loginId") != null) ?  "header1_hidden" : "header1_active" %>
+        ">
+            <div class="logout">
+                <div class="">
+                    <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_login.jsp">로그인</a>
+                </div>
+                <div class="">
+                    <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_join1.jsp">회원가입</a>
+                </div>
+                <div class="">
                     <a href="">고객센터</a>
-                </span>
-                
-                <span style="clear: both;"></span>
+                </div>
             </div>
         </div>
+        <div class="
+            header1_login
+            <%= (session.getAttribute("loginId") != null) ?  "header1_active" : "header1_hidden" %>
+        ">
+            <div class="login">
+                <div class="">
+                    <a href="<%=request.getContextPath() %>/LogOutServlet">로그아웃</a>
+                </div>
+                <div class="">
+                    <a href="">고객센터</a>
+                </div>
+            </div>
+        </div>
+
         <!-- header2 -->
         <div class="header2">
-        
             <!-- header2 왼쪽 -->
             <div class="fl">
                 <div class="logo fl">
-                    <img src="../../img/header/ico-hanatour-logo2.png" alt="logo">
+                	<a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_1.jsp">
+                    	<img src="<%=request.getContextPath() %>/hanatour/img/header/ico-hanatour-logo2.png" alt="logo">
+                	</a>
                 </div>
                 <div class="search_bar fl">
-                    <form action="#">
+                    <form action="<%=request.getContextPath()%>/hanatour/jsp/tour/main_search.jsp?"> <!-- 여기 -->
                         <input 
                             type="text" 
                             name ="search_keyword" 
                             placeholder="검색어를 입력해 주세요"
                         >
                         <button class="search_btn">
-                            <img src="../../img/header/ico-search.png" alt="돋보기">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/header/ico-search.png" alt="돋보기">
                         </button>
                     </form>
                 </div>
                 <div class="trending_search fl">
-                    <img src="../../img/header/osaka.png" alt="osaka">
+                    <img src="<%=request.getContextPath() %>/hanatour/img/header/osaka.png" alt="osaka">
                     <div class="trending_hover">
                         <div>
-                            <img src="../../img/header/trending_search.png" alt="인기검색어">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/header/trending_search.png" alt="인기검색어">
                         </div>
                         <div>
                             <div>일본</div>
@@ -76,23 +93,62 @@
             <div class="mypage fr">
                 <div class="mypage_item1 fr">
                     <a href="#">
-                        <img src="../../img/header/ico-haeder-choice.png" alt="">
-                       
+                        <img src="<%=request.getContextPath() %>/hanatour/img/header/ico-haeder-choice.png" alt="">
                     </a>
                 </div>
                 <div class="mypage_item2 fr">
-                    <a href="#">
-                        <img src="../../img/header/ico-paymenthistory.png" alt="">
+                    <a href="<%=request.getContextPath() %>/hanatour/jsp/reservation_check/reservation_check.jsp">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/header/ico-reservationhistory.png" alt="">
                     </a>
                 </div>
                 <div class="mypage_item3 fr">
-                    <a href="">
-                        <img src="../../img/header/ico-mymenu.png" alt="">
+                    <a href="#">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/header/ico-mymenu.png" alt="">
                     </a>
+                    <!-- mypage_item3_hover_active -->
+                    <div class="mypage_item3_hover1 ">
+                        <div class="mypage_item3_hover1_header">
+                            	마이메뉴는<br/><span>회원 전용</span> 메뉴입니다.
+                        </div>
+                        <div class="mypage_item3_hover1_body">
+                            <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_login.jsp">
+                                <div class="mypage_item3_hover1_body_btn1">
+                                   	 로그인
+                                </div>
+                            </a>
+                            <a href="<%=request.getContextPath() %>/hanatour/jsp/main1_home/main1_join1.jsp">
+                                <div class="mypage_item3_hover1_body_btn2">
+                                    	회원가입
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- mypage_item3_hover_active -->
+                    <div class="mypage_item3_hover2">
+                        <div class="mypage_item3_hover2_header">
+                        	<span>
+                        		<%= (session.getAttribute("loginId") != null) ? session.getAttribute("loginName") : "???" %>
+                        	</span> 님, 반갑습니다.
+                        </div>
+                        <div class="mypage_item3_hover2_body">
+                            <div>
+                                <a href="<%=request.getContextPath() %>/hanatour/jsp/reservation_check/reservation_chekc.jsp">예약내역</a>
+                            </div>
+                            <div>
+                                <a href="">찜</a>
+                            </div>
+                            <div>
+                                <a href="">1:1문의하기</a>
+                            </div>
+                            <div>
+                                <a href="<%=request.getContextPath() %>/MypageEditPersonalInfoEntranceServlet">개인정보수정</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div style="clear:both;"></div>
             </div>
-        
             <div style="clear: both;"></div>
         </div>
         
@@ -101,27 +157,26 @@
             <div class="menu">
                 <div class="menu_left fl" id="menu_left">
                     <a href="#">
-                        <img src="../../img/header/ico-hamburgermenu.png" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/header/ico-hamburgermenu.png" alt="">
                     </a>
-
                     <div class="sub_menu_container smc_hide" id="sub_menu_container">
                         <div class="sub_menu">
                             <div class="sub_top">
                                 <div class="sub_item fl">
                                     <div>
-                                        <a href="#">
+                                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=해외여행"> 
                                             	해외여행
                                         </a>
                                     </div>
                                     <div>
-                                        <a href="#">
-                                            	해외여행 홈
+                                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=해외여행">
+                                           	 해외여행 홈
                                         </a>
                                     </div>
                                 </div>
                                 <div class="sub_item fl">
                                     <div>
-                                        <a href="">
+                                        <a href="<%=request.getContextPath()%>/hanatour/jsp/main5_airline/main5_1.jsp">
                                             	항공
                                         </a>
                                     </div>
@@ -139,44 +194,39 @@
                                     </div>
                                     <div>
                                         <a href="#">
-                                            	해외호텔
+                                           	 해외호텔
                                         </a>
                                     </div>
                                     <div>
                                         <a href="#">
-                                            	국내숙박
+                                           	 국내숙박
                                         </a>
                                     </div>
                                 </div>
                                 <div class="sub_item fl">
                                     <div>
-                                        <a href="#">
-                                           	 국내여행
+                                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=국내여행">
+                                            	국내여행
                                         </a>
                                     </div>
                                     <div>
-                                        <a href="#">
-                                            	제주여행
+                                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=제주여행">
+                                           	 제주여행
                                         </a>
                                     </div>
                                     <div>
-                                        <a href="#">
+                                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=국내여행">
                                             	내륙여행
                                         </a>
                                     </div>
                                     <div>
-                                        <a href="#">
-                                           	 울릉도/섬
+                                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=국내여행">
+                                            	울릉도/섬
                                         </a>
                                     </div>
                                     <div>
-                                        <a href="#">
+                                        <a href="<%=request.getContextPath() %>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=국내여행">
                                             	내나라여행
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a href="#">
-                                            	국내골프
                                         </a>
                                     </div>
                                 </div>
@@ -230,12 +280,12 @@
                                 <div class="sub_item fl">
                                     <div>
                                         <a href="">
-                                            	테마여행
+                                           	 테마여행
                                         </a>
                                     </div>
                                     <div>
                                         <a href="#">
-                                           	 허니문
+                                            	허니문
                                         </a>
                                     </div>
                                     <div>
@@ -294,37 +344,36 @@
                                     </div>
                                     <div>
                                         <a href="#">
-                                            	여행기획전
+                                           	여행기획전
                                         </a>
                                     </div>
                                 </div>
                                 <div class="sub_item fl">
                                     <div>
                                         <a href="#">
-                                            	하나투어 셀렉션
+                                           	 하나투어 셀렉션
                                         </a>
                                     </div>
                                     <div>
                                         <a href="#">
-                                            하나LIVE
+                                            	하나LIVE
                                         </a>
                                     </div>
                                     <div>
                                         <a href="#">
-                                            하나Original
+                                            	하나Original
                                         </a>
                                     </div>
                                     <div>
                                         <a href="#">
-                                            밍글링투어
+                                            	밍글링투어
                                         </a>
                                     </div>
                                     <div>
                                         <a href="#">
-                                            마일리지 클럽
+                                            	마일리지 클럽
                                         </a>
                                     </div>
-                        
                                 </div>
                                 <div class="sub_item fl">
                                     <div>
@@ -332,12 +381,12 @@
                                     </div>
                                     <div>
                                         <a href="#">
-                                            하나팩 2.0
+                                            	하나팩 2.0
                                         </a>
                                     </div>
                                     <div>
                                         <a href="#">
-                                            개런티 프로그램
+                                            	개런티 프로그램
                                         </a>
                                     </div>
                                     <div>
@@ -347,7 +396,7 @@
                                     </div>
                                     <div>
                                         <a href="#">
-                                            우리끼리
+                                            	우리끼리
                                         </a>
                                     </div>
                                 </div>
@@ -358,14 +407,13 @@
                         <!-- sub_menu close -->
                         <div class="sub_menu_close" id="sub_menu_close">
                             <a href="#">
-                                <img src="../../img/header/ico-alllmenu_close.png" alt="">
+                                <img src="<%=request.getContextPath() %>/hanatour/img/header/ico-alllmenu_close.png" alt="">
                             </a>
                         </div>
                     </div>
                     <!-- sub_menu_container close -->
                 </div>
                 <!-- menu_left close -->
-
                 <div class="menu_center fl">
                     <ul>
                         <li>
@@ -373,11 +421,11 @@
                             <div></div>
                         </li>
                         <li class="menu_center_sub1">
-                            <a href="#">해외여행</a>
+                            <a href="<%=request.getContextPath()%>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=해외여행">해외여행</a>
                             <div></div>
                         </li>
                         <li>
-                            <a href="#">항공</a>
+                            <a href="<%=request.getContextPath()%>/hanatour/jsp/main5_airline/main5_1.jsp">항공</a>
                             <div></div>
                         </li>
                         <li>
@@ -393,7 +441,7 @@
                             <div></div>
                         </li>
                         <li>
-                            <a href="#">국내여행</a>
+                            <a href="<%=request.getContextPath() %>/hanatour/jsp/main2_oversea/main2_oversea_tour.jsp?main=국내여행">국내여행</a>
                             <div></div>
                         </li>
                         <li>
@@ -427,6 +475,7 @@
             </div>
         </div>
     </header>
+    <!-- header 끝  -->
   
     <form action="">
 	    <div id="payment_background-color">
@@ -442,7 +491,8 @@
 									<% 
 										if(dto.getFlightPrice() != null) { 
 									%>
-										<%=dto.getFlightPrice() %>
+										${totalPrice}
+										<!-- <%=dto.getFlightPrice() %>  -->
 									<%
 										}
 									%>
@@ -463,7 +513,8 @@
 									<% 
 										if(dto.getTravelPrice() != null) { 
 									%>
-										<%=dto.getTravelPrice() %>
+										${totalPrice}
+										<!--  <%=dto.getTravelPrice() %>  -->
 									<%
 										}
 									%>
@@ -475,65 +526,10 @@
 						<div>
 							<div class="fl">전액결제</div>
 							<div class="fr">
-								<strong class="comma" id="price_parameter"
-								price="<% 
-										if(dto.getFlightPrice() != null) { 
-									%>
-										<%=dto.getFlightPrice() %>
-									<%
-										}
-									%>
-									<% 
-										if(dto.getGoodsPrice() != null) { 
-									%>
-										<%=dto.getGoodsPrice() %>
-									<%
-										}
-									%>
-									<% 
-										if(dto.getInnPrice() != null) { 
-									%>
-										<%=dto.getInnPrice() %>
-									<%
-										}
-									%>
-									<% 
-										if(dto.getTravelPrice() != null) { 
-									%>
-										<%=dto.getTravelPrice() %>
-									<%
-										}
-									%>">
-									<% 
-										if(dto.getFlightPrice() != null) { 
-									%>
-										<%=dto.getFlightPrice() %>
-									<%
-										}
-									%>
-									<% 
-										if(dto.getGoodsPrice() != null) { 
-									%>
-										<%=dto.getGoodsPrice() %>
-									<%
-										}
-									%>
-									<% 
-										if(dto.getInnPrice() != null) { 
-									%>
-										<%=dto.getInnPrice() %>
-									<%
-										}
-									%>
-									<% 
-										if(dto.getTravelPrice() != null) { 
-									%>
-										<%=dto.getTravelPrice() %>
-									<%
-										}
-									%>
-									원
+								<strong class="comma" id="price_parameter">
+										${totalPrice}
 								</strong>
+								원
 							</div>
 							<div style="clear:both;"></div>
 						</div>
@@ -549,7 +545,8 @@
 									<% 
 										if(dto.getFlightPrice() != null) { 
 									%>
-										<%=dto.getFlightPrice() %>
+										${totalPrice}
+										<!--  <%=dto.getFlightPrice() %>  -->
 									<%
 										}
 									%>
@@ -602,17 +599,14 @@
 								<label for="kakao"><span class="kakao_img"></span></label>
 							</div>
 						</div>
-	// pay_button ----> payment_pay_action.jsp (호출1 호출2) ------> payment.jsp
-						
 						<div id="pay_button">
 							<div>	
-								<button type="button" class="button_base_big">
+								<button type="button" id="payButton" class="button_base_big">
 									<div>결제하기</div>
 								</button>
 							</div>	
 						</div>
 				</div>
-				
 			</div>
 		</div>
 	</form>
@@ -643,32 +637,32 @@
                 <div class="footer1_right fr">
                     <div>
                         <a href="#">
-                            <img src="../../img/footer/facebook.png" alt="페이스북">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/facebook.png" alt="페이스북">
                         </a>
                     </div>
                     <div>
                         <a href="#">
-                            <img src="../../img/footer/instagram.png" alt="인스타그램">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/instagram.png" alt="인스타그램">
                         </a>
                     </div>
                     <div>
                         <a href="#">
-                            <img src="../../img/footer/naverblog.png" alt="네이버 블로그">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/naverblog.png" alt="네이버 블로그">
                         </a>
                     </div>
                     <div >
                         <a href="#">
-                            <img src="../../img/footer/kakaoplus.png" alt="카카오 플러스">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/kakaoplus.png" alt="카카오 플러스">
                         </a>
                     </div>
                     <div>
                         <a href="#">
-                            <img src="../../img/footer/youtube.png" alt="유튜브">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/youtube.png" alt="유튜브">
                         </a>
                     </div>
                     <div>
                         <a href="#">
-                            <img src="../../img/footer/kakaostory.png" alt="카카오 스토리">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/kakaostory.png" alt="카카오 스토리">
                         </a>
                     </div>
                 </div>
@@ -705,7 +699,7 @@
                         </div>
                     </div>
                     <div class="footer2_left_bottom">
-                        <img src="../../img/footer/footer2_left.png" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/footer/footer2_left.png" alt="">
                     </div>
                    <div style="clear: both;"></div>
                 </div>
@@ -749,7 +743,7 @@
                 <div class="footer4_left fl">
                     <div class="fl">
                         <div class="fl">
-                            <img src="../../img/footer/award-logo-01.png" alt="">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/award-logo-01.png" alt="">
                         </div>
                         <div class="fl">
                             대한민국<br/>100대 브랜드
@@ -758,7 +752,7 @@
                     </div>
                     <div class="fl">
                         <div class="fl">
-                            <img src="../../img/footer/award-logo-02-2024.png" alt="">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/award-logo-02-2024.png" alt="">
                         </div>
                         <div class="fl">
                             한국능률협회선정<br/>20년연속(2005~2024)<br/>브랜드파워 1위
@@ -767,7 +761,7 @@
                     </div>
                     <div class="fl">
                         <div class="fl">
-                            <img src="../../img/footer/award-logo-03-2024.png" alt="">
+                            <img src="<%=request.getContextPath() %>/hanatour/img/footer/award-logo-03-2024.png" alt="">
                         </div>
                         <div class="fl">
                             브랜드스탁선정<br/>20년연속(2005~2024)<br/>브랜드스타 1위
@@ -780,28 +774,28 @@
 
                 <div class="footer4_center fl">
                    <button>
-                        <img src="../../img/footer/ico-arrow-left.png" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/footer/ico-arrow-left.png" alt="">
                     </button>
                     <button>
-                       <img src="../../img/footer/ico-arrow-right.png" alt="">
+                       <img src="<%=request.getContextPath() %>/hanatour/img/footer/ico-arrow-right.png" alt="">
                    </button>
                 </div>
                 <!-- footer4_center 종료 -->
                 <div class="footer4_right fl">
                     <div>
-                        <img src="../../img/footer/korea_brand_awards.jpg" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/footer/korea_brand_awards.jpg" alt="">
                     </div>
                     <div>
-                        <img src="../../img/footer/mark_01.png" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/footer/mark_01.png" alt="">
                     </div>
                     <div>
-                        <img src="../../img/footer/mark1_eprivacy.png" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/footer/mark1_eprivacy.png" alt="">
                     </div>
                     <div>
-                        <img src="../../img/footer/mark_03_new.png" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/footer/mark_03_new.png" alt="">
                     </div>
                     <div>
-                        <img src="../../img/footer/ico_isms.png" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/footer/ico_isms.png" alt="">
                     </div>
                 </div>
                 <!-- footer4_right 종료 -->
@@ -813,7 +807,10 @@
     </footer>
 
 </body>
-<script src="../../script/payment.js"></script>
-<script src="../../script/header.js"></script>
-<script src="../../script/footer.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script/payment.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script/header.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script/footer.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 </html>

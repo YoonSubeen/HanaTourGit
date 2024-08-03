@@ -9,7 +9,7 @@ public class PaymentDao {
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String id = "project";
-		String pw = "pass1222";
+		String pw = "pass1234";
 		
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url,id,pw);

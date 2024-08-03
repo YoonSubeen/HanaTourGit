@@ -1,3 +1,13 @@
+$(function() {
+// 가격 단위에 쉼표 찍어주기
+	$(".price_comma").each(function() {
+    let text = $(this).text();
+    let formattedText = text.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    $(this).text(formattedText);
+	});
+	
+});
+
 // 페이지 진입 시 기본 값
 window.addEventListener('DOMContentLoaded', function() {
   showContent('A');
@@ -27,3 +37,4 @@ function selectAll(selectAll)  {
     checkbox.checked = selectAll.checked;
   })
 }
+

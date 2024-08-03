@@ -128,6 +128,8 @@ $(function() {
 	    }
 	});
 	
+
+	
 // 클릭시 팝업 더블시 검색창
 	$("#where_hide").hide();
 	$("#doubleclick_search").hide();
@@ -163,16 +165,17 @@ $(function() {
 	$("#tour_date").click(function() {
 		$("#tour_date_hide").toggle();
 		if (!myPicker) {
-        myPicker = new Lightpick({
-            field: document.getElementById('input_start_date'),
-            secondField: document.getElementById('input_end_date'),
-            singleDate: false,
-            numberOfMonths: 2,
-            format: 'YYYYMMDD',
-            inline: true
-        });
-    }
+	        myPicker = new Lightpick({
+	            field: document.getElementById('input_start_date'),
+	            secondField: document.getElementById('input_end_date'),
+	            singleDate: false,
+	            numberOfMonths: 2,
+	            format: 'YYYYMMDD',
+	            inline: true
+	        });
+    	}
 	});
+	
 
 	//상품비교함 3개짜리
 	$('#compare_content > div:nth-child(3) > button:nth-child(2)').click(function() {
@@ -351,7 +354,11 @@ function makeCalenders() {
 		});
 		
 		makeCalenders();
+		
+		리스트가져와서그려();
 	});	
+	
+
 
 	
 	
