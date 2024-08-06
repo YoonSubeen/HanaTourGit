@@ -1,8 +1,11 @@
 <%@page import="dto.AirlineTicketDto"%>
 <%@page import="dao.AirlineTicketDao"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,9 +16,13 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/lightpick.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/header.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/footer.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main5_2.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/hanatour/css/main5_round_trip1.css">
 </head>
 <body>
+
+	
+
+
     <header>
         <!-- header1_active -->
 		<!-- header1_hidden -->
@@ -507,11 +514,11 @@
 
 
                     <div class="airline_info_top">
-                        <div>서울</div>
+                        <div>${roundTripDepartureCity}</div>
                         <div>
                             <div></div>
                         </div>
-                        <div>도쿄(나리타)</div>
+                        <div>${roundTripArrivalCity}</div>
                     </div>
 
 
@@ -519,25 +526,29 @@
                         <div></div>
                         <div class="airline_info_bottom_center">
                             <div class="airline_info_date">
-                                <div>2024.09.12(목)</div>
+                                <div>${roundTripDepartureDate}</div>
                                 <div>&nbsp;~&nbsp;</div>
-                                <div> 2024.09.13(금)</div>
+                                <div>${roundTripArrivalDate}</div>
                             </div>
                             <div class="airline_info_member">
                                 <div>
-                                    <span>성인</span>
-                                    <span>1&#44;</span>
+                                    <span>
+                                    	<c:if test="${roundTripAdult ne 0}">성인 ${roundTripAdult}</c:if>
+                                    </span>
                                 </div>
                                 <div>
-                                    <span>소아</span>
-                                    <span>1&#44;</span>
+                                    <span>
+                                    	<c:if test="${roundTripChild ne 0}">, 소아 ${roundTripChild}</c:if>
+                                    </span>
+                                    	
                                 </div>
                                 <div>
-                                    <span>유아</span>
-                                    <span>1&nbsp;</span>
+                                    <span>
+                                    	<c:if test="${roundTripInfant ne 0}">, 유아 ${roundTripInfant}</c:if>
+                                    </span>
                                 </div>
                                 <div>
-                                    <span>일반석</span>
+                                    <span>⊙${roundTripSeatClass}</span>
                                 </div>
                             </div>
                         </div>
@@ -1246,164 +1257,16 @@
 
 
 
-                <!-- selected_airline_ticket_container  시작 -->
-
-                <div class="selected_airline_ticket_container">
-
-                    <!--
-                    <div class="selected_airline_ticket ">
-
-                        <div class="selected_airline_ticket_header">
-                            <div></div>
-                            <div>2024.09.12 (목) </div>
-                        </div>
-
-                        <div class="selected_airline_ticket_inner">
-
-                            <div class="selected_airline_ticket1">
-                                <div class="airline_ticket_airline">
-                                    <div>
-                                        <img src="<%=request.getContextPath()%>/hanatour/img/main5_airline2/ailrine_logo1.png" alt="">
-                                    </div>
-                                    <div>대한항공</div>
-                                </div>
-                            </div>
-                            <div class="selected_airline_ticket2">
-                                <div class="airline_ticket_flight_number">
-                                    <span>KE 5743&#44;</span>
-                                    <span>수하물포함 </span>
-                                </div>
-                                <div class="airline_ticket_codeshare">
-                                    <span>공동운항</span>
-                                    <span class="airline_ticket_codeshare_mark"></span>
-                                    <div class="airline_ticket_codeshare_hover">
-                                        <span>실제탑승&#58;</span>
-                                        <span>진에어</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="selected_airline_ticket3">
-                                <div class="airline_ticket_time">
-                                    <div>14:45</div>
-                                    <div>ICN</div>
-                                </div>
-                                <div class="airline_ticket_stop">
-                                    <div>2시간 25분</div>
-                                    <div class="airline_ticket_stop_line"></div>
-                                    <div>직항</div>
-                                </div>
-                                <div class="airline_ticket_time">
-                                    <div>17:10</div>
-                                    <div>NRT</div>
-                                </div>
-                            </div>
-                            <div class="selected_airline_ticket4">
-                                <div class="airline_ticket_detail_schedule">
-                                    상세일정 보기
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="selected_airline_ticket5">
-                                <a href="#">
-                                    <div class="airline_ticket_select_btn">
-                                        변경
-                                    </div>
-                                    <div>
-                                        <span>잔여</span>
-                                        <span>7</span>
-                                        <span>석</span>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    
-                    <div class="selected_airline_ticket ">
-
-                        <div class="selected_airline_ticket_header">
-                            <div></div>
-                            <div>2024.09.12 (목) </div>
-                        </div>
-
-                        <div class="selected_airline_ticket_inner">
-
-                            <div class="selected_airline_ticket1">
-                                <div class="airline_ticket_airline">
-                                    <div>
-                                        <img src="<%=request.getContextPath()%>/hanatour/img/main5_airline2/ailrine_logo1.png" alt="">
-                                    </div>
-                                    <div>대한항공</div>
-                                </div>
-                            </div>
-                            <div class="selected_airline_ticket2">
-                                <div class="airline_ticket_flight_number">
-                                    <span>KE 5743&#44;</span>
-                                    <span>수하물포함 </span>
-                                </div>
-                                <div class="airline_ticket_codeshare">
-                                    <span>공동운항</span>
-                                    <span class="airline_ticket_codeshare_mark"></span>
-                                    <div class="airline_ticket_codeshare_hover">
-                                        <span>실제탑승&#58;</span>
-                                        <span>진에어</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="selected_airline_ticket3">
-                                <div class="airline_ticket_time">
-                                    <div>14:45</div>
-                                    <div>ICN</div>
-                                </div>
-                                <div class="airline_ticket_stop">
-                                    <div>2시간 25분</div>
-                                    <div class="airline_ticket_stop_line"></div>
-                                    <div>직항</div>
-                                </div>
-                                <div class="airline_ticket_time">
-                                    <div>17:10</div>
-                                    <div>NRT</div>
-                                </div>
-                            </div>
-                            <div class="selected_airline_ticket4">
-                                <div class="airline_ticket_detail_schedule">
-                                    상세일정 보기
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="selected_airline_ticket5">
-                                <a href="#">
-                                    <div class="airline_ticket_select_btn">
-                                        변경
-                                    </div>
-                                    <div>
-                                        <span>잔여</span>
-                                        <span>7</span>
-                                        <span>석</span>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    -->
-
-                </div>
-                <!-- selected_airline_ticket_container 종료 -->
-
-
-
-
 
                 <div class="airline_search_page_body_right_middle">
                     <div>
                         <div>가는 항공편 선택</div>
                         <div>
-                            <span>2024.09.12 (목)&nbsp;</span>
-                            <span>서울(SEL)</span>
+                            <span>${roundTripDepartureDate}</span>
+                            &nbsp;
+                            <span>${roundTripDepartureCity}(${roundTripDepartureIata})</span>
                             <span>→</span>
-                            <span>도쿄(나리타)(NRT)</span>
+                            <span>${roundTripArrivalCity}(${roundTripArrivalIata})</span>
                         </div>
                     </div>
                     <div>성인 1인 왕복요금입니다</div>
@@ -1412,7 +1275,7 @@
                 <div class="airline_search_page_body_right_middle2">
                     <div>
                         <span>총</span>
-                        <span>61</span>
+                        <span>${ticketList.size()}</span>
                         <span>개</span>
                     </div>
                     <div class="airline_ticket_order">
@@ -1425,39 +1288,43 @@
 
 
                 <div class="airline_ticket_container">
+                
+                
+                
 
-						<!-- Dto 반복문 시작 -->
-						<%
-							ArrayList<AirlineTicketDto> ticketList = (ArrayList<AirlineTicketDto>)request.getAttribute("ticketList"); 
-						%>
+					<!-- Dto 반복문 시작 -->
+					<c:forEach var="aDto" items="${ticketList}">
+						<!-- ${aDto.ticketIdx } -->
+							
 												
-						<h1>
-							<%=ticketList.get(0).getTicketIdx() %>
-						</h1>
-						
-						
 						<!-- 티켓0 -->
                         <div class="airline_ticket">
-
+					
                             <div class="airline_ticket_inner">
-
+								<input type="hidden" name="airline_ticket_id" value="${aDto.ticketIdx}"/>
                                 <div class="airline_ticket1">
                                     <div class="airline_ticket_airline">
                                         <div>
-                                            <img src="https://image.hanatour.com/usr/static/img/airline/KE.png" alt="">
+                                            <img src="https://image.hanatour.com/usr/static/img/airline/${aDto.airlineIata}.png" alt="">
                                         </div>
-                                        <div>대한항공</div>
+                                        <div>${aDto.airlineName}</div>
                                     </div>
                                      <div class="airline_ticket_flight_number">
-                                        <span>KE 5743&#44;</span>
-                                        <span>수하물포함 </span>
+                                        <span>${aDto.flightNumber}&#44;</span>
+                                        <span>
+                                        	<c:if test="${aDto.freeBaggage == 'T'}">수하물포함</c:if>
+                                        	<c:if test="${aDto.freeBaggage == 'F'}">수하물미포함</c:if>
+                                        </span>
                                     </div>
                                     <div class="airline_ticket_codeshare">
-                                        <span>공동운항</span>
+                                        <span>
+                                        	<c:if test="${aDto.codeShare == 'T'}">공동운항</c:if>
+                                        	<c:if test="${aDto.codeShare == 'F'}"></c:if>
+                                        </span>
                                         <span class="airline_ticket_codeshare_mark"></span>
                                         <div class="airline_ticket_codeshare_hover">
                                             <span>실제탑승&#58;</span>
-                                            <span>진에어</span>
+                                            <span>${aDto.codeShareAirline}</span>
                                         </div>
                                     </div>
                                     <div class="airline_ticket_detail_schedule">
@@ -1469,23 +1336,37 @@
 
                                 <div class="airline_ticket2">
                                     <div class="airline_ticket_time">
-                                        <div>14:45</div>
-                                        <div>ICN</div>
+                                        <div>
+                                        	${aDto.departureTimeHour}
+                                        </div>
+                                        <div>${aDto.departureIata}</div>
                                     </div>
                                     <div class="airline_ticket_stop">
-                                        <div>2시간 25분</div>
+                                        <div>${aDto.flyingTime}</div>
                                         <div class="airline_ticket_stop_line"></div>
-                                        <div>직항</div>
+                                        <div>
+                                        	<c:if test="${aDto.stop == 0}">직항</c:if>
+                                        	<c:if test="${aDto.stop != 0}">경유 ${aDto.stop}회</c:if>
+                                        </div>
                                     </div>
                                     <div class="airline_ticket_time">
-                                        <div>17:10</div>
-                                        <div>NRT</div>
+                                        <div>
+                                        	${aDto.arrivalTimeHour}
+                                        </div>
+                                        <div>${aDto.arrivalIata}</div>
                                     </div>
                                 </div>
 
                                 <div class="airline_ticket3">
                                     <div>
-                                        <span>452,600</span>
+                                        <span>
+                                        	<c:if test="${requestScope.roundTripSeatClass eq '일반석' }">
+                                       			<fmt:formatNumber value="${aDto.economyClassPrice}" type="number" groupingUsed="true"/>
+                                        	</c:if>
+                                        	<c:if test="${requestScope.roundTripSeatClass eq '프레스티지석' }">
+	                                        	<fmt:formatNumber value="${aDto.prestigeClassPrice}" type="number" groupingUsed="true"/>
+                                        	</c:if>
+                                        </span>
                                         <span>원~</span>
                                     </div>
                                     <div>
@@ -1502,7 +1383,7 @@
                                         </div>
                                         <div>
                                             <span>잔여</span>
-                                            <span>7</span>
+                                            <span>${aDto.leftSeats}</span>
                                             <span>석</span>
                                         </div>
                                     </a>
@@ -1514,7 +1395,10 @@
                         </div>
 						<!-- 티켓0 -->
 						 
-						<!-- Dto 반복문 종료 --> 
+					
+						
+					</c:forEach>
+					<!-- Dto 반복문 종료 --> 
 							
 						
 
@@ -1526,7 +1410,7 @@
                                 <div class="airline_ticket1">
                                     <div class="airline_ticket_airline">
                                         <div>
-                                            <img src="https://image.hanatour.com/usr/static/img/airline/KE.png" alt="">
+                                            <img src="<%=request.getContextPath()%>/hanatour/img/main5_airline1/ailrine_logo2.png" alt="">
                                         </div>
                                         <div>대한항공</div>
                                     </div>
@@ -1594,8 +1478,6 @@
                             </div>
                             <!-- airline_ticket_inner 종료 -->
                         </div>
-
-                        
 
 
                         <!-- 티켓2 -->
@@ -1673,8 +1555,6 @@
                             </div>
                             <!-- airline_ticket_inner 종료 -->
                         </div>
-
-
 
 
                         <!-- 티켓3 -->
@@ -1831,59 +1711,10 @@
                             <!-- airline_ticket_inner 종료 -->
                         </div>
 
-
-
                 </div>
                 <!-- airline_ticket_container 종료 -->
 
-
-
-
-
-
-
-                            
-                <div class="
-                    airline_ticket_select_result">
-                    <div class="airline_ticket_select_result_info">
-                        <div class="airline_ticket_select_result_info_top">
-                            <div>성인1,소아1,유아1(일반석)</div>
-                            <div>
-                                <div>총 예상금액(왕복)</div>
-                                <div>
-                                    <span>848,800</span>
-                                    <span>원</span>
-                                    <span></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="airline_ticket_select_result_info_line"></div>
-
-                        <div class="airline_ticket_select_result_bottom">
-                            <div>
-                                <div>&nbsp;유류할증료, 제세공과금, 발권대행 수수료 포함(변동가능)</div>
-                                <div>
-                                    <span>&nbsp;예약변경 및 환불 수수료는 별도</span>
-                                    <span>이며, 상세내용은 요금/환불 규정을 확인바랍니다.</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="airline_ticket_select_result_bottom_btn">
-                                    요금/환불 규정
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="airline_ticket_select_result_btn">
-                        <div>공유하기</div>
-                        <div>일정 상세보기</div>
-                        <div>예약하기</div>
-                    </div>
-                </div>
-
-
-
+				
 
             </div>
             <!-- airline_search_page_body_right 종료 -->
@@ -1985,6 +1816,30 @@
         <!-- airline_ticket_detail_schedule_popup_inner 종료 -->
     </div>
     <!-- airline_ticket_detail_schedule_popup 종료 -->
+	
+	<form action="${pageContext.request.contextPath}/AirlineRoundtrip2Servlet" class="round_trip_select1">
+		<input type="hidden" name="roundtrip_departure_iata" value="${roundTripDepartureIata}"/>
+		<input type="hidden" name="roundtrip_departure_city" value="${roundTripDepartureCity}"/>
+		<input type="hidden" name="roundtrip_departure_date" value="${roundTripDepartureDate}"/>
+		
+		<input type="hidden" name="roundtrip_arrival_iata" value="${roundTripArrivalIata}"/>
+		<input type="hidden" name="roundtrip_arrival_city" value="${roundTripArrivalCity}"/>
+		<input type="hidden" name="roundtrip_arrival_date" value="${roundTripArrivalDate}"/>
+	
+		<input type="hidden" name="roundtrip_adult" value="${roundTripAdult}"/>
+		<input type="hidden" name="roundtrip_child" value="${roundTripChild}"/>
+		<input type="hidden" name="roundtrip_infant" value="${roundTripInfant}"/>
+		
+		<input type="hidden" name="roundtrip_seat_class" value="${roundTripSeatClass}"/>
+		<input type="hidden" name="roundtrip_direct_flight" value="${roundTripDirectFlight}"/>
+		
+		<input type="hidden" name="roundtrip_airline_ticket1" value=""/>
+	</form>
+	
+	
+	
+	
+	
 
 
 
@@ -2196,6 +2051,6 @@
 <script src="<%=request.getContextPath() %>/hanatour/script_jsp/lightpick.js"></script>
 
 <script src="<%=request.getContextPath() %>/hanatour/script_jsp/header.js"></script>
-<script src="<%=request.getContextPath() %>/hanatour/script_jsp/main5_airline2.js"></script>
+<script src="<%=request.getContextPath() %>/hanatour/script_jsp/main5_round_trip1.js"></script>
 <script src="<%=request.getContextPath() %>/hanatour/script_jspt/footer.js"></script>
 </html>

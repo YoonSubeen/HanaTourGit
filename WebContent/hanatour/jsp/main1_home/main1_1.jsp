@@ -1889,7 +1889,7 @@
 
                 <div class="main1_type7_item">
                     <div class="main1_type7_img">
-                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type7_img1.jpg" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/type7_img1.jpg" alt="">
                     </div>
                     <div class="main1_type7_title">
                         언제가도 좋은 섬, 제주
@@ -1902,7 +1902,7 @@
                 
                 <div class="main1_type7_item">
                     <div class="main1_type7_img">
-                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type7_img2.jpg" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/type7_img2.jpg" alt="">
                     </div>
                     <div class="main1_type7_title">
                         여름을 기다리는 울릉도🌿
@@ -1914,7 +1914,7 @@
                 
                 <div class="main1_type7_item">
                     <div class="main1_type7_img">
-                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type7_img3.jpg" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/type7_img3.jpg" alt="">
                     </div>
                     <div class="main1_type7_title">
                         <p class="item_title">이달의 국내여행</p>
@@ -1926,7 +1926,7 @@
                 
                 <div class="main1_type7_item">
                     <div class="main1_type7_img">
-                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type7_img4.jpg" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/type7_img4.jpg" alt="">
                     </div>
                     <div class="main1_type7_title">
                         이유 있는 선택, 내나라 여행
@@ -1938,7 +1938,7 @@
                 
                 <div class="main1_type7_item">
                     <div class="main1_type7_img">
-                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/main1_type7_img5.jpg" alt="">
+                        <img src="<%=request.getContextPath() %>/hanatour/img/main1_home/type7_img4.jpg" alt="">
                     </div>
                     <div class="main1_type7_title">
                         천혜의 자연 속으로, 섬 여행

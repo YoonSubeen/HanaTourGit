@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -930,7 +932,69 @@
                                 직항
                                 <input type="checkbox" name="round_trip_direct"/>
                             </div>
-
+							
+							<div class="weather_info">
+								날씨정보 확인
+								<div class="weather_info_list">
+									<input type="text" name="weather_iata" placeholder="공항코드 입력"/>
+									<button class="weather_iata" type="button">검색</button>
+									<button class="weather_info_close" type="button">닫기</button>
+									<table>
+									
+										<thead>
+											<tr>
+												<th>공항코드</th>
+												<th>시간</th>
+												<th>날씨</th>
+												<th>기온</th>
+												<th>기압</th>
+												<th>습도</th>
+												<th>구름량</th>
+												<th>풍속</th>
+												<th>강수량</th>
+												<th>적설량</th>
+												<th>도시</th>
+												<th>국가</th>
+												<th>시간대</th>
+												<th>일출시간</th>
+												<th>일몰시간</th>
+												<th>날씨 아이콘</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+										
+											<!-- 반복문 시작 -->
+											<c:forEach var="wDto" items="${requestScope.weatherList}">
+												<tr>
+													<td>${wDto.iata}</td>
+													<td>${wDto.weatherDate}</td>
+													<td>${wDto.weather}</td>
+													<td>${wDto.temp}</td>
+													<td>${wDto.pressure}</td>
+													<td>${wDto.humidity}</td>
+													<td>${wDto.clouds}</td>
+													<td>${wDto.wind}</td>
+													<td>${wDto.rain}</td>
+													<td>${wDto.snow}</td>
+													<td>${wDto.city}</td>
+													<td>${wDto.country}</td>
+													<td>${wDto.timeZone}</td>
+													<td>${wDto.sunRise}</td>
+													<td>${wDto.sunSet}</td>
+													<td>
+														<img src="${wDto.iconUrl}"/>
+													</td>
+												</tr>
+											</c:forEach>
+											<!-- 반복문 종료 -->
+										</tbody>
+																			
+									</table>
+									
+									
+								</div>
+							</div>
                         </div>
                         <!-- round_trip1 종료 -->
 
@@ -2016,6 +2080,15 @@
         </div>
     </div>
         
+	
+	
+	
+	
+	<form action="${pageContext.request.contextPath}/AirportWeatherServlet">
+		<input type="hidden" name="weather_iata_real"/>
+	</form>
+	
+	
 	
 	<footer>
 

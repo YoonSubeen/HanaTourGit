@@ -1,21 +1,36 @@
 package dto;
 
+import java.util.Date;
+
+import dao.AirlineTicketDao;
+
 public class AirlineTicketDto {
 
 	private int ticketIdx;
 	
-	private String departureIATA;
-	private String arrivalIATA;
-	private String airlineIATA;
+	private String departureIata;
+	private String arrivalIata;
+	
+	private String airlineIata;
+	private String airlineName;
 	
 	private int modelIdx;
-	private String departureTime;
-	private String arrivalTime;
+	
+	private String departureTimeDate;
+	private String departureTimeHour;
+	
+	private String arrivalTimeDate;
+	private String arrivalTimeHour;
+	
+	private String flyingTime;
 	
 	private int stop;
 	private String freeBaggage;
+	
 	private String codeShare;
 	private String codeShareAirline;
+	private String codeShareAirlineName;
+	
 	private String flightNumber;
 	
 	private String departureTerminal;
@@ -23,33 +38,36 @@ public class AirlineTicketDto {
 	
 	private int economyClassPrice;
 	private int prestigeClassPrice;
-	
+
 	private int leftSeats;
-	
-	
-	
-	public AirlineTicketDto() {
-		super();
-	}
 
 	
+	public AirlineTicketDto() {
+	}
 	
-	public AirlineTicketDto(int ticketIdx, String departureIATA, String arrivalIATA, String airlineIATA, int modelIdx,
-			String departureTime, String arrivalTime, int stop, String freeBaggage, String codeShare,
-			String codeShareAirline, String flightNumber, String departureTerminal, String arrivalTerminal,
-			int economyClassPrice, int prestigeClassPrice, int leftSeats) {
+	public AirlineTicketDto(int ticketIdx, String departureIata, String arrivalIata, String airlineIata,
+			String airlineName, int modelIdx, String departureTimeDate, String departureTimeHour,
+			String arrivalTimeDate, String arrivalTimeHour, String flyingTime, int stop, String freeBaggage,
+			String codeShare, String codeShareAirline, String codeShareAirlineName, String flightNumber,
+			String departureTerminal, String arrivalTerminal, int economyClassPrice, int prestigeClassPrice,
+			int leftSeats) {
 		super();
 		this.ticketIdx = ticketIdx;
-		this.departureIATA = departureIATA;
-		this.arrivalIATA = arrivalIATA;
-		this.airlineIATA = airlineIATA;
+		this.departureIata = departureIata;
+		this.arrivalIata = arrivalIata;
+		this.airlineIata = airlineIata;
+		this.airlineName = airlineName;
 		this.modelIdx = modelIdx;
-		this.departureTime = departureTime;
-		this.arrivalTime = arrivalTime;
+		this.departureTimeDate = departureTimeDate;
+		this.departureTimeHour = departureTimeHour;
+		this.arrivalTimeDate = arrivalTimeDate;
+		this.arrivalTimeHour = arrivalTimeHour;
+		this.flyingTime = flyingTime;
 		this.stop = stop;
 		this.freeBaggage = freeBaggage;
 		this.codeShare = codeShare;
 		this.codeShareAirline = codeShareAirline;
+		this.codeShareAirlineName = codeShareAirlineName;
 		this.flightNumber = flightNumber;
 		this.departureTerminal = departureTerminal;
 		this.arrivalTerminal = arrivalTerminal;
@@ -57,10 +75,6 @@ public class AirlineTicketDto {
 		this.prestigeClassPrice = prestigeClassPrice;
 		this.leftSeats = leftSeats;
 	}
-
-
-
-
 
 	public int getTicketIdx() {
 		return ticketIdx;
@@ -70,28 +84,36 @@ public class AirlineTicketDto {
 		this.ticketIdx = ticketIdx;
 	}
 
-	public String getDepartureIATA() {
-		return departureIATA;
+	public String getDepartureIata() {
+		return departureIata;
 	}
 
-	public void setDepartureIATA(String departureIATA) {
-		this.departureIATA = departureIATA;
+	public void setDepartureIata(String departureIata) {
+		this.departureIata = departureIata;
 	}
 
-	public String getArrivalIATA() {
-		return arrivalIATA;
+	public String getArrivalIata() {
+		return arrivalIata;
 	}
 
-	public void setArrivalIATA(String arrivalIATA) {
-		this.arrivalIATA = arrivalIATA;
+	public void setArrivalIata(String arrivalIata) {
+		this.arrivalIata = arrivalIata;
 	}
 
-	public String getAirlineIATA() {
-		return airlineIATA;
+	public String getAirlineIata() {
+		return airlineIata;
 	}
 
-	public void setAirlineIATA(String airlineIATA) {
-		this.airlineIATA = airlineIATA;
+	public void setAirlineIata(String airlineIata) {
+		this.airlineIata = airlineIata;
+	}
+
+	public String getAirlineName() {
+		return airlineName;
+	}
+
+	public void setAirlineName(String airlineName) {
+		this.airlineName = airlineName;
 	}
 
 	public int getModelIdx() {
@@ -102,20 +124,44 @@ public class AirlineTicketDto {
 		this.modelIdx = modelIdx;
 	}
 
-	public String getDepartureTime() {
-		return departureTime;
+	public String getDepartureTimeDate() {
+		return departureTimeDate;
 	}
 
-	public void setDepartureTime(String departureTime) {
-		this.departureTime = departureTime;
+	public void setDepartureTimeDate(String departureTimeDate) {
+		this.departureTimeDate = departureTimeDate;
 	}
 
-	public String getArrivalTime() {
-		return arrivalTime;
+	public String getDepartureTimeHour() {
+		return departureTimeHour;
 	}
 
-	public void setArrivalTime(String arrivalTime) {
-		this.arrivalTime = arrivalTime;
+	public void setDepartureTimeHour(String departureTimeHour) {
+		this.departureTimeHour = departureTimeHour;
+	}
+
+	public String getArrivalTimeDate() {
+		return arrivalTimeDate;
+	}
+
+	public void setArrivalTimeDate(String arrivalTimeDate) {
+		this.arrivalTimeDate = arrivalTimeDate;
+	}
+
+	public String getArrivalTimeHour() {
+		return arrivalTimeHour;
+	}
+
+	public void setArrivalTimeHour(String arrivalTimeHour) {
+		this.arrivalTimeHour = arrivalTimeHour;
+	}
+
+	public String getFlyingTime() {
+		return flyingTime;
+	}
+
+	public void setFlyingTime(String flyingTime) {
+		this.flyingTime = flyingTime;
 	}
 
 	public int getStop() {
@@ -141,13 +187,21 @@ public class AirlineTicketDto {
 	public void setCodeShare(String codeShare) {
 		this.codeShare = codeShare;
 	}
-	
+
 	public String getCodeShareAirline() {
 		return codeShareAirline;
 	}
 
 	public void setCodeShareAirline(String codeShareAirline) {
 		this.codeShareAirline = codeShareAirline;
+	}
+
+	public String getCodeShareAirlineName() {
+		return codeShareAirlineName;
+	}
+
+	public void setCodeShareAirlineName(String codeShareAirlineName) {
+		this.codeShareAirlineName = codeShareAirlineName;
 	}
 
 	public String getFlightNumber() {
@@ -197,9 +251,7 @@ public class AirlineTicketDto {
 	public void setLeftSeats(int leftSeats) {
 		this.leftSeats = leftSeats;
 	}
-	
-	
-	
+
 	
 	
 }

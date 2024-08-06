@@ -1,5 +1,8 @@
 $(function() {
-		
+	
+	const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+	const origin = window.location.origin;
+	const contextPath = origin + pathname;
 
 
     // 항공권 조회 페이지 변경 버튼
@@ -413,26 +416,81 @@ $(function() {
     });
 
 
-    // 선택된 티켓
+    
 
 
 
 
-
-
-    // 항공권 정렬 글씨색
+    // 항공권 정렬 
     $(".airline_ticket_order > span").click(function() {
         $(this).parent().find(".airline_ticket_order_active").removeClass("airline_ticket_order_active");
         $(this).addClass("airline_ticket_order_active");
+
+		// 버튼순서 0~3
+		let sortBtnIdx = $(this).index();
+		
+		// 현재 출력된 티켓 idx 배열
+		let ticketIdx = $("input[name='airline_ticket_id']").map(function() {
+				return $(this).val();
+		}).get();
+		
+		
+		if(sortBtnIdx == 0) { // 추천순
+			alert("준비중입니다.")
+		} else if(sortBtnIdx == 1) { // 가격낮은순
+		 	
+		} else if(sortBtnIdx == 2) { // 소요시간적은순
+			
+		} else { // 출발시간빠른순
+			airlineTicketSortDate(sortBtnIdx, ticketIdx);
+			
+		}
     })
  
+	
+	// 4. 출발시간빠른순
+	function airlineTicketSortDate(sortBtnIdx, ticketIdx) {
+		$.ajax({
+			type: "GET",
+			async: true,
+			url: contextPath + "/AirlineTicketSortServlet",
+			data: {
+				sortBtnIdx: sortBtnIdx,
+				ticketIdx: ticketIdx
+			},
+			traditional: true,
+			dataType: "json",
+			success: function() {
+				console.log("빠른날짜순 success");
+			}, error: function() {
+				console.log("빠른날짜순error");
+			}, complete: function() {
+				console.log("빠른날짜순 complete");
+			}
+		})
+	}
+	
+
+
+
+
 
     // 공동운항 아이콘 없애기 
 	$(".airline_ticket_codeshare > span:nth-child(1)").each(function(){
-		if( $(this).text() == "" ) {
+		if( $(this).text().trim() == "" ) {
 			$(this).parent().remove();
 		}   	
 	}) 
+	
+	
+	// 직항 아닐시 빨간색
+	$(".airline_ticket_stop > div:nth-child(3)").each(function() {
+		if( $(this).text().trim() == "직항" ) {
+			$(this).css("color", "#666");
+		} else {
+			$(this).css("color", "red");
+		}
+	});
 	
 
 
@@ -695,7 +753,9 @@ $(function() {
 
 
 
+	
 
+	
 
 
 

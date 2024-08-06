@@ -339,5 +339,36 @@ $(function() {
 
 
 
+
+
+
+	// 날씨 정보창 켜기
+	$(".weather_info").click(function() {
+		$(".weather_info_list").css("display", "block");
+	});
+	
+	// 날씨 정보창 끄기
+	$(".weather_info_close").click(function(e) {
+		e.stopPropagation();
+		$(".weather_info_list").css("display", "none");		
+	})
+	
+	// 날씨 검색
+	$(".weather_iata").click(function() {
+		let weatherIata = $("input[name='weather_iata']").val();
+		$("input[name='weather_iata_real']").val(weatherIata);
+		$("input[name='weather_iata_real']").closest("form").submit();
+	});
+	
+
+
+
+
+
+
+
+
+
+
   
 });

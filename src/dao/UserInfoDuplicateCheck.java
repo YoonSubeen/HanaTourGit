@@ -9,7 +9,7 @@ public class UserInfoDuplicateCheck {
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String dbId = "project";
-		String dbPw = "1234";
+		String dbPw = "pass1234";
 		
 		Class.forName(driver);
 		DriverManager.getConnection(url, dbId, dbPw);

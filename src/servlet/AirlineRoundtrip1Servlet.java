@@ -24,29 +24,36 @@ public class AirlineRoundtrip1Servlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		// SEL 인천/김포
+		// SEL 인천/김포 - 출발지
 		String roundTripDepartureParam = request.getParameter("round_trip_departure_airport");
 		String roundTripDepartureIata = roundTripDepartureParam.split(" ")[0];
+		String roundTripDepartureCity = roundTripDepartureParam.split(" ")[1];
+		request.setAttribute("roundTripDepartureIata", roundTripDepartureIata);
+		request.setAttribute("roundTripDepartureCity", roundTripDepartureCity);
 		
-		// NRT 나리타
+		// NRT 나리타 - 도착지
 		String roundTripArrivalParam = request.getParameter("round_trip_arrival_airport");
 		String roundTripArrivalIata = roundTripArrivalParam.split(" ")[0];
+		String roundTripArrivalCity = roundTripArrivalParam.split(" ")[1];
+		request.setAttribute("roundTripArrivalIata", roundTripArrivalIata);
+		request.setAttribute("roundTripArrivalCity", roundTripArrivalCity);
 		
-		// 2024.10.08
+		// 2024.10.08 - 출발일
 		String roundTripDepartureDateParam = request.getParameter("round_trip_departure_date_calender");
 		String roundTripDepartureDate = roundTripDepartureDateParam.replace(".", "-");
+		request.setAttribute("roundTripDepartureDate", roundTripDepartureDate);
 		
-		// 2024.10.17
-		String roundTripArrivaleDateParam = request.getParameter("round_trip_arrival_date_calender");
-		String roundTripArrivaleDate = roundTripArrivaleDateParam.replace(".", "-");
+		// 2024.10.17 - 도착일
+		String roundTripArrivalDateParam = request.getParameter("round_trip_arrival_date_calender");
+		String roundTripArrivalDate = roundTripArrivalDateParam.replace(".", "-");
+		request.setAttribute("roundTripArrivalDate", roundTripArrivalDate);
 		
-		// 직항여부 (on or null)
+		// 직항여부 ("on" or null)
 		String roundTripDirectFlight = request.getParameter("round_trip_direct");
 		if(roundTripDirectFlight == null) {
 			roundTripDirectFlight = "";
 		} 
-		
-		
+		request.setAttribute("roundTripDirectFlight", roundTripDirectFlight);
 		
 		
 		
@@ -59,6 +66,8 @@ public class AirlineRoundtrip1Servlet extends HttpServlet {
 		
 		// 좌석
 		String roundTripSeatClass = roundTripMemberSeatClass.split("'")[1].trim();
+		request.setAttribute("roundTripSeatClass", roundTripSeatClass);
+		
 		
 		String[] roundTripMemberSplit = roundTripMember.split(",");
 		int roundTripAdult = 1;
@@ -109,14 +118,23 @@ public class AirlineRoundtrip1Servlet extends HttpServlet {
 		// System.out.println("유아 : " + roundTripInfant);
 		// System.out.println("좌석 : " + roundTripSeatClass);
 		
-		// 성인 + 소아
+		request.setAttribute("roundTripAdult", roundTripAdult);
+		request.setAttribute("roundTripChild", roundTripChild);
+		request.setAttribute("roundTripInfant", roundTripInfant);
+		
+		// 좌석 선택수  = 성인 + 소아 (유아 제외)
 		int seatNumber = roundTripAdult + roundTripChild;
 
 		
 		AirlineTicketDao aDao = new AirlineTicketDao();
-		ArrayList<AirlineTicketDto> ticketList = aDao.getRoundTripDirectFlightAirlineTicket(roundTripDepartureIata, roundTripArrivalIata, roundTripDepartureDate, roundTripDirectFlight, seatNumber, roundTripSeatClass);
+		// 왕복 출발지 -> 도착지 티켓 리스트
+		ArrayList<AirlineTicketDto> ticketList = aDao.getRoundTripAirlineTicket(roundTripDepartureIata, roundTripArrivalIata, roundTripDepartureDate, roundTripDirectFlight, seatNumber, roundTripSeatClass);
 		
 		request.setAttribute("ticketList", ticketList);
+		
+//		for(AirlineTicketDto val : ticketList) {
+//			System.out.println(val.getTicketIdx() + ", " + val.getFlyingTime());			
+//		}
 		
 		
 		request.getRequestDispatcher("hanatour/jsp/main5_airline/main5_round_trip1.jsp").forward(request, response);
